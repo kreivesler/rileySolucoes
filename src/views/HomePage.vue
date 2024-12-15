@@ -25,7 +25,7 @@ import { LoremTeste, conteudoTexto } from '@/data/texts';
 
     </CardComponent>
 
-    <ImagemUnica :imgPath="imagenSite[1]"></ImagemUnica>
+    <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
   </ContainerComponent>
 
   <ContainerComponent id="container1" display-type="grid" >
