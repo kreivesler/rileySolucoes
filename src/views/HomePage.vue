@@ -4,7 +4,6 @@ import CardComponent from '@/components/CardComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import ContainerCarrocel from '@/components/ContainerCarrocel.vue';
 import { imagenSite } from '@/data/images';
 import { LoremTeste, conteudoTexto } from '@/data/texts';
 </script>
@@ -28,17 +27,6 @@ import { LoremTeste, conteudoTexto } from '@/data/texts';
     <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
   </ContainerComponent>
 
-  <ContainerComponent id="container1" display-type="grid" >
-    <GridItem :-imagem="imagenSite[1]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[4]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[5]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[2]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[3]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[0]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-  </ContainerComponent>
-
-  <ContainerCarrocel :bg-image="imagenSite" />
-
   <ContainerComponent id="container2" display-type="flex" >
     <CardComponent :titulo-card="conteudoTexto[1].titulo"  font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[1].descricao" max-linesp="10"  font-sizep="1rem"
@@ -47,7 +35,7 @@ import { LoremTeste, conteudoTexto } from '@/data/texts';
 
   <ContainerComponent displayType="flex" height-comp="300px" >
 
-    <ImagemUnica :imgPath="imagenSite[0]"></ImagemUnica>
+    <ImagemUnica :imgPath="imagenSite[9]"></ImagemUnica>
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo"  font-sizespan="2rem"
@@ -57,6 +45,23 @@ import { LoremTeste, conteudoTexto } from '@/data/texts';
       <ButtonComponent msg="Entrar em contato" typeButton="button"
         path="https://rileysolucoes.com.br" />
 
+    </CardComponent>
+  </ContainerComponent>
+
+  <ContainerComponent id="container1" display-type="grid" >
+    <GridItem :-imagem="imagenSite[1]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+    <GridItem :-imagem="imagenSite[4]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+    <GridItem :-imagem="imagenSite[5]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+    <GridItem :-imagem="imagenSite[2]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+    <GridItem :-imagem="imagenSite[3]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+    <GridItem :-imagem="imagenSite[0]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+  </ContainerComponent>
+
+  <ContainerComponent :bg-image="imagenSite[7]">
+    <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800" :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
+
+      <ButtonComponent msg="Entrar em contato" typeButton="button"
+      path="https://rileysolucoes.com.br" />
     </CardComponent>
   </ContainerComponent>
 

@@ -7,6 +7,7 @@ import bgimg6 from '@/assets/images/bg6.webp'
 import bgimg7 from '@/assets/images/fundo.webp'
 import bgimg8 from '@/assets/images/fundo2.webp'
 import bgimg9 from '@/assets/images/fundo3.webp'
+import bgimg10 from '@/assets/images/fundo4.webp'
 const imagenSite = [
   bgimg1,
   bgimg2,
@@ -16,6 +17,7 @@ const imagenSite = [
   bgimg6,
   bgimg7,
   bgimg8,
-  bgimg9
+  bgimg9,
+  bgimg10
 ]
 export { imagenSite }
