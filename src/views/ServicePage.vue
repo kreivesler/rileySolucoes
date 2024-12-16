@@ -2,15 +2,15 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
-import { LoremTeste, conteudoServicos } from '@/data/texts';
+import { conteudoServicos } from '@/data/texts';
 </script>
 
 <template>
   <ContainerComponent id="container1" display-type="grid" >
-    <GridItem :-titulo="conteudoServicos[0].titulo" :-paragrafo="conteudoServicos[0].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[1].titulo" :-paragrafo="conteudoServicos[1].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[2].titulo" :-paragrafo="conteudoServicos[2].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[3].titulo" :-paragrafo="conteudoServicos[3].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[0].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[1].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[2].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[3].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex"   >
@@ -19,41 +19,38 @@ import { LoremTeste, conteudoServicos } from '@/data/texts';
 
   <ContainerComponent id="container3" display-type="flex" bg-color="black" flex-d="row">
     <div class="cardFooter">
-      <span>{{ LoremTeste.Title }}</span>
+      <span>Treinamentos:</span>
       <nav>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
+        <a href="https://www.udemy.com/course/javascript-do-basico-ao-avancado-orientado-a-objetos/?referralCode=9F4A4286CA81D5381F16">JavaScript Orientado a Objetos</a>
+        <a href="https://www.udemy.com/course/curso-de-informatica-essencial/?referralCode=EB7A53AB3FDC78443041">Informática e Pacote Office</a>
+        <a href="https://www.udemy.com/course/microsoft-excel-intermediario/?referralCode=CE4301E4AC8E4D423FF2">Microsoft Excel</a>
       </nav>
     </div>
 
     <div class="cardFooter">
-      <span>{{ LoremTeste.Title }}</span>
+      <span>Nossos Serviços:</span>
       <nav>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
+        <a href="/services">{{ conteudoServicos[0].titulo }}</a>
+        <a href="/services">{{ conteudoServicos[1].titulo }}</a>
+        <a href="/services">{{ conteudoServicos[2].titulo }}</a>
+        <a href="/services">{{ conteudoServicos[3].titulo }}</a>
       </nav>
     </div>
 
     <div class="cardFooter">
-      <span>{{ LoremTeste.Title }}</span>
+      <span>Sobre a KR Riley Soluções:</span>
       <nav>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
-        <a href="http://">{{ LoremTeste.Subtitle }}</a>
+        <a href="/about">Quem somos</a>
+        <a href="http://">Política de privacidade</a>
+        <a href="http://">Política de reembolso</a>
       </nav>
     </div>
 
     <div class="cardFooter">
       <span>Redes Sociais:</span>
-      <ButtonComponent type-button="button" msg="Facebook" bg-color="transparent" text-color="white" />
-      <ButtonComponent type-button="button" msg="Instagram" bg-color="transparent" text-color="white" />
-      <ButtonComponent type-button="button" msg="Twitter" bg-color="transparent" text-color="white" />
+      <ButtonComponent path="https://www.facebook.com/people/Kr-Riley-Solu%C3%A7%C3%B5es/61552679426384/" type-button="button" msg="Facebook" bg-color="transparent" text-color="white" />
+      <ButtonComponent path="https://www.instagram.com/rileysolucoes/" type-button="button" msg="Instagram" bg-color="transparent" text-color="white" />
+      <ButtonComponent path="https://www.linkedin.com/company/rileysolucoes/" type-button="button" msg="Linkedin" bg-color="transparent" text-color="white" />
     </div>
 
 
