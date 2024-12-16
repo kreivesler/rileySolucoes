@@ -2,18 +2,15 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
-import { LoremTeste } from '@/data/texts';
-import { imagenSite } from '@/data/images';
+import { LoremTeste, conteudoServicos } from '@/data/texts';
 </script>
 
 <template>
   <ContainerComponent id="container1" display-type="grid" >
-    <GridItem :-imagem="imagenSite[1]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[4]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[5]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[2]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[3]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
-    <GridItem :-imagem="imagenSite[0]" :-titulo="LoremTeste.Title"  font-s="1.5rem" />
+    <GridItem :-titulo="conteudoServicos[0].titulo" :-paragrafo="conteudoServicos[0].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[1].titulo" :-paragrafo="conteudoServicos[1].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[2].titulo" :-paragrafo="conteudoServicos[2].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[3].titulo" :-paragrafo="conteudoServicos[3].descricao" font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex"   >
@@ -102,6 +99,11 @@ import { imagenSite } from '@/data/images';
 }
 
 @media only screen and (min-width: 1200px) {
+  #container1{
+    padding: 10rem !important;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   #container2 button{
     position: absolute;
     margin-bottom: 150px;
