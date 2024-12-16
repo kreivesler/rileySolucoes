@@ -50,7 +50,7 @@ import { LoremTeste, conteudoServicos } from '@/data/texts';
     </div>
 
     <div class="cardFooter">
-      <span>{{ LoremTeste.Title }}</span>
+      <span>Redes Sociais:</span>
       <ButtonComponent type-button="button" msg="Facebook" bg-color="transparent" text-color="white" />
       <ButtonComponent type-button="button" msg="Instagram" bg-color="transparent" text-color="white" />
       <ButtonComponent type-button="button" msg="Twitter" bg-color="transparent" text-color="white" />
