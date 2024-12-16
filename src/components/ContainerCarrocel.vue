@@ -134,30 +134,30 @@ svg:hover{
 }
 
 @media (prefers-color-scheme: light) {
-    .has-bg-image ::v-deep .cardComponente {
+    .has-bg-image :deep(.cardComponente) {
         color: white;
     }
-    .has-bg-image ::v-deep h2 {
+    .has-bg-image :deep(h2) {
         font-size: 1.5vw;
         color: rgb(25, 0, 255);
         font-weight: 800;
     }
-    .has-bg-image ::v-deep .GridItem{
+    .has-bg-image :deep(.GridItem){
       color: white;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    .has-bg-image ::v-deep .cardComponente {
+    .has-bg-image :deep(.cardComponente) {
         color: white;
         border-color: rgba(255, 255, 255, 0.219);
     }
-    .has-bg-image ::v-deep h2 {
+    .has-bg-image :deep(h2) {
         font-size: 2vw;
         color: rgb(25, 0, 255);
         font-weight: 800;
     }
-    .has-bg-image ::v-deep .GridItem{
+    .has-bg-image :deep(.GridItem){
       color: white;
     }
 }

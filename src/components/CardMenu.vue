@@ -51,7 +51,7 @@ const props = defineProps({
 }
 
 @media only screen and (min-width: 1200px){
-  :v-deep .carrocel-componente{
+  :deep(.carrocel-componente){
     width: 100%;
   }
 }
