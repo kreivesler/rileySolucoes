@@ -3,13 +3,13 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import { cardTeste } from '@/data/texts';
+import { conteudoServicos } from '@/data/texts';
 </script>
 
 <template>
 
-  <ContainerComponent id="container4"  display-type="flex" lex-d="column">
-    <CardComponent bgColor="transparent" :titulo-card="cardTeste.Title" font-sizespan="2rem" font-weightspan="800"
-        :paragrafo-card="cardTeste.Subtitle" font-sizep="1.2rem">
+  <ContainerComponent id="container4"  display-type="flex" flex-d="column">
+    <CardComponent bgColor="transparent" :titulo-card="cardTeste.Title" font-sizespan="2rem" font-weightspan="800" :paragrafo-card="cardTeste.Subtitle" font-sizep="1.2rem">
       <p>{{ cardTeste.largeDesc }}</p>
       <p>{{ cardTeste.largeDesc }}</p>
     </CardComponent>

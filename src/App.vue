@@ -17,27 +17,19 @@ const toggleMenuVertical = () => {
 <template>
   <header>
     <!-- Passa a função de toggle para o MenuHorizontal -->
-    <MenuHorizontal
-      Titulo="Kr Riley Soluções"
-      :Rotas="rotasMenu"
-      @toggleMenuVertical="toggleMenuVertical"
-      font-weight-span="800"
-      font-size-span="1.2rem"
-    />
+    <MenuHorizontal Titulo="Kr Riley Soluções" :Rotas="rotasMenu" @toggleMenuVertical="toggleMenuVertical"
+      font-weight-span="800" font-size-span="1.2rem" />
   </header>
 
   <!-- Condicionalmente renderiza o MenuVertical -->
   <div>
-    <MenuVertical
-      height-menu="100vh"
-      v-if="isMenuVerticalActive"
-      :Rotas="rotasMenu"
-    />
+    <MenuVertical height-menu="100vh" v-if="isMenuVerticalActive" :Rotas="rotasMenu" />
   </div>
 
   <RouterView />
 
   <footer>
-    <FooterComponent msg="Feito por" link="https://rileysolucoes.com.br" msgLink="Kr Riley Soluções" footer-bg="black" />
+    <FooterComponent msg="Feito por" link="https://rileysolucoes.com.br" msgLink="Kr Riley Soluções"
+      footer-bg="black" />
   </footer>
 </template>
