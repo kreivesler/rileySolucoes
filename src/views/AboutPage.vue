@@ -9,7 +9,7 @@ import { conteudoServicos } from '@/data/texts';
 <template>
 
   <ContainerComponent id="container4"  display-type="flex" flex-d="column">
-    <CardComponent bgColor="transparent" :titulo-card="cardTeste.Title" font-sizespan="2rem" font-weightspan="800" :paragrafo-card="cardTeste.Subtitle" font-sizep="1.2rem">
+    <CardComponent bgColor="transparent" titulo-card="Sobre a KR Riley Soluções" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Quem somos" font-sizep="1.2rem">
       <p>{{ cardTeste.largeDesc }}</p>
       <p>{{ cardTeste.largeDesc }}</p>
     </CardComponent>
