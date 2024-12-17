@@ -72,7 +72,7 @@ import { imagenSite } from '@/data/images';
 
   <ContainerComponent display-type="flex" flex-d="column">
 
-    <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
+    <ImagemUnica :imgPath="imagenSite[11]"></ImagemUnica>
 
     <CardComponent class="cardServices" :titulo-card="conteudoServicos[3].titulo" text-align="left">
       <p>{{ conteudoServicos[3].descricao }}</p>
