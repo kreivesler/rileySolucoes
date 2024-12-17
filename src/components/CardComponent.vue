@@ -116,7 +116,7 @@ slot img{
 }
 @media only screen and (min-width: 1200px){
   .cardComponente{
-    width: calc(100% - 50%);
+    width: calc(100% - 40%);
   }
 }
 </style>
