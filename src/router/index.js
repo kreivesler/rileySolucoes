@@ -32,6 +32,11 @@ const router = createRouter({
       path: '/politica/servicos',
       name: 'politica/servicos',
       component: ()=> import('../views/PolicyServicePage.vue')
+    },
+    {
+      path: '/contato',
+      name: 'contato',
+      component: ()=> import('../views/ContatoPage.vue')
     }
   ]
 })
