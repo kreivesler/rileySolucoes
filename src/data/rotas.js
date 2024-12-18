@@ -1,7 +1,7 @@
 const rotasMenu = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services'}
+  { name: 'Sobre', path: '/sobre' },
+  { name: 'Servicos', path: '/servicos'}
 ]
 
 export {rotasMenu}

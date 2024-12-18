@@ -11,13 +11,13 @@ const router = createRouter({
       component: HomePage
     },
     {
-      path: '/services',
-      name: 'services',
+      path: '/servicos',
+      name: 'servicos',
       component: ServicePage
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/sobre',
+      name: 'sobre',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -27,6 +27,11 @@ const router = createRouter({
       path: '/politica',
       name: 'politica',
       component: ()=> import('../views/PoliticPage.vue')
+    },
+    {
+      path: '/politica/servicos',
+      name: 'politica',
+      component: ()=> import('../views/PolicyServicePage.vue')
     }
   ]
 })

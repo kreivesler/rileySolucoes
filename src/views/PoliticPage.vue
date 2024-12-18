@@ -93,9 +93,9 @@ import { conteudoServicos } from '@/data/texts';
     <div class="cardFooter">
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
-        <a href="/about">Quem somos</a>
-        <a href="politica">Política de privacidade</a>
-        <a href="http://">Política de reembolso</a>
+        <a href="/sobre">Quem somos</a>
+        <a href="/politica">Política de privacidade</a>
+        <a href="/politica/servicos">Política de serviços</a>
       </nav>
     </div>
 
