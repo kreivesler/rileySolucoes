@@ -24,13 +24,13 @@ const router = createRouter({
       component: () => import('../views/AboutPage.vue')
     },
     {
-      path: '/politica',
-      name: 'politica',
+      path: '/politica/privacidade',
+      name: 'politica/privacidade',
       component: ()=> import('../views/PoliticPage.vue')
     },
     {
       path: '/politica/servicos',
-      name: 'politica',
+      name: 'politica/servicos',
       component: ()=> import('../views/PolicyServicePage.vue')
     }
   ]
