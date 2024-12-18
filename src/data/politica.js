@@ -67,7 +67,7 @@ const politicaPrivacidade = {
       descricao: "Para quaisquer dúvidas, reclamações ou solicitações relacionadas à privacidade de dados, entre em contato conosco:",
       itens: [
         "E-mail: contato@rileysolucoes.com.br",
-        "Telefone: (31) XXX-XXXX"
+        "Whatsapp: (31) 9 9534 - 1667"
       ]
     }
   ]

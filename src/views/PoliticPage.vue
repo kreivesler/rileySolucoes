@@ -1,36 +1,72 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
-import { conteudoPoliticaPrivacidade } from '@/data/politica';
+import { politicaPrivacidade } from '@/data/politica';
 import { conteudoServicos } from '@/data/texts';
 </script>
 
 <template>
 <ContainerComponent id="container1" display-type="flex" flex-d="column" >
-  <CardComponent class="cardPolitic" :titulo-card="conteudoPoliticaPrivacidade.titulo[0]" bgColor="transparent" font-sizespan="2rem" font-weightspan="800" text-align="left">
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[0] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[1] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[2] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[3] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[4] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[5] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[6] }}</p>
+  <CardComponent class="cardPolitic" :titulo-card="politicaPrivacidade.titulo" bgColor="transparent" font-sizespan="2rem" font-weightspan="800" text-align="left" :paragrafo-card="politicaPrivacidade.introducao">
+    <span>{{ politicaPrivacidade.secoes[0].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[0].descricao }}</p>
     <ul>
-      <li>{{ conteudoPoliticaPrivacidade.lista[0] }}</li>
-      <li>{{ conteudoPoliticaPrivacidade.lista[1] }}</li>
-      <li>{{ conteudoPoliticaPrivacidade.lista[2] }}</li>
-      <li>{{ conteudoPoliticaPrivacidade.lista[3] }}</li>
+      <li>{{ politicaPrivacidade.secoes[0].itens[0] }}</li>
+      <li>{{ politicaPrivacidade.secoes[0].itens[1] }}</li>
+      <li>{{ politicaPrivacidade.secoes[0].itens[2] }}</li>
+      <li>{{ politicaPrivacidade.secoes[0].itens[3] }}</li>
     </ul>
-    <span>{{ conteudoPoliticaPrivacidade.titulo[1] }}</span>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[7] }}</p>
+    <p>Esses dados são coletados para:</p>
     <ul>
-      <li>{{ conteudoPoliticaPrivacidade.lista[4] }}</li>
-      <li>{{ conteudoPoliticaPrivacidade.lista[5] }}</li>
-      <li>{{ conteudoPoliticaPrivacidade.lista[6] }}</li>
+      <li>{{ politicaPrivacidade.secoes[0].finalidade[0] }}</li>
+      <li>{{ politicaPrivacidade.secoes[0].finalidade[1] }}</li>
     </ul>
-    <span>{{ conteudoPoliticaPrivacidade.titulo[2] }}</span>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[8] }}</p>
-    <p>{{ conteudoPoliticaPrivacidade.paragrafo[9] }}</p>
+    <p>{{ politicaPrivacidade.secoes[0].nota }}</p>
+
+    <span>{{ politicaPrivacidade.secoes[1].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[1].descricao }}</p>
+    <ul>
+      <li>{{ politicaPrivacidade.secoes[1].itens[0] }}</li>
+      <li>{{ politicaPrivacidade.secoes[1].itens[1] }}</li>
+      <li>{{ politicaPrivacidade.secoes[1].itens[2] }}</li>
+    </ul>
+
+    <span>{{ politicaPrivacidade.secoes[2].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[2].descricao }}</p>
+    <ul>
+      <li>{{ politicaPrivacidade.secoes[2].itens[0] }}</li>
+      <li>{{ politicaPrivacidade.secoes[2].itens[1] }}</li>
+    </ul>
+
+    <span>{{ politicaPrivacidade.secoes[3].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[3].descricao }}</p>
+
+    <span>{{ politicaPrivacidade.secoes[4].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[4].descricao }}</p>
+    <ul>
+      <li>{{ politicaPrivacidade.secoes[4].itens[0] }}</li>
+      <li>{{ politicaPrivacidade.secoes[4].itens[1] }}</li>
+      <li>{{ politicaPrivacidade.secoes[4].itens[2] }}</li>
+      <li>{{ politicaPrivacidade.secoes[4].itens[3] }}</li>
+    </ul>
+    <p>{{ politicaPrivacidade.secoes[4].contato }}</p>
+
+    <span>{{ politicaPrivacidade.secoes[5].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[5].descricao }}</p>
+
+    <span>{{ politicaPrivacidade.secoes[6].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[6].descricao }}</p>
+
+    <span>{{ politicaPrivacidade.secoes[7].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[7].descricao }}</p>
+    <p>Última atualização:{{ politicaPrivacidade.secoes[7].ultimaAtualizacao }}</p>
+
+    <span>{{ politicaPrivacidade.secoes[8].titulo }}</span>
+    <p>{{ politicaPrivacidade.secoes[8].descricao }}</p>
+    <ul>
+      <li>{{ politicaPrivacidade.secoes[8].itens[0] }}</li>
+      <li>{{ politicaPrivacidade.secoes[8].itens[1] }}</li>
+    </ul>
   </CardComponent>
 </ContainerComponent>
 
