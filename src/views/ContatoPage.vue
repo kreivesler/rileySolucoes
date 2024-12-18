@@ -1,5 +1,6 @@
 <script setup>
-
+import ContainerComponent from '@/components/ContainerComponent.vue';
+import { conteudoServicos } from '@/data/texts';
 </script>
 
 <template>
