@@ -3,6 +3,7 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import { conteudoServicos } from '@/data/texts';
 import FormComponent from '@/components/FormComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
+import ButtonComponent from '@/components/ButtonComponent.vue';
 </script>
 
 <template>
@@ -101,7 +102,11 @@ import CardComponent from '@/components/CardComponent.vue';
 
 @media only screen and (min-width: 600px) {}
 
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+  #container1{
+    align-items: flex-start;
+  }
+}
 
 @media only screen and (min-width: 992px) {}
 

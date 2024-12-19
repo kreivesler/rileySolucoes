@@ -20,7 +20,7 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       font-weightp="500" text-align="center">
 
       <ButtonComponent msg="Entrar em contato" typeButton="button"
-        path="https://rileysolucoes.com.br" />
+        path="/contato" />
 
     </CardComponent>
 
@@ -43,7 +43,7 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       font-weightp="500" text-align="center">
 
       <ButtonComponent msg="Entrar em contato" typeButton="button"
-        path="https://rileysolucoes.com.br" />
+        path="/contato" />
 
     </CardComponent>
   </ContainerComponent>
@@ -60,7 +60,7 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
     <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800" :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 
       <ButtonComponent msg="Entrar em contato" typeButton="button"
-      path="https://rileysolucoes.com.br" />
+      path="/contato" />
     </CardComponent>
   </ContainerComponent>
 
