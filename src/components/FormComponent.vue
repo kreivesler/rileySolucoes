@@ -50,28 +50,28 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="submitForm" ref="myForm" method="post">
+  <form class="formulario" @submit.prevent="submitForm" ref="myForm" method="post">
 
     <input type="hidden" name="_captcha" value="false">
 
     <label for="company-name">Nome da empresa:</label>
-    <input type="text" id="company-name" v-model="formData.companyName" required>
+    <input type="text" id="company-name" v-model="formData.companyName" placeholder="Sua Empresa LTDA" required>
 
     <label for="cnpj">CNPJ:</label>
-    <input type="text" id="cnpj" v-model="formData.cnpj" required>
+    <input type="text" id="cnpj" v-model="formData.cnpj" placeholder="CNPJ: 00.000.000/0000-00" required>
 
     <label for="responsible-name">Nome do responsável:</label>
-    <input type="text" id="responsible-name" v-model="formData.responsibleName" required>
+    <input type="text" id="responsible-name" v-model="formData.responsibleName" placeholder="Informe seu nome" required>
 
     <label for="email">Informe seu email:</label>
-    <input type="email" id="email" v-model="formData.email" required>
+    <input type="email" id="email" v-model="formData.email" placeholder="contato@empresa.com.br" required>
 
     <label for="phone">Informe seu celular:</label>
     <input type="tel" id="phone" v-model="formData.phoneNumber" @input="formatPhoneNumber" maxlength="15"
-      placeholder="(00) 0 0000 - 0000" required>
+      placeholder="(00) 0 0000-0000" required>
 
     <label for="services">Selecione o serviço:</label>
-    <input list="listaServicos" id="services" v-model="formData.service" required>
+    <input list="listaServicos" id="services" v-model="formData.service" placeholder="Clique duas vezes para selecionar..." required>
     <datalist id="listaServicos">
       <option value="Site Institucional"></option>
       <option value="Landing Page"></option>
@@ -81,13 +81,13 @@ const submitForm = async () => {
     </datalist>
 
     <label for="description">Descrição do projeto:</label>
-    <textarea id="description" v-model="formData.description" required></textarea>
+    <textarea maxlength="700" id="description" v-model="formData.description" placeholder="Descreva brevemente o que você precisa..." required></textarea>
 
     <label for="deadline">Prazo desejado:</label>
     <input type="date" id="deadline" v-model="formData.deadline" required>
 
     <label for="budget">Orçamento estimado (opcional):</label>
-    <input type="number" id="budget" v-model="formData.budget">
+    <input type="number" id="budget" v-model="formData.budget" placeholder="Digite um valor em R$" >
 
     <button type="submit">Enviar</button>
   </form>
@@ -106,15 +106,47 @@ button {
   padding: 10px;
   font-size: 16px;
 }
+textarea{
+  resize: none;
+}
 
 button {
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
+  font-weight: 600;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+@media only screen and (min-width: 300px){
+
+}
+@media only screen and (min-width: 400px){
+
+}
+@media only screen and (min-width: 600px){
+
+}
+@media only screen and (min-width: 768px){
+
+}
+@media only screen and (min-width: 992px){
+
+}
+@media only screen and (min-width: 1200px){
+  .formulario{
+    width: 50%;
+  }
+  .formulario textarea{
+    height: 200px;
+  }
+  .formulario input,
+  textarea,
+  button {
+    width: calc(100% - 20%);
+  }
 }
 </style>

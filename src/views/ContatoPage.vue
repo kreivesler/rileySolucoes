@@ -2,13 +2,16 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import { conteudoServicos } from '@/data/texts';
 import FormComponent from '@/components/FormComponent.vue';
+import CardComponent from '@/components/CardComponent.vue';
 </script>
 
 <template>
-  <span>Contato</span>
+  <ContainerComponent id="container1" display-type="flex" flex-d="row"  >
+    <CardComponent titulo-card="Fale Conosco" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Estamos prontos para ajudar você! Preencha o formulário ao lado com suas informações e detalhes do serviço desejado. Nossa equipe analisará sua solicitação e entrará em contato o mais rápido possível." >
+      <p>Se preferir, você também pode nos enviar um e-mail diretamente para contato@rileysolucoes.com.br. Estamos à disposição para transformar suas ideias em realidade!</p>
+    </CardComponent>
+      <FormComponent />
 
-  <ContainerComponent display-type="flex" flex-d="column" >
-    <FormComponent/>
   </ContainerComponent>
 
   <ContainerComponent id="container3" display-type="flex" bg-color="black" flex-d="row">
@@ -59,6 +62,18 @@ import FormComponent from '@/components/FormComponent.vue';
 </template>
 
 <style scoped>
+#divForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: rgb(5, 78, 78);
+}
+
 @media only screen and (min-width: 300px) {
   .cardFooter {
     display: flex;
@@ -92,8 +107,13 @@ import FormComponent from '@/components/FormComponent.vue';
 
 @media only screen and (min-width: 1200px) {
 
+  #container1{
+    align-items: flex-start;
+  }
+
   #container3 {
     height: 300px !important;
   }
+
 }
 </style>
