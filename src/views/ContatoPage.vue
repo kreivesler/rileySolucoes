@@ -1,10 +1,15 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import { conteudoServicos } from '@/data/texts';
+import FormComponent from '@/components/FormComponent.vue';
 </script>
 
 <template>
   <span>Contato</span>
+
+  <ContainerComponent display-type="flex" flex-d="column" >
+    <FormComponent/>
+  </ContainerComponent>
 
   <ContainerComponent id="container3" display-type="flex" bg-color="black" flex-d="row">
     <div class="cardFooter">
