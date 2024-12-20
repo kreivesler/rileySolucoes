@@ -7,7 +7,7 @@ import PolicyService  from '../views/PolicyServicePage.vue'
 import Contato from '@/views/ContatoPage.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/rileySolucoes/'),
   routes: [
     {
       path: '/',
