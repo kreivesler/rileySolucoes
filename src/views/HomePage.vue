@@ -20,7 +20,7 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       font-weightp="500" text-align="center">
 
       <ButtonComponent msg="Entrar em contato" typeButton="button"
-        path="https://rileysolucoes.com.br/contato" />
+        path="/contato" />
 
     </CardComponent>
 
@@ -43,7 +43,7 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       font-weightp="500" text-align="center">
 
       <ButtonComponent msg="Entrar em contato" typeButton="button"
-        path="https://rileysolucoes.com.br/contato" />
+        path="/contato" />
 
     </CardComponent>
   </ContainerComponent>
@@ -88,8 +88,8 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
         <a href="/sobre">Quem somos</a>
-        <a href="https://rileysolucoes.com.br/privacidade">Política de privacidade</a>
-        <a href="https://rileysolucoes.com.br/politica-servicos">Política de serviços</a>
+        <a href="/privacidade">Política de privacidade</a>
+        <a href="/politica-servicos">Política de serviços</a>
       </nav>
     </div>
 

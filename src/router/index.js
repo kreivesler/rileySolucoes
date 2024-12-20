@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import ServicePage from '@/views/ServicePage.vue'
+import Sobre from '@/views/ContatoPage.vue'
+import Privacidade from '@/views/PoliticPage.vue'
+import PolicyService  from '../views/PolicyServicePage.vue'
+import Contato from '@/views/ContatoPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,22 +25,22 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutPage.vue')
+      component: Sobre
     },
     {
       path: '/privacidade',
       name: 'privacidade',
-      component: ()=> import('../views/PoliticPage.vue')
+      component: Privacidade
     },
     {
       path: '/politica-servicos',
       name: 'politica-servicos',
-      component: ()=> import('../views/PolicyServicePage.vue')
+      component: PolicyService
     },
     {
       path: '/contato',
       name: 'contato',
-      component: ()=> import('../views/ContatoPage.vue')
+      component: Contato
     }
   ]
 })
