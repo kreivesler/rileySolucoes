@@ -43,8 +43,8 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
         <a href="/sobre">Quem somos</a>
-        <a href="/politica/privacidade">Política de privacidade</a>
-        <a href="/politica/servicos">Política de serviços</a>
+        <a href="/privacidade">Política de privacidade</a>
+        <a href="/politica-servicos">Política de serviços</a>
       </nav>
     </div>
 
