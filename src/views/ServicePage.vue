@@ -32,7 +32,7 @@ import { imagenSite } from '@/data/images';
         <li>{{ conteudoServicos[0].beneficios.beneficio3 }}</li>
       </ul>
 
-      <ButtonComponent msg="Entrar em contato" type-button="button" path="/contato" />
+      <ButtonComponent msg="Entrar em contato" type-button="button" path="https://rileysolucoes.com.br/contato" />
     </CardComponent>
     <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
 
@@ -64,7 +64,7 @@ import { imagenSite } from '@/data/images';
         <li>{{ conteudoServicos[2].beneficios.beneficio3 }}</li>
       </ul>
 
-      <ButtonComponent msg="Entrar em contato" type-button="button" path="/contato" />
+      <ButtonComponent msg="Entrar em contato" type-button="button" path="https://rileysolucoes.com.br/contato" />
     </CardComponent>
     <ImagemUnica :imgPath="imagenSite[9]"></ImagemUnica>
 
@@ -103,7 +103,7 @@ import { imagenSite } from '@/data/images';
       <p>Pronto para transformar sua presença online? Entre em contato conosco e descubra como podemos ajudar seu
         negócio a alcançar novos patamares.</p>
 
-      <ButtonComponent msg="Entrar em contato" type-button="button" path="/contato" />
+      <ButtonComponent msg="Entrar em contato" type-button="button" path="https://rileysolucoes.com.br/contato" />
     </CardComponent>
 
 
