@@ -34,7 +34,7 @@ import { RouterLink } from 'vue-router';
       </ul>
 
       <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
       </RouterLink>
     </CardComponent>
 
@@ -69,7 +69,7 @@ import { RouterLink } from 'vue-router';
       </ul>
 
       <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
       </RouterLink>
     </CardComponent>
 
@@ -111,7 +111,7 @@ import { RouterLink } from 'vue-router';
         negócio a alcançar novos patamares.</p>
 
       <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
       </RouterLink>
 
     </CardComponent>

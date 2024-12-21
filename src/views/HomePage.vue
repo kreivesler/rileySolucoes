@@ -20,7 +20,7 @@ import { RouterLink } from 'vue-router';
       :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
       <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
       </RouterLink>
 
 
@@ -43,7 +43,7 @@ import { RouterLink } from 'vue-router';
       :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
       <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
       </RouterLink>
 
     </CardComponent>
@@ -66,7 +66,7 @@ import { RouterLink } from 'vue-router';
       :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 
       <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
       </RouterLink>
     </CardComponent>
   </ContainerComponent>
