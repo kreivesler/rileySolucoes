@@ -29,7 +29,7 @@ const toggleMenuVertical = () => {
   <RouterView />
 
   <footer>
-    <FooterComponent msg="Feito por" link="/sobre" msgLink="Kr Riley Soluções"
+    <FooterComponent msg="Feito por Kr Riley Soluções"
       footer-bg="black" />
   </footer>
 </template>
