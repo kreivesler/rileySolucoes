@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import ServicePage from '@/views/ServicePage.vue'
-import Sobre from '@/views/ContatoPage.vue'
+import Sobre from '@/views/AboutPage.vue'
 import Privacidade from '@/views/PoliticPage.vue'
 import PolicyService  from '../views/PolicyServicePage.vue'
 import Contato from '@/views/ContatoPage.vue'

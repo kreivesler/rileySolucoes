@@ -68,8 +68,11 @@ import { RouterLink } from 'vue-router';
         <li>{{ conteudoServicos[2].beneficios.beneficio3 }}</li>
       </ul>
 
-      <ButtonComponent msg="Entrar em contato" type-button="button" path="/contato" />
+      <RouterLink to="/contato" >
+        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      </RouterLink>
     </CardComponent>
+
     <ImagemUnica :imgPath="imagenSite[9]"></ImagemUnica>
 
   </ContainerComponent>
@@ -107,7 +110,10 @@ import { RouterLink } from 'vue-router';
       <p>Pronto para transformar sua presença online? Entre em contato conosco e descubra como podemos ajudar seu
         negócio a alcançar novos patamares.</p>
 
-      <ButtonComponent msg="Entrar em contato" type-button="button" path="/contato" />
+        <RouterLink to="/contato" >
+          <ButtonComponent msg="Entrar em contato" type-button="button" />
+        </RouterLink>
+
     </CardComponent>
 
 
@@ -150,9 +156,15 @@ import { RouterLink } from 'vue-router';
     <div class="cardFooter">
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
-        <a href="/sobre">Quem somos</a>
-        <a href="/privacidade">Política de privacidade</a>
-        <a href="/politica-servicos">Política de serviços</a>
+        <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
+            Quem somos
+        </RouterLink>
+        <RouterLink :to="{ path: '/privacidade', query: { titulo: 'Política de privacidade' } }">
+          Política de privacidade
+        </RouterLink>
+        <RouterLink :to="{ path: '/politica-servicos', query: { titulo: 'Política de serviços' } }">
+          Política de serviços
+        </RouterLink>
       </nav>
     </div>
 

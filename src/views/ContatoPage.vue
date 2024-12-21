@@ -4,6 +4,7 @@ import { conteudoServicos } from '@/data/texts';
 import FormComponent from '@/components/FormComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -32,19 +33,33 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
     <div class="cardFooter">
       <span>Nossos Serviços:</span>
       <nav>
-        <a href="/services">{{ conteudoServicos[0].titulo }}</a>
-        <a href="/services">{{ conteudoServicos[1].titulo }}</a>
-        <a href="/services">{{ conteudoServicos[2].titulo }}</a>
-        <a href="/services">{{ conteudoServicos[3].titulo }}</a>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[0].titulo } }">
+            {{ conteudoServicos[0].titulo }}
+        </RouterLink>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[1].titulo } }">
+            {{ conteudoServicos[1].titulo }}
+        </RouterLink>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[2].titulo } }">
+            {{ conteudoServicos[2].titulo }}
+        </RouterLink>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[3].titulo } }">
+            {{ conteudoServicos[3].titulo }}
+        </RouterLink>
       </nav>
     </div>
 
     <div class="cardFooter">
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
-        <a href="/sobre">Quem somos</a>
-        <a href="/privacidade">Política de privacidade</a>
-        <a href="/politica-servicos">Política de serviços</a>
+        <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
+            Quem somos
+        </RouterLink>
+        <RouterLink :to="{ path: '/privacidade', query: { titulo: 'Política de privacidade' } }">
+          Política de privacidade
+        </RouterLink>
+        <RouterLink :to="{ path: '/politica-servicos', query: { titulo: 'Política de serviços' } }">
+          Política de serviços
+        </RouterLink>
       </nav>
     </div>
 

@@ -6,6 +6,7 @@ import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { imagenSite } from '@/data/images';
 import { conteudoTexto, conteudoServicos } from '@/data/texts';
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -19,8 +20,9 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       font-weightspan="800" :paragrafo-card="conteudoTexto[0].descricao"  font-sizep="1rem"
       font-weightp="500" text-align="center">
 
-      <ButtonComponent msg="Entrar em contato" typeButton="button"
-        path="/contato" />
+      <RouterLink to="/contato">
+        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      </RouterLink>
 
     </CardComponent>
 
@@ -42,8 +44,9 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
       font-weightspan="800" :paragrafo-card="conteudoTexto[2].descricao"  font-sizep="1rem"
       font-weightp="500" text-align="center">
 
-      <ButtonComponent msg="Entrar em contato" typeButton="button"
-        path="/contato" />
+      <RouterLink to="/contato">
+        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      </RouterLink>
 
     </CardComponent>
   </ContainerComponent>
@@ -59,8 +62,9 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
   <ContainerComponent :bg-image="imagenSite[7]">
     <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800" :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 
-      <ButtonComponent msg="Entrar em contato" typeButton="button"
-      path="/contato" />
+      <RouterLink to="/contato">
+        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      </RouterLink>
     </CardComponent>
   </ContainerComponent>
 
@@ -68,36 +72,57 @@ import { conteudoTexto, conteudoServicos } from '@/data/texts';
     <div class="cardFooter">
       <span>Treinamentos:</span>
       <nav>
-        <a href="https://www.udemy.com/course/javascript-do-basico-ao-avancado-orientado-a-objetos/?referralCode=9F4A4286CA81D5381F16">JavaScript Orientado a Objetos</a>
-        <a href="https://www.udemy.com/course/curso-de-informatica-essencial/?referralCode=EB7A53AB3FDC78443041">Informática e Pacote Office</a>
-        <a href="https://www.udemy.com/course/microsoft-excel-intermediario/?referralCode=CE4301E4AC8E4D423FF2">Microsoft Excel</a>
+        <a
+          href="https://www.udemy.com/course/javascript-do-basico-ao-avancado-orientado-a-objetos/?referralCode=9F4A4286CA81D5381F16">JavaScript
+          Orientado a Objetos</a>
+        <a href="https://www.udemy.com/course/curso-de-informatica-essencial/?referralCode=EB7A53AB3FDC78443041">Informática
+          e Pacote Office</a>
+        <a href="https://www.udemy.com/course/microsoft-excel-intermediario/?referralCode=CE4301E4AC8E4D423FF2">Microsoft
+          Excel</a>
       </nav>
     </div>
 
     <div class="cardFooter">
       <span>Nossos Serviços:</span>
       <nav>
-        <a href="/services">{{ conteudoServicos[0].titulo }}</a>
-        <a href="/services">{{ conteudoServicos[1].titulo }}</a>
-        <a href="/services">{{ conteudoServicos[2].titulo }}</a>
-        <a href="/services">{{ conteudoServicos[3].titulo }}</a>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[0].titulo } }">
+            {{ conteudoServicos[0].titulo }}
+        </RouterLink>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[1].titulo } }">
+            {{ conteudoServicos[1].titulo }}
+        </RouterLink>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[2].titulo } }">
+            {{ conteudoServicos[2].titulo }}
+        </RouterLink>
+        <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[3].titulo } }">
+            {{ conteudoServicos[3].titulo }}
+        </RouterLink>
       </nav>
     </div>
 
     <div class="cardFooter">
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
-        <a href="/sobre">Quem somos</a>
-        <a href="/privacidade">Política de privacidade</a>
-        <a href="/politica-servicos">Política de serviços</a>
+        <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
+            Quem somos
+        </RouterLink>
+        <RouterLink :to="{ path: '/privacidade', query: { titulo: 'Política de privacidade' } }">
+          Política de privacidade
+        </RouterLink>
+        <RouterLink :to="{ path: '/politica-servicos', query: { titulo: 'Política de serviços' } }">
+          Política de serviços
+        </RouterLink>
       </nav>
     </div>
 
     <div class="cardFooter">
       <span>Redes Sociais:</span>
-      <ButtonComponent path="https://www.facebook.com/people/Kr-Riley-Solu%C3%A7%C3%B5es/61552679426384/" type-button="button" msg="Facebook" bg-color="transparent" text-color="white" />
-      <ButtonComponent path="https://www.instagram.com/rileysolucoes/" type-button="button" msg="Instagram" bg-color="transparent" text-color="white" />
-      <ButtonComponent path="https://www.linkedin.com/company/rileysolucoes/" type-button="button" msg="Linkedin" bg-color="transparent" text-color="white" />
+      <ButtonComponent path="https://www.facebook.com/people/Kr-Riley-Solu%C3%A7%C3%B5es/61552679426384/"
+        type-button="button" msg="Facebook" bg-color="transparent" text-color="white" />
+      <ButtonComponent path="https://www.instagram.com/rileysolucoes/" type-button="button" msg="Instagram"
+        bg-color="transparent" text-color="white" />
+      <ButtonComponent path="https://www.linkedin.com/company/rileysolucoes/" type-button="button" msg="Linkedin"
+        bg-color="transparent" text-color="white" />
     </div>
 
 
