@@ -10,17 +10,16 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-    <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="imagenSite[6]">
-    </ContainerComponent>
+  <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="imagenSite[6]">
+  </ContainerComponent>
 
 
 
-  <ContainerComponent displayType="flex" height-comp="300px" >
-    <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo"  font-sizespan="2rem"
-      font-weightspan="800" :paragrafo-card="conteudoTexto[0].descricao"  font-sizep="1rem"
-      font-weightp="500" text-align="center">
+  <ContainerComponent displayType="flex" height-comp="300px">
+    <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
-      <RouterLink to="/contato">
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         <ButtonComponent msg="Entrar em contato" type-button="button" />
       </RouterLink>
 
@@ -29,40 +28,43 @@ import { RouterLink } from 'vue-router';
     <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
   </ContainerComponent>
 
-  <ContainerComponent id="container2" display-type="flex" >
-    <CardComponent :titulo-card="conteudoTexto[1].titulo"  font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[1].descricao" max-linesp="10"  font-sizep="1rem"
-      font-weightp="500"></CardComponent>
+  <ContainerComponent id="container2" display-type="flex">
+    <CardComponent :titulo-card="conteudoTexto[1].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudoTexto[1].descricao" max-linesp="10" font-sizep="1rem" font-weightp="500"></CardComponent>
   </ContainerComponent>
 
-  <ContainerComponent displayType="flex" height-comp="300px" >
+  <ContainerComponent displayType="flex" height-comp="300px">
 
     <ImagemUnica :imgPath="imagenSite[9]"></ImagemUnica>
 
 
-    <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo"  font-sizespan="2rem"
-      font-weightspan="800" :paragrafo-card="conteudoTexto[2].descricao"  font-sizep="1rem"
-      font-weightp="500" text-align="center">
+    <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
-      <RouterLink to="/contato">
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         <ButtonComponent msg="Entrar em contato" type-button="button" />
       </RouterLink>
 
     </CardComponent>
   </ContainerComponent>
 
-  <ContainerComponent id="container1" display-type="grid" >
-    <GridItem :-titulo="conteudoServicos[0].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[1].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[2].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[3].titulo"  font-s="1.2rem" border-st="solid" border-wd="2px" border-rad="10px" />
+  <ContainerComponent id="container1" display-type="grid">
+    <GridItem :-titulo="conteudoServicos[0].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+      border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[1].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+      border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[2].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+      border-rad="10px" />
+    <GridItem :-titulo="conteudoServicos[3].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+      border-rad="10px" />
 
   </ContainerComponent>
 
   <ContainerComponent :bg-image="imagenSite[7]">
-    <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800" :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
+    <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 
-      <RouterLink to="/contato">
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         <ButtonComponent msg="Entrar em contato" type-button="button" />
       </RouterLink>
     </CardComponent>
@@ -86,16 +88,16 @@ import { RouterLink } from 'vue-router';
       <span>Nossos Serviços:</span>
       <nav>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[0].titulo } }">
-            {{ conteudoServicos[0].titulo }}
+          {{ conteudoServicos[0].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[1].titulo } }">
-            {{ conteudoServicos[1].titulo }}
+          {{ conteudoServicos[1].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[2].titulo } }">
-            {{ conteudoServicos[2].titulo }}
+          {{ conteudoServicos[2].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[3].titulo } }">
-            {{ conteudoServicos[3].titulo }}
+          {{ conteudoServicos[3].titulo }}
         </RouterLink>
       </nav>
     </div>
@@ -104,7 +106,7 @@ import { RouterLink } from 'vue-router';
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
         <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
-            Quem somos
+          Quem somos
         </RouterLink>
         <RouterLink :to="{ path: '/privacidade', query: { titulo: 'Política de privacidade' } }">
           Política de privacidade
@@ -190,7 +192,7 @@ import { RouterLink } from 'vue-router';
     height: 300px !important;
   }
 
-  #container1{
+  #container1 {
     padding: 10rem !important;
     grid-template-columns: repeat(4, 1fr);
   }

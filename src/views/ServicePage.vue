@@ -10,7 +10,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <ContainerComponent id="container1" display-type="grid" :bg-image="imagenSite[6]" >
+  <ContainerComponent id="container1" display-type="grid" :bg-image="imagenSite[6]">
     <GridItem :-titulo="conteudoServicos[0].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
       border-rad="10px" />
     <GridItem :-titulo="conteudoServicos[1].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
@@ -33,7 +33,7 @@ import { RouterLink } from 'vue-router';
         <li>{{ conteudoServicos[0].beneficios.beneficio3 }}</li>
       </ul>
 
-      <RouterLink to="/contato">
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         <ButtonComponent msg="Entrar em contato" type-button="button" />
       </RouterLink>
     </CardComponent>
@@ -68,7 +68,7 @@ import { RouterLink } from 'vue-router';
         <li>{{ conteudoServicos[2].beneficios.beneficio3 }}</li>
       </ul>
 
-      <RouterLink to="/contato" >
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         <ButtonComponent msg="Entrar em contato" type-button="button" />
       </RouterLink>
     </CardComponent>
@@ -94,7 +94,7 @@ import { RouterLink } from 'vue-router';
 
   </ContainerComponent>
 
-  <ContainerComponent display-type="flex" flex-d="column" :bg-image="imagenSite[7]" >
+  <ContainerComponent display-type="flex" flex-d="column" :bg-image="imagenSite[7]">
 
 
 
@@ -110,9 +110,9 @@ import { RouterLink } from 'vue-router';
       <p>Pronto para transformar sua presença online? Entre em contato conosco e descubra como podemos ajudar seu
         negócio a alcançar novos patamares.</p>
 
-        <RouterLink to="/contato" >
-          <ButtonComponent msg="Entrar em contato" type-button="button" />
-        </RouterLink>
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
+        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      </RouterLink>
 
     </CardComponent>
 
@@ -139,16 +139,16 @@ import { RouterLink } from 'vue-router';
       <span>Nossos Serviços:</span>
       <nav>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[0].titulo } }">
-            {{ conteudoServicos[0].titulo }}
+          {{ conteudoServicos[0].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[1].titulo } }">
-            {{ conteudoServicos[1].titulo }}
+          {{ conteudoServicos[1].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[2].titulo } }">
-            {{ conteudoServicos[2].titulo }}
+          {{ conteudoServicos[2].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[3].titulo } }">
-            {{ conteudoServicos[3].titulo }}
+          {{ conteudoServicos[3].titulo }}
         </RouterLink>
       </nav>
     </div>
@@ -157,7 +157,7 @@ import { RouterLink } from 'vue-router';
       <span>Sobre a KR Riley Soluções:</span>
       <nav>
         <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
-            Quem somos
+          Quem somos
         </RouterLink>
         <RouterLink :to="{ path: '/privacidade', query: { titulo: 'Política de privacidade' } }">
           Política de privacidade
