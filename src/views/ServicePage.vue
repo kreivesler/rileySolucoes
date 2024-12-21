@@ -33,8 +33,8 @@ import { RouterLink } from 'vue-router';
         <li>{{ conteudoServicos[0].beneficios.beneficio3 }}</li>
       </ul>
 
-      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
-        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
       </RouterLink>
     </CardComponent>
 
@@ -68,8 +68,8 @@ import { RouterLink } from 'vue-router';
         <li>{{ conteudoServicos[2].beneficios.beneficio3 }}</li>
       </ul>
 
-      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
-        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
       </RouterLink>
     </CardComponent>
 
@@ -110,8 +110,8 @@ import { RouterLink } from 'vue-router';
       <p>Pronto para transformar sua presença online? Entre em contato conosco e descubra como podemos ajudar seu
         negócio a alcançar novos patamares.</p>
 
-      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
-        <ButtonComponent msg="Entrar em contato" type-button="button" />
+      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
+        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent="null" />
       </RouterLink>
 
     </CardComponent>
