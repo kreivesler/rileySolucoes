@@ -24,7 +24,7 @@ onMounted(() => {
 
 const submitForm = async () => {
   try {
-    const response = await fetch('https://formsubmit.co/ajax/contato@rileysolucoes.com.br', {
+    const response = await fetch('https://formsubmit.co/ajax/c0041a01360f6ee604309ddcee4c7178', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
