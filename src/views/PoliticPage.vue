@@ -4,6 +4,7 @@ import CardComponent from '@/components/CardComponent.vue';
 import { politicaPrivacidade } from '@/data/politica';
 import { conteudoServicos } from '@/data/texts';
 import { RouterLink } from 'vue-router';
+import ButtonComponent from '@/components/ButtonComponent.vue';
 </script>
 
 <template>
