@@ -19,9 +19,10 @@ import { RouterLink } from 'vue-router';
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
-      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
+      <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
+        Entrar em contato
       </RouterLink>
+
 
 
     </CardComponent>
@@ -42,9 +43,10 @@ import { RouterLink } from 'vue-router';
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
-      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
+      <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
+        Entrar em contato
       </RouterLink>
+
 
     </CardComponent>
   </ContainerComponent>
@@ -65,9 +67,10 @@ import { RouterLink } from 'vue-router';
     <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 
-      <RouterLink :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }" custom>
-        <ButtonComponent msg="Entrar em contato" type-button="button" @click.prevent />
+      <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
+        Entrar em contato
       </RouterLink>
+
     </CardComponent>
   </ContainerComponent>
 
@@ -166,12 +169,16 @@ import { RouterLink } from 'vue-router';
     height: 200px !important;
   }
 
+
+
 }
 
 @media only screen and (min-width: 600px) {
   .imagemComp1 {
     height: 200px !important;
   }
+
+
 
 }
 
@@ -180,12 +187,16 @@ import { RouterLink } from 'vue-router';
     height: 300px !important;
   }
 
+
+
 }
 
 @media only screen and (min-width: 992px) {
   .imagemComp1 {
     height: 300px !important;
   }
+
+
 }
 
 @media only screen and (min-width: 1200px) {
@@ -205,5 +216,7 @@ import { RouterLink } from 'vue-router';
   #container3 {
     height: 300px !important;
   }
+
+
 }
 </style>
