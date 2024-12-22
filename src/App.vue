@@ -22,7 +22,7 @@ const toggleMenuVertical = () => {
   </header>
 
   <!-- Condicionalmente renderiza o MenuVertical -->
-  <div>
+  <div class="menuVertical" >
     <MenuVertical height-menu="100vh" v-if="isMenuVerticalActive" :Rotas="rotasMenu" />
   </div>
 
@@ -33,3 +33,10 @@ const toggleMenuVertical = () => {
       footer-bg="black" />
   </footer>
 </template>
+<style scoped>
+.menuVertical{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+</style>

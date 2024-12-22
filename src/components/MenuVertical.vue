@@ -1,11 +1,11 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-
 // Props
 defineProps({
   Rotas: Array,
   heightMenu: String
 });
+
 </script>
 
 <template>
@@ -20,6 +20,7 @@ defineProps({
         {{ rota.name }}
       </RouterLink>
     </nav>
+    <button type="button">X</button>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ defineProps({
 nav{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
 }
 nav a{
   padding: 5px;
