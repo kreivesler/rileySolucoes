@@ -141,27 +141,6 @@ import { RouterLink } from 'vue-router';
     height: 200px !important;
   }
 
-  .cardFooter {
-    display: flex;
-    flex-direction: column;
-    height: 80%;
-  }
-
-  .cardFooter span {
-    font-size: 1.2rem;
-  }
-
-  .cardFooter nav {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 2px;
-  }
-
-  .cardFooter a {
-    text-decoration: none;
-    color: white;
-  }
-
 }
 
 @media only screen and (min-width: 400px) {
