@@ -7,6 +7,7 @@ import { RouterLink } from 'vue-router';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 </script>
 <template>
+  <span id="msg"  >Pagina indisponível no momento!</span>
   <ContainerComponent id="container1" display-type="flex" flex-d="row">
     <CardComponent titulo-card="Faça login" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Preencha o formulário para ter acesso ao curso adquirido." />
 
@@ -74,6 +75,18 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
   </ContainerComponent>
 </template>
 <style scoped>
+#msg{
+  width: 100%;
+  height: 500px;
+  padding-top: 20%;
+  text-align: center;
+  color: red;
+  font-size: 1.8rem;
+  font-weight: 800;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.644);
+
+}
 @media only screen and (min-width:300px) {
 
 }
