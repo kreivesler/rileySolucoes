@@ -5,6 +5,7 @@ import Sobre from '@/views/AboutPage.vue'
 import Privacidade from '@/views/PoliticPage.vue'
 import PolicyService  from '../views/PolicyServicePage.vue'
 import Contato from '@/views/ContatoPage.vue'
+import LoginPage from '@/views/LoginPage.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -41,6 +42,11 @@ const router = createRouter({
       path: '/contato',
       name: 'contato',
       component: Contato
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginPage
     }
   ]
 })
