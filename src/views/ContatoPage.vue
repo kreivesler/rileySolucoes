@@ -78,17 +78,6 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style scoped>
-#divForm {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: flex-start;
-  justify-content: center;
-  box-sizing: border-box;
-  background-color: rgb(5, 78, 78);
-}
 
 @media only screen and (min-width: 300px) {}
 

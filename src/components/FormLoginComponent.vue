@@ -9,7 +9,7 @@
       <label for="passUser">Sua senha:</label>
       <input type="password" id="passUser">
 
-      <button @click="prev" type="submit">Fazer login</button>
+      <button type="submit">Fazer login</button>
     </form>
 </template>
 <style scoped>
