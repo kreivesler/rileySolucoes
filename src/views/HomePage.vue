@@ -133,5 +133,6 @@ import { RouterLink } from 'vue-router';
     height: 400px !important;
   }
 
+
 }
 </style>

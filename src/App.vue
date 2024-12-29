@@ -67,7 +67,7 @@ const toggleMenuVertical = () => {
     <div class="cardFooter">
       <span>Institucional:</span>
       <nav>
-        <RouterLink :to="{ path: '/home', query: { titulo: 'Home' } }">
+        <RouterLink :to="{ path: '/', query: { titulo: 'Home' } }">
             Home page
         </RouterLink>
         <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
