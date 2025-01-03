@@ -1,6 +1,9 @@
 <script setup>
 const props = defineProps({
-  videoPath: String,
+  videoPath: {
+    type: String,
+    required: true
+  },
   boxShad: String,
   borderRad: String
 })
