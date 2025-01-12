@@ -57,7 +57,7 @@ const toggleMenu = () => {
 <style scoped>
 .menu-h{
     width: 100vw;
-    height: 40px;
+    height: 80px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -72,26 +72,26 @@ nav {
   align-items: center;
 }
 nav a{
-  padding: 5px;
+  padding: 10px;
+  margin: 5px;
   text-decoration: none;
 }
 nav a:hover{
-  transition: 0.5s;
+  transition: 0.6s;
   transition-delay: 15ms;
-  background-color: rgba(0, 0, 0, 0.151);
+  font-weight: 800;
 }
 button{
   padding: 5px;
+  font-size: 1rem;
   background-color: transparent;
   color: inherit;
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 2px;
+  border-style: none;
   cursor: pointer;
   border-color: inherit;
 }
 button:hover{
-  transform: scale(1.1);
+  font-weight: 800;
   transition: 0.6s;
   transition-delay: 15ms;
 }
