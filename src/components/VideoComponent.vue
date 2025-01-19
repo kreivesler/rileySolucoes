@@ -13,7 +13,8 @@ const props = defineProps({
   <video class="meu-video" controls
   :style="{
         boxShadow: props.boxShad,
-        borderRadius: props.borderRad
+        borderRadius: props.borderRad,
+        width: props.widthVideo
       }"
   >
     <source :src="props.videoPath" type="video/mp4">

@@ -5,7 +5,7 @@ import CardComponent from '@/components/CardComponent.vue';
 </script>
 
 <template>
-  <ContainerComponent id="container1" display-type="flex" flex-d="row"  >
+  <ContainerComponent id="container1" display-type="flex" flex-d="row" alignItems="flex-start" >
     <CardComponent titulo-card="Fale Conosco" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Estamos prontos para ajudar você! Preencha o formulário ao lado com suas informações e detalhes do serviço desejado. Nossa equipe analisará sua solicitação e entrará em contato o mais rápido possível." >
       <p>Se preferir, você também pode nos enviar um e-mail diretamente para contato@rileysolucoes.com.br. Estamos à disposição para transformar suas ideias em realidade!</p>
     </CardComponent>

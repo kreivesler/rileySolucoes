@@ -1,24 +1,87 @@
-
-const video = [
+const cursoInformatica = [
   {
-    modulo: 'Informática',
-    aula: 'Aula 1 Introdução e Explorador de Arquivos',
-    video: 'aula1'
+    modulo: "Informática",
+    aula: [
+      "Aula 1 Introdução e Explorador de Arquivos",
+      "Aula 2 Aprendendo a digitar texto",
+      "Aula 3 Envio e recebimento de e-mail",
+      "Aula 4 Como inserir link no e-mail",
+      "Aula 5 Configurações do Sistema",
+      "Aula 6 Como Excluir Software Malicioso",
+    ],
+    video: [
+      "https://h0pbbgw41p79.share.zrok.io/videos/m01/a01.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m01/a02.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m01/a03.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m01/a04.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m01/a05.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m01/a06.mp4",
+    ],
   },
   {
-    modulo: 'Informática',
-    aula: 'Aula 2 Aprendendo a digitar texto',
-    video: 'aula2'
+    modulo: "Microsoft Excel",
+    aula: [
+      "Aula 7 Conhecendo a Interface do Excel",
+      "Aula 8 Guia Pagina Inicial",
+      "Aula 9 Criando a Primeira Tabela",
+      "Aula 10 Aprendendo a Fórmula SOMA e SE",
+      "Aula 11 Fórmulas PROCV e PROCX",
+      "Aula 12 Fórmula PROCH e Validação de Dados",
+      "Aula 13 Fórmula VP ",
+      "Aula 14 Fórmula VF ",
+      "Aula 15 Como Saber Números de Periodos NPER",
+      "Aula 16 Fórmula PGTO",
+      "Aula 17 Taxa de Juros",
+      "Aula 18 Tabela Dinâmica",
+      "Aula 19 Gráficos e Segmentação de Dados",
+      "Aula 20 Guia Fórmulas e Autosoma",
+      "Aula 21 Guia Dados e Revisão",
+    ],
+    video: [
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a07.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a08.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a09.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a10.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a11.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a12.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a13.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a14.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a15.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a16.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a17.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a18.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a19.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a20.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m02/a21.mp4",
+    ],
   },
   {
-    modulo: 'Informática',
-    aula: 'Aula 3 Envio e recebimento de e-mail',
-    video: 'aula3'
+    modulo: "Microsoft Word",
+    aula: [
+      "Aula 22 Interface do Word",
+      "Aula 23 Guia Inserir",
+      "Aula 24 Como Desenhar e Guia Design",
+      "Aula 25 Correspondências e Revisão",
+    ],
+    video: [
+      "https://h0pbbgw41p79.share.zrok.io/videos/m03/a22.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m03/a23.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m03/a24.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m03/a25.mp4",
+    ],
   },
   {
-    modulo: 'Informática',
-    aula: 'Aula 4 Como inserir link no e-mail',
-    video: 'aula4'
-  }
-]
-export { video }
+    modulo: "Microsoft PowerPoint",
+    aula: [
+      "Aula 26 Interface do PowerPoint",
+      "Aula 27 Como Mudar Design do Slide",
+      "Aula 28 Apresentação de Slides",
+    ],
+    video: [
+      "https://h0pbbgw41p79.share.zrok.io/videos/m04/a26.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m04/a27.mp4",
+      "https://h0pbbgw41p79.share.zrok.io/videos/m04/a28.mp4",
+    ],
+  },
+];
+export { cursoInformatica };

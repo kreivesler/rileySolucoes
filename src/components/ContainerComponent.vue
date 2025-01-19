@@ -31,6 +31,10 @@ const props = defineProps({
   opacityComp: {
     type: String,
     default: 'none'
+  },
+  alignItems: {
+    type: String,
+    default: 'center'
   }
 })
 </script>
@@ -46,7 +50,8 @@ const props = defineProps({
         padding: props.paddingComp,
         backgroundColor: props.bgColor,
         height: props.heightComp,
-        opacity: props.opacityComp
+        opacity: props.opacityComp,
+        alignItems: props.alignItems
       }"
   >
     <slot></slot>
@@ -57,7 +62,6 @@ const props = defineProps({
 .container {
   width: 100vw;
   padding: 1rem;
-  align-items: center;
   gap: 40px;
   justify-content: space-around;
   display: flex;
