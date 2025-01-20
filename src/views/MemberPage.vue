@@ -2,19 +2,40 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
 import { cursoInformatica } from '@/data/videos';
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
 
-// Estado reativo para o índice do vídeo atualmente exibido
+// Estados reativos para módulo e vídeo
+const currentModuloIndex = ref(0);
 const currentVideoIndex = ref(0);
 
-// Função para navegar para o próximo vídeo
+// Observa mudanças no módulo para redefinir o índice do vídeo
+watch(currentModuloIndex, () => {
+  currentVideoIndex.value = 0; // Redefine para o primeiro vídeo ao mudar de módulo
+});
+
+// Gera uma chave única para o componente de vídeo
+const videoKey = computed(() => `${currentModuloIndex.value}-${currentVideoIndex.value}`);
+
+// Funções de navegação de módulo
+const nextModulo = () => {
+  if (currentModuloIndex.value < cursoInformatica.length - 1) {
+    currentModuloIndex.value++;
+  }
+};
+
+const prevModulo = () => {
+  if (currentModuloIndex.value > 0) {
+    currentModuloIndex.value--;
+  }
+};
+
+// Funções de navegação de vídeo
 const nextVideo = () => {
-  if (currentVideoIndex.value < cursoInformatica[0].video.length - 1) {
+  if (currentVideoIndex.value < cursoInformatica[currentModuloIndex.value].video.length - 1) {
     currentVideoIndex.value++;
   }
 };
 
-// Função para navegar para o vídeo anterior
 const prevVideo = () => {
   if (currentVideoIndex.value > 0) {
     currentVideoIndex.value--;
@@ -25,29 +46,40 @@ const prevVideo = () => {
 <template>
   <ContainerComponent display-type="flex" flex-d="column" alignItems="flex-start">
     <div class="caixaVideo">
-      <!-- Componente de vídeo -->
-      <VideoComponent id="videoAula" :key="currentVideoIndex" :video-path="cursoInformatica[0].video[currentVideoIndex]"
-        border-rad="8px" />
-        <span>{{ cursoInformatica[0].aula[currentVideoIndex] }}</span>
-    </div>
-    <div class="infoCurso">
-      <span>Módulo: {{ cursoInformatica[0].modulo }}</span>
-      <div class="infoAula">
-        <span>{{ cursoInformatica[0].aula[currentVideoIndex] }}</span>
-      </div>
-      <div class="btnAula" >
-          <button @click="prevVideo" :disabled="currentVideoIndex === 0">
-            Aula Anterior
-          </button>
-          <button @click="nextVideo" :disabled="currentVideoIndex === cursoInformatica[0].video.length - 1">
-            Próxima Aula
-          </button>
-        </div>
+      <!-- Componente de vídeo com chave dinâmica -->
+      <VideoComponent id="videoAula" :key="videoKey"
+        :video-path="cursoInformatica[currentModuloIndex].video[currentVideoIndex]" border-rad="8px" />
+      <span>{{ cursoInformatica[currentModuloIndex].aula[currentVideoIndex] }}</span>
     </div>
 
+    <div class="infoCurso">
+      <span>Módulo: {{ cursoInformatica[currentModuloIndex].modulo }}</span>
+
+      <div class="btnAula">
+        <button @click="prevModulo" :disabled="currentModuloIndex === 0">
+          Módulo Anterior
+        </button>
+        <button @click="nextModulo" :disabled="currentModuloIndex === cursoInformatica.length - 1">
+          Próximo Módulo
+        </button>
+      </div>
+
+      <div class="infoAula">
+        <span>{{ cursoInformatica[currentModuloIndex].aula[currentVideoIndex] }}</span>
+      </div>
+
+      <div class="btnAula">
+        <button @click="prevVideo" :disabled="currentVideoIndex === 0">
+          Aula Anterior
+        </button>
+        <button @click="nextVideo"
+          :disabled="currentVideoIndex === cursoInformatica[currentModuloIndex].video.length - 1">
+          Próxima Aula
+        </button>
+      </div>
+    </div>
   </ContainerComponent>
 </template>
-
 
 <style scoped>
 ul {
@@ -77,7 +109,6 @@ button {
   border-style: solid;
   border-width: 2px;
   border-color: inherit;
-  font-size: 1.2rem;
 }
 
 .caixaVideo {
@@ -90,9 +121,8 @@ button {
   font-size: 1.5rem;
   padding: 5px;
 }
-.infoCurso{
-  width: 50%;
-}
+
+
 
 .infoAula {
   width: 100%;
@@ -101,25 +131,35 @@ button {
   padding: 2px;
 
 }
-.btnAula{
-    width: 20%;
-    display: flex;
-    flex-direction: row;
-  }
+
+.btnAula {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+}
+
 @media only screen and (min-width: 300px) {
   .caixaVideo {
     width: 100%;
-
   }
 
   .infoAula {
     flex-direction: column;
   }
-  .btnAula{
+
+  .infoCurso {
     width: 100%;
-    display: flex;
-    flex-direction: row;
   }
+
+  .btnAula {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
+
   #videoAula {
     width: 100%;
   }
@@ -135,6 +175,18 @@ button {
     flex-direction: column;
   }
 
+  .infoCurso {
+    width: 100%;
+  }
+
+  .btnAula {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
   #videoAula {
     width: 100%;
   }
@@ -144,6 +196,18 @@ button {
   .caixaVideo {
     width: 100%;
 
+  }
+
+  .infoCurso {
+    width: 100%;
+  }
+
+  .btnAula {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
   }
 
   #videoAula {
@@ -157,6 +221,18 @@ button {
 
   }
 
+  .infoCurso {
+    width: 100%;
+  }
+
+  .btnAula {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
   #videoAula {
     width: 100%;
   }
@@ -168,6 +244,18 @@ button {
 
   }
 
+  .infoCurso {
+    width: 100%;
+  }
+
+  .btnAula {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
   #videoAula {
     width: 100%;
   }
@@ -177,6 +265,18 @@ button {
   .caixaVideo {
     width: 80%;
 
+  }
+
+  .infoCurso {
+    width: 40%;
+  }
+
+  .btnAula {
+    width: 100%;
+  }
+
+  button {
+    font-size: 1rem;
   }
 
   #videoAula {
