@@ -3,8 +3,8 @@
 </script>
 <template>
     <form class="formulario" @submit.prevent method="post">
-      <label for="name">Escreva seu nome:</label>
-      <input id="name" type="text">
+      <label for="email">Escreva seu e-mail:</label>
+      <input id="email" type="email">
 
       <label for="passUser">Sua senha:</label>
       <input type="password" id="passUser">
