@@ -1,38 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-
-// Variáveis reativas para os dados do formulário
-const email = ref('');
-const password = ref('');
-
-// Função para enviar o formulário
-const submitForm = async () => {
-  try {
-    const response = await fetch('https://h0pbbgw41p79.share.zrok.io/api/login' , {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Erro ao fazer login');
-    }
-
-    const data = await response.json();
-    console.log('Resposta da API:', data);
-    alert('Login bem-sucedido!');
-  } catch (error) {
-    console.error(error);
-    alert('Falha ao fazer login. Verifique suas credenciais.');
-  }
-};
 </script>
-
 <template>
   <form class="formulario" @submit.prevent="submitForm">
     <label for="emailUser">Escreva seu e-mail:</label>
@@ -41,7 +8,7 @@ const submitForm = async () => {
     <label for="passUser">Sua senha:</label>
     <input type="password" id="passUser" v-model="password" placeholder="Digite sua senha" required>
 
-    <button type="submit">Fazer login</button>
+    <button type="submit">Criar acesso</button>
   </form>
 </template>
 <style scoped>
