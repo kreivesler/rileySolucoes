@@ -1,0 +1,117 @@
+Criar cliente ASAAS
+
+headers de segurança:
+
+"Content-Type": "application/json",
+"User-Agent": "nome_da_sua_aplicação",
+"access_token": "sua_api_key"
+//Criar cliente
+//https://sandbox.asaas.com/api/v3/customers
+BODY {
+	name: string required, //Nome do cliente
+	cpfCnpj: string required, //CPF ou CNPJ do cliente
+	email: string required, //Email do cliente
+	phone: string, //Fone fixo
+	mobilePhone: string, //Fone celular
+	address: string, //Logradouro
+	addressNumber: string, //Número do endereço
+	complement: string, //Complemento do endereço (máx. 255 caracteres)
+	province: string, //Bairro
+	postalCode: string, //CEP do endereço
+	externalReference: string, //Identificador do cliente no seu sistema
+	notificationDisabled: boolean, //true para desabilitar o envio de notificações de cobrança
+	additionalEmails: string, //Emails adicionais para envio de notificações de cobrança separados por ","
+	municipalInscription: string, //Inscrição municipal do cliente
+	stateInscription: string, //Inscrição estadual do cliente
+	observations: string, //Observações adicionais
+	groupName: string, //Nome do grupo ao qual o cliente pertence
+	company: string, //Empresa
+	foreignCustomer: boolean, //informe true caso seja pagador estrangeiro
+}
+
+//Listar cliente
+//filtrar por nome
+//https://api.asaas.com/v3/customers?name=Marcelo
+//filtrar por cpf ou cnpj
+//https://api.asaas.com/v3/customers?cpfCnpj=42885229519
+Query params {
+	offset: integer, //Elemento inicial da lista
+	limit: integer < 100, //Número de elementos da lista (max: 100)
+	name: string, //Filtrar por nome
+	email: string, //Filtrar por email
+	cpfCnpj: string, //Filtrar por CPF ou CNPJ
+	groupName: string, //Filtrar por grupo
+	externalReference: string, //Filtrar pelo Identificador do seu sistema
+}
+//Criar cobrança PIX or CARTÃO or BOLETO
+//https://sandbox.asaas.com/api/v3/payments
+BODY{
+	customer: string required, //Identificador único do cliente no Asaas
+	billingType: string required, //Forma de pagamento CREDIT_CARD or PIX or BOLETO
+	value: number required, //Valor da cobrança
+	dueDate: date required, //Data de vencimento da cobrança
+	description: string, //Descrição da cobrança (máx. 500 caracteres)
+	daysAfterDueDateToRegistrationCancel: int32, //Dias após o vencimento para cancelamento do registro (somente para boleto bancário)
+	externalReference: string, //Campo livre para busca
+	installmentCount: int32, //Número de parcelas (somente no caso de cobrança parcelada)
+	totalValue: number, //Informe o valor total de uma cobrança que será parcelada (somente no caso de cobrança parcelada). Caso enviado este campo o installmentValue não é necessário, o cálculo por parcela será automático.
+	installmentValue: number, //Valor de cada parcela (somente no caso de cobrança parcelada). Envie este campo em caso de querer definir o valor de cada parcela.
+	discount: object{ //Informações de desconto
+		value: number, //Valor percentual ou fixo de desconto a ser aplicado sobre o valor da cobrança
+		dueDateLimitDays: int32, //Dias antes do vencimento para aplicar desconto. Ex: 0 = até o vencimento, 1 = até um dia antes, 2 = até dois dias antes, e assim por diante
+		type: string //Tipo de desconto FIXED or PERCENTAGE
+	},
+	interest: object{ //Informações de juros para pagamento após o vencimento
+		value: number //Percentual de juros ao mês sobre o valor da cobrança para pagamento após o vencimento
+	},
+	fine: object{ //Informações de multa para pagamento após o vencimento
+		value: number, //Percentual de multa sobre o valor da cobrança para pagamento após o vencimento
+		type: string //Tipo de multa FIXED or PERCENTAGE
+	},
+	postalService: boolean, //Define se a cobrança será enviada via Correios
+	split: array of objects[ //Configurações do split
+		{
+			walletId: string required, //Identificador da carteira Asaas que será transferido
+			fixedValue: number, //Valor fixo a ser transferido para a conta quando a cobrança for recebida
+			percentualValue: number, //Percentual sobre o valor líquido da cobrança a ser transferido quando for recebida
+			totalFixedValue: number, //(Somente parcelamentos). Valor que será feito split referente ao valor total que será parcelado.
+			externalReference: string, //Identificador do split no seu sistema
+			description: string //Descrição do split
+		}
+	],
+	callBack: object{
+		successUrl: string required, //URL que o cliente será redirecionado após o pagamento com sucesso da fatura ou link de pagamento
+		autoRedirect: boolean //Definir se o cliente será redirecionado automaticamente ou será apenas informado com um botão para retornar ao site. O padrão é true, caso queira desativar informar false
+	}
+
+}
+
+//Pagar cobrança com cartão de crédito
+//https://sandbox.asaas.com/api/v3/payments/{id}/payWithCreditCard
+PATH PARAMS {
+	id: string required //Identificador único da cobrança no Asaas
+}
+BODY{ //Informações do cartão de crédito
+	creditCard: object{
+		holderName: string, //Nome impresso no cartão
+		number: string, //Número do cartão
+		expiryMonth: string, //Mês de expiração com 2 dígitos
+		expireYear: string, //Ano de expiração com 4 dígitos
+		ccv: string //Código de segurança
+	},
+	creditCardHolderInfo: object{
+		name: string, //Nome do titular do cartão
+		cpfCnpj: string //CPF ou CNPJ do titular do cartão
+	}
+}
+//Obter QR code para pagamento via PIX
+//https://sandbox.asaas.com/api/v3/payments/{id}/pixQrCode
+PATH PARAMS{
+	id: string required //Identificador único da cobrança no Asaas
+}
+
+//Recuperar status de uma cobrança
+// https://sandbox.asaas.com/api/v3/payments/{id}/status
+PATH PARAMS{
+	id: string required //Identificador único da cobrança no Asaas
+}

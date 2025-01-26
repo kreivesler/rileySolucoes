@@ -62,6 +62,11 @@ const router = createRouter({
       path: '/curso',
       name: 'curso',
       component: ()=> import('@/views/MemberPage.vue')
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: ()=> import('@/views/CheckoutPage.vue')
     }
   ]
 })
