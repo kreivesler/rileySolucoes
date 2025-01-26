@@ -65,6 +65,12 @@
       background-color: var(--vt-c-white);
       color: var(--vt-c-black);
     }
+
+    input:focus{
+      outline: none;
+      border: 3px solid #007bff;
+      border-radius: 5px;
+    }
   }
 }
 
@@ -80,6 +86,11 @@ a:hover{
 }
 button{
   cursor: pointer;
+}
+input:focus{
+  outline: none;
+  border: 2px solid #0056b3;
+  border-radius: 5px;
 }
 
 body {
