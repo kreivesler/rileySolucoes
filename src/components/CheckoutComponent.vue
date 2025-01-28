@@ -110,10 +110,10 @@ const gerarQrCodePix = async () => {
       `https://sandbox.asaas.com/api/v3/payments/${cliente.idCobranca}/pixQrCode`,
       {
         headers: {
-        accept: 'application/json',
-        access_token:
-          "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
-      },
+          accept: 'application/json',
+          access_token:
+            "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
+        },
       }
     );
 
@@ -166,12 +166,12 @@ const paymentCreditCard = async () => {
       `https://sandbox.asaas.com/api/v3/payments/${cliente.idCobranca}/payWithCreditCard`,
       {
         method: "POST",
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        access_token:
-          "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
-      },
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          access_token:
+            "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
+        },
         body: JSON.stringify({
           creditCard: {
             holderName: cartaoCredito.nome,
@@ -204,7 +204,7 @@ const paymentCreditCard = async () => {
 <template>
   <div id="checkout">
     <!-- Formulário 1 -->
-    <form v-if="!showSecondForm" id="form1">
+    <form v-if="!showSecondForm" id="form1" class="formCheckout" >
       <div>
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" v-model="cliente.nome" placeholder="Nome Completo" required />
@@ -232,14 +232,41 @@ const paymentCreditCard = async () => {
     </form>
 
     <!-- Formulário 2 -->
-    <form v-if="showSecondForm" id="form2">
-      <input type="text" v-model="cartaoCreditoCliente.nome" placeholder="Nome completo" required />
-      <input type="text" v-model="cartaoCreditoCliente.cpfCnpj" placeholder="CPF/CNPJ" required />
-      <input type="text" v-model="cartaoCredito.nome" placeholder="Nome do titular" required />
-      <input type="text" v-model="cartaoCredito.numero" placeholder="Número do cartão" required />
-      <input type="text" v-model="cartaoCredito.mes" placeholder="Mês" required />
-      <input type="text" v-model="cartaoCredito.ano" placeholder="Ano" required />
-      <input type="text" v-model="cartaoCredito.ccv" placeholder="Código de segurança" required />
+    <form v-if="showSecondForm" id="form2" class="formCheckout">
+      <div>
+        <label for="nomeCompleto">Nome completo:</label>
+        <input type="text" id="nomeCompleto" v-model="cartaoCreditoCliente.nome" placeholder="Nome completo" required />
+      </div>
+
+
+      <div>
+        <label for="cpfCnpjCliente">CPF/CNPJ:</label>
+        <input type="text" id="cpfCnpjCliente" v-model="cartaoCreditoCliente.cpfCnpj" placeholder="CPF/CNPJ" required />
+      </div>
+
+
+      <div>
+        <label for="nomeTitular">Nome titular do cartão:</label>
+        <input type="text" id="nomeTitular" v-model="cartaoCredito.nome" placeholder="Nome do titular" required />
+      </div>
+
+
+      <div>
+        <label for="numeroCartao">Número do cartão:</label>
+        <input type="text" id="numeroCartao" v-model="cartaoCredito.numero" placeholder="Número do cartão" required />
+      </div>
+
+
+      <span>Data de vencimento e código ccv:</span>
+
+
+      <div class="dataCartao">
+        <input type="text" id="mesCartao" v-model="cartaoCredito.mes" placeholder="01" required />
+        <input type="text" id="anoCartao" v-model="cartaoCredito.ano" placeholder="25" required />
+        <input type="text" id="ccvCartao" v-model="cartaoCredito.ccv" placeholder="123" required />
+      </div>
+
+
       <button @click.prevent="paymentCreditCard">Efetuar pagamento</button>
     </form>
 
@@ -266,7 +293,7 @@ const paymentCreditCard = async () => {
   padding: 10px;
 }
 
-#form1 input {
+.formCheckout input {
   width: 100%;
   font-size: 1rem;
   border-radius: 10px;
@@ -275,7 +302,8 @@ const paymentCreditCard = async () => {
   margin-bottom: 5px;
   color: rgb(2, 2, 2);
 }
-#form1 button{
+
+.formCheckout button {
   width: 100%;
   font-size: 1rem;
   border-radius: 10px;
@@ -285,7 +313,15 @@ const paymentCreditCard = async () => {
   background-color: #007bff;
   margin-top: 5px;
 }
-#form1 button:hover{
+
+.formCheckout button:hover {
   background-color: #0056b3;
+}
+.dataCartao{
+  display: flex;
+  flex-direction: row;
+}
+.dataCartao input{
+  width: 60px;
 }
 </style>
