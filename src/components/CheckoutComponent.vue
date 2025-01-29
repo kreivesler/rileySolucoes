@@ -3,12 +3,17 @@ import { reactive, ref } from "vue";
 import CardComponent from "./CardComponent.vue";
 import ImagemUnica from "./ImagemUnica.vue";
 
+const chaveApiBanco = "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmU0NGI4NjMwLWIxNmItNGQzMC04ZGU3LTZlZTg0N2FmNTVhZDo6JGFhY2hfOWU2YmEzYWMtY2MxYy00NzMyLTkyOTMtMmRmYzQwMTU1NzE5"
+
+const idCarteira = "e2c7b2a2-094a-4e3a-89ce-ea4e890a3500"
 // Estado do cliente
 const cliente = reactive({
   nome: "",
   cpfCnpj: "",
   email: "",
   billingType: "",
+  idCobranca: "",
+  id: ""
 });
 
 // Estado do cartão de crédito
@@ -39,11 +44,10 @@ const criarCliente = async (cliente) => {
   try {
     const response = await fetch("https://sandbox.asaas.com/api/v3/customers", {
       method: "POST",
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        access_token:
-          "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": "KR Riley Soluções",
+          "access_token": chaveApiBanco,
       },
       body: JSON.stringify({
         name: cliente.nome,
@@ -70,11 +74,10 @@ const criarCobranca = async () => {
   try {
     const response = await fetch("https://sandbox.asaas.com/api/v3/payments", {
       method: "POST",
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        access_token:
-          "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": "KR Riley Soluções",
+          "access_token": chaveApiBanco,
       },
       body: JSON.stringify({
         customer: cliente.id,
@@ -83,7 +86,7 @@ const criarCobranca = async () => {
         dueDate: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString().split("T")[0], // Data de vencimento em 12 horas
         split: [
           {
-            walletId: "e2c7b2a2-094a-4e3a-89ce-ea4e890a3500"
+            walletId: idCarteira
           }
         ],
         callback: {
@@ -109,10 +112,11 @@ const gerarQrCodePix = async () => {
     const response = await fetch(
       `https://sandbox.asaas.com/api/v3/payments/${cliente.idCobranca}/pixQrCode`,
       {
+        method: "GET",
         headers: {
-          accept: 'application/json',
-          access_token:
-            "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
+          "Content-Type": "application/json",
+          "User-Agent": "KR Riley Soluções",
+          "access_token": chaveApiBanco, // Certifique-se de que esta variável tem o valor correto!
         },
       }
     );
@@ -121,10 +125,10 @@ const gerarQrCodePix = async () => {
 
     if (response.ok) {
       console.log("QR Code PIX gerado:", data);
-      // Atualiza o estado com os dados do QR Code
       imageBase64.value = `data:image/png;base64,${data.encodedImage}`;
       payload.value = data.payload;
       expirationDate.value = data.expirationDate;
+      showPixDetails.value = true;
     } else {
       console.error("Erro ao gerar QR Code PIX:", data);
     }
@@ -132,6 +136,8 @@ const gerarQrCodePix = async () => {
     console.error("Erro na requisição:", error);
   }
 };
+
+
 
 // Função chamada ao clicar no botão "Próximo"
 const nextCheckout = async () => {
@@ -141,14 +147,19 @@ const nextCheckout = async () => {
       await criarCobranca();
 
       if (cliente.billingType === "PIX") {
-        // Gera o QR Code PIX e define as informações para exibição
         const pixResponse = await gerarQrCodePix();
+
+        if (!pixResponse) {
+          alert("Erro ao gerar QR Code PIX. Tente novamente.");
+          return;
+        }
+
         imageBase64.value = pixResponse.imageBase64;
         payload.value = pixResponse.payload;
         expirationDate.value = pixResponse.expirationDate;
-        showPixDetails.value = true; // Exibe o Card PIX
+        showPixDetails.value = true;
       } else if (cliente.billingType === "CREDIT_CARD") {
-        showSecondForm.value = true; // Mostra o segundo formulário
+        showSecondForm.value = true;
       }
     } catch (error) {
       console.error("Erro ao processar o checkout:", error);
@@ -159,6 +170,7 @@ const nextCheckout = async () => {
   }
 };
 
+
 // Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
 const paymentCreditCard = async () => {
   try {
@@ -167,10 +179,9 @@ const paymentCreditCard = async () => {
       {
         method: "POST",
         headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-          access_token:
-            "$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmRlZDA4NjY2LTYyMWItNGJlNC05MzdhLTNiNjE1YzNmOGJhNjo6JGFhY2hfNTIwNTk4YTItNzNiMC00MzIxLThlOGEtYjAyZjk2ODY4MWZm",
+          "Content-Type": "application/json",
+          "User-Agent": "KR Riley Soluções",
+          "access_token": chaveApiBanco,
         },
         body: JSON.stringify({
           creditCard: {
@@ -204,7 +215,7 @@ const paymentCreditCard = async () => {
 <template>
   <div id="checkout">
     <!-- Formulário 1 -->
-    <form v-if="!showSecondForm" id="form1" class="formCheckout" >
+    <form v-if="!showSecondForm" id="form1" class="formCheckout">
       <div>
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" v-model="cliente.nome" placeholder="Nome Completo" required />
@@ -317,11 +328,13 @@ const paymentCreditCard = async () => {
 .formCheckout button:hover {
   background-color: #0056b3;
 }
-.dataCartao{
+
+.dataCartao {
   display: flex;
   flex-direction: row;
 }
-.dataCartao input{
+
+.dataCartao input {
   width: 60px;
 }
 </style>
