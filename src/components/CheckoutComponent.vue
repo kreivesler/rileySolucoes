@@ -213,7 +213,7 @@ const paymentCreditCard = async () => {
 </script>
 
 <template>
-  <div id="checkout">
+  <div class="checkout">
     <!-- Formulário 1 -->
     <form v-if="!showSecondForm" id="form1" class="formCheckout">
       <div>
@@ -293,20 +293,19 @@ const paymentCreditCard = async () => {
 </template>
 
 <style scoped>
-#checkout {
-  width: 400px;
+.checkout {
   display: flex;
   flex-direction: column;
   border-style: solid;
   border-color: inherit;
   border-width: 2px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 30px;
 }
 
 .formCheckout input {
   width: 100%;
-  font-size: 1rem;
+  padding: 5px;
   border-radius: 10px;
   border-style: solid;
   border-color: none;
@@ -316,13 +315,12 @@ const paymentCreditCard = async () => {
 
 .formCheckout button {
   width: 100%;
-  font-size: 1rem;
   border-radius: 10px;
   border-style: none;
   color: white;
   font-weight: 500;
   background-color: #007bff;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .formCheckout button:hover {
@@ -336,5 +334,91 @@ const paymentCreditCard = async () => {
 
 .dataCartao input {
   width: 60px;
+}
+
+@media only screen and (min-width: 300px){
+
+  .checkout {
+    width: 100%;
+  }
+  .formCheckout label{
+    font-size: 1rem;
+  }
+  .formCheckout input{
+    font-size: 1rem;
+  }
+  .formCheckout button{
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 400px){
+  .checkout {
+    width: 100%;
+  }
+  .formCheckout label{
+    font-size: 1rem;
+  }
+  .formCheckout input{
+    font-size: 1rem;
+  }
+  .formCheckout button{
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 600px){
+  .checkout {
+    width: 100%;
+  }
+  .formCheckout label{
+    font-size: 1rem;
+  }
+  .formCheckout input{
+    font-size: 1rem;
+  }
+  .formCheckout button{
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 768px){
+  .checkout {
+    width: 100%;
+  }
+  .formCheckout label{
+    font-size: 1rem;
+  }
+  .formCheckout input{
+    font-size: 1rem;
+  }
+  .formCheckout button{
+    font-size: 1.2rem;
+  }
+}
+@media only screen and (min-width: 992px){
+  .checkout {
+    width: 50%;
+  }
+  .formCheckout label{
+    font-size: 1rem;
+  }
+  .formCheckout input{
+    font-size: 1rem;
+  }
+  .formCheckout button{
+    font-size: 1.3rem;
+  }
+}
+@media only screen and (min-width: 1200px){
+  .checkout {
+    width: 50%;
+  }
+  .formCheckout label{
+    font-size: 1.2rem;
+  }
+  .formCheckout input{
+    font-size: 1.2rem;
+  }
+  .formCheckout button{
+    font-size: 1.5rem;
+  }
 }
 </style>
