@@ -5,7 +5,7 @@ import CardComponent from '@/components/CardComponent.vue';
 </script>
 <template>
   <ContainerComponent display-type="flex" align-items="center" padding-comp="10%">
-    <CheckoutComponent />
+    <CheckoutComponent valuePayment="55" productName="Curso de Informática" />
     <CardComponent text-align="center" titulo-card="Curso de informática Essencial e Pacote Office"
       paragrafo-card="Faça o pagamento e receba o acesso as aulas!">
       <span>Por apenas R$55,00 Avista!</span>
