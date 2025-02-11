@@ -48,7 +48,7 @@ const cadastroCliente = async (cliente) => {
       cliente.value &&
       cliente.product
     ) {
-      const response = await fetch("https://app.rileysolucoes.com.br/api/checkout/", {
+      const response = await fetch("https://app.rileysolucoes.com.br/api/c/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
