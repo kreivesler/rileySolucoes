@@ -33,28 +33,41 @@ const payload = ref(""); // Código para pagamento
 const expirationDate = ref(""); // Data de expiração
 const showPixDetails = ref(false); // Controla a exibição do Card PIX
 
+const apiProducao = 'https://app.rileysolucoes.com.br'
+const apiLocalhost = 'http://localhost:3000'
+const apiTunnel = 'a084edb6-9aad-4ff9-af53-a8f1962d44fb.cfargotunnel.com'
+
+const apiLista = {
+  apiProducao,
+  apiLocalhost,
+  apiTunnel
+}
 // Controle do formulário exibido
 const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `true` exibe o segundo
 
 // Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
   try {
-    // Verifica se os campos obrigatórios estão preenchidos
-    if (
-      cliente.name &&
-      cliente.cpfCnpj &&
-      cliente.email &&
-      cliente.billingType &&
-      cliente.value &&
-      cliente.product
-    ) {
-      const response = await fetch("https://app.rileysolucoes.com.br/api/c/create", {
+    if(!cliente.name || !cliente.cpfCnpj || !cliente.email || !cliente.billingType ){
+      alert('cadastro inválido')
+    }
+
+    console.log(cliente)
+
+      const response = await fetch(`${apiLista.apiTunnel}/api/c/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "User-Agent": "KR Riley Soluções"
+          "User-Agent": "Projeto teste"
         },
-        body: JSON.stringify(cliente),
+        body: JSON.stringify({
+          name: cliente.name,
+          cpfCnpj: cliente.cpfCnpj,
+          email: cliente.email,
+          billingType: cliente.billingType,
+          value: cliente.value,
+          product: cliente.product
+        }),
       });
 
       if (!response.ok) {
@@ -65,15 +78,7 @@ const cadastroCliente = async (cliente) => {
 
       const obj = await response.json();
       console.log("Cliente cadastrado com sucesso:", obj);
-    } else {
-      console.error("Erro ao cadastrar cliente: Campos obrigatórios ausentes", cliente);
-      alert("Erro ao realizar cadastro. Verifique os campos obrigatórios:\n" +
-        `Nome: ${cliente.name}\n` +
-        `CPF/CNPJ: ${cliente.cpfCnpj}\n` +
-        `E-mail: ${cliente.email}\n` +
-        `Pagamento: ${cliente.billingType}`
-      );
-    }
+
   } catch (error) {
     console.error("Erro na requisição:", error);
   }
