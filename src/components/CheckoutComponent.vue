@@ -35,12 +35,11 @@ const showPixDetails = ref(false); // Controla a exibição do Card PIX
 
 const apiProducao = 'https://app.rileysolucoes.com.br'
 const apiLocalhost = 'http://localhost:3000'
-const apiTunnel = 'a084edb6-9aad-4ff9-af53-a8f1962d44fb.cfargotunnel.com'
+
 
 const apiLista = {
   apiProducao,
-  apiLocalhost,
-  apiTunnel
+  apiLocalhost
 }
 // Controle do formulário exibido
 const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `true` exibe o segundo
@@ -54,7 +53,7 @@ const cadastroCliente = async (cliente) => {
 
     console.log(cliente)
 
-      const response = await fetch(`${apiLista.apiTunnel}/api/c/create`, {
+      const response = await fetch(`${apiLista.apiProducao}/api/c/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,6 +78,12 @@ const cadastroCliente = async (cliente) => {
       const obj = await response.json();
       console.log("Cliente cadastrado com sucesso:", obj);
 
+      if(obj.cobranca.billingType === 'PIX'){
+        imageBase64.value = obj.qrCodePix.encodedImage
+        payload.value = obj.qrCodePix.payload
+        expirationDate.value =  obj.qrCodePix.expirationDate
+      }
+
   } catch (error) {
     console.error("Erro na requisição:", error);
   }
@@ -90,18 +95,21 @@ const nextCheckout = async () => {
   if (cliente.name && cliente.cpfCnpj && cliente.email && cliente.billingType && cliente.product && cliente.value) {
 
     cadastroCliente(cliente);
-    if (cliente.billingType === 'CREDIT_CARD') {
-      showSecondForm.value = true
-    }
-    if (cliente.billingType === 'PIX') {
-      showPixDetails.value = true
+
+    if (cliente.billingType === "CREDIT_CARD") {
+      showSecondForm.value = true;
+    } else if (cliente.billingType === "PIX") {
+      showSecondForm.value = false; // Garante que o segundo formulário não apareça
+      showPixDetails.value = true;
     }
 
   } else {
     alert("Preencha todos os campos antes de continuar.");
-    console.log(cliente)
+    console.log(cliente);
   }
 };
+
+
 
 // Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
 
@@ -111,7 +119,7 @@ const nextCheckout = async () => {
 <template>
   <div class="checkout">
     <!-- Formulário 1 -->
-    <form v-if="!showSecondForm" id="form1" class="formCheckout">
+    <form v-if="!!showSecondForm && !showPixDetails" id="form1" class="formCheckout">
       <div>
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" v-model="cliente.name" placeholder="Nome Completo" required />
@@ -175,7 +183,7 @@ const nextCheckout = async () => {
 
     <!-- QrCode Pix -->
     <div class="imgpix" v-if="showPixDetails && imageBase64">
-      <ImagemUnica :img-path="imageBase64" img-alt="Erro ao gerar imagem" />
+      <ImagemUnica :img-path="imageBase64" :base64="true" img-alt="Erro ao gerar imagem" />
       <span>Código copia e cola:</span>
       <p>{{ payload }}</p>
       <span>Data de expiração: {{ expirationDate }}</span>
@@ -241,6 +249,7 @@ const nextCheckout = async () => {
 }
 
 .imgpix p {
+  cursor: pointer;
   font-size: 0.7rem;
   color: #034386;
 }

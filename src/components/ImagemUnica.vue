@@ -1,18 +1,29 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   imgPath: String,
   imgAlt: String,
   boxShad: String,
-  borderRad: String
+  borderRad: String,
+  base64: Boolean
 })
+
+// Computando o src da imagem com base na prop base64
+const imgSrc = computed(() =>
+  props.base64 ? `data:image/png;base64,${props.imgPath}` : props.imgPath
+)
 </script>
 
 <template>
-  <img class="imagemUnica" :src="props.imgPath" :alt="props.imgAlt"
+  <img
+    class="imagemUnica"
+    :src="imgSrc"
+    :alt="props.imgAlt"
     :style="{
       boxShadow: props.boxShad,
       borderRadius: props.borderRad
-      }"
+    }"
   >
 </template>
 
