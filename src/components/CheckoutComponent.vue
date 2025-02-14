@@ -13,7 +13,7 @@ const cliente = reactive({
   cpfCnpj: "",
   email: "",
   billingType: "",
-  value: parseFloat(props.valuePayment),
+  value: isNaN(parseFloat(props.valuePayment)) ? 0 : parseFloat(props.valuePayment),
   product: props.productName
 });
 
@@ -27,13 +27,25 @@ const cartaoCredito = reactive({
   ccv: "",
 });
 
-
+const headerApiTeste = {
+  "Content-Type": "application/json",
+  "User-Agent": "Projeto teste"
+}
+const headerApiProd = {
+  "Content-Type": "application/json",
+  "User-Agent": "Kr Riley Soluções"
+}
+const headerApi = {
+  headerApiProd,
+  headerApiTeste
+}
+const cobranca = ref(null); // Armazena os dados da cobrança
 const imageBase64 = ref(""); // Base64 da imagem do QR Code
 const payload = ref(""); // Código para pagamento
 const expirationDate = ref(""); // Data de expiração
 const showPixDetails = ref(false); // Controla a exibição do Card PIX
 
-const apiProducao = 'https://app.rileysolucoes.com.br'
+const apiProducao = 'https://app.rileysolucoes.com.br/api'
 const apiLocalhost = 'http://localhost:3000'
 
 
@@ -47,60 +59,130 @@ const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `tru
 // Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
   try {
-    if(!cliente.name || !cliente.cpfCnpj || !cliente.email || !cliente.billingType ){
+    if (!cliente.name || !cliente.cpfCnpj || !cliente.email || !cliente.billingType) {
       alert('cadastro inválido')
+      return
     }
 
     console.log(cliente)
 
-      const response = await fetch(`${apiLista.apiProducao}/api/c/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "User-Agent": "Projeto teste"
-        },
-        body: JSON.stringify({
-          name: cliente.name,
-          cpfCnpj: cliente.cpfCnpj,
-          email: cliente.email,
-          billingType: cliente.billingType,
-          value: cliente.value,
-          product: cliente.product
-        }),
-      });
+    const response = await fetch(`${apiLista.apiProducao}/c/create`, {
+      method: "POST",
+      headers: headerApi.headerApiTeste,
+      body: JSON.stringify({
+        name: cliente.name,
+        cpfCnpj: cliente.cpfCnpj,
+        email: cliente.email,
+        billingType: cliente.billingType,
+        value: cliente.value,
+        product: cliente.product
+      }),
+    });
 
-      if (!response.ok) {
-        const errorResponse = await response.json().catch(() => response.text());
-        console.error("Erro na resposta do servidor:", errorResponse);
-        throw new Error("Erro ao cadastrar cliente: " + JSON.stringify(errorResponse));
-      }
+    if (!response.ok) {
+      const errorResponse = await response.json().catch(() => response.text());
+      console.error("Erro na resposta do servidor:", errorResponse);
+      throw new Error("Erro ao cadastrar cliente: " + JSON.stringify(errorResponse));
+    }
 
-      const obj = await response.json();
-      console.log("Cliente cadastrado com sucesso:", obj);
+    const obj = await response.json();
+    cobranca.value = obj
+    console.log("Cliente cadastrado com sucesso:", obj);
 
-      if(obj.cobranca.billingType === 'PIX'){
-        imageBase64.value = obj.qrCodePix.encodedImage
-        payload.value = obj.qrCodePix.payload
-        expirationDate.value =  obj.qrCodePix.expirationDate
-      }
+    if (obj.cobranca.billingType === 'PIX') {
+      imageBase64.value = obj.qrCodePix.encodedImage
+      payload.value = obj.qrCodePix.payload
+      expirationDate.value = obj.qrCodePix.expirationDate
+    }
 
   } catch (error) {
     console.error("Erro na requisição:", error);
   }
 };
 
+// Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
+const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
+  try {
+    if (!cartaoCredito.name || !cartaoCredito.cpfCnpj || !cartaoCredito.numero ||
+      !cartaoCredito.mes || !cartaoCredito.ano || !cartaoCredito.ccv) {
+      alert('Informe corretamente as informações do cartão.');
+      return;
+    }
 
-// Função chamada ao clicar no botão "Próximo"
+    const obj = cobranca.value;
+
+    console.log({
+      obj: obj,
+      cartao: cartaoCredito
+    });
+
+    const response = await fetch(`${apiLista.apiProducao}/c/payment`, {
+      method: 'POST',
+      headers: headerApi.headerApiTeste,
+      body: JSON.stringify({
+        id: obj.cobranca.id,
+        name: cliente.name,
+        cpfCnpj: cartaoCredito.cpfCnpj,
+        holderName: cartaoCredito.name,
+        number: cartaoCredito.numero,
+        expiryMonth: cartaoCredito.mes,
+        expiryYear: cartaoCredito.ano,
+        ccv: cartaoCredito.ccv
+      })
+    });
+
+    const objResposta = await response.json(); // Lendo o corpo da resposta APENAS uma vez
+    console.log('Resposta completa da API:', response.status, objResposta);
+
+    if (!response.ok) {
+      alert(`Não foi possível processar pagamento. \n Motivo: ${objResposta.message || objResposta.error || "Erro desconhecido"}`);
+      console.log('Falha no processamento do pagamento: ', objResposta);
+
+      cartaoCredito.numero = "";
+      cartaoCredito.mes = "";
+      cartaoCredito.ano = "";
+      cartaoCredito.ccv = "";
+
+      return;
+    }
+
+    if (objResposta?.message && objResposta?.status) {
+      alert(`Mensagem: ${objResposta.message} \n Status: ${objResposta.status}`);
+      cartaoCredito.name = "";
+      cartaoCredito.cpfCnpj = "";
+      cartaoCredito.numero = "";
+      cartaoCredito.mes = "";
+      cartaoCredito.ano = "";
+      cartaoCredito.ccv = "";
+    } else {
+      alert("Erro ao processar pagamento. Tente novamente.");
+    }
+
+  } catch (error) {
+    console.log('Erro ao efetuar pagamento:', error);
+    alert('Erro ao processar pagamento');
+    cartaoCredito.name = "";
+    cartaoCredito.cpfCnpj = "";
+    cartaoCredito.numero = "";
+    cartaoCredito.mes = "";
+    cartaoCredito.ano = "";
+    cartaoCredito.ccv = "";
+  }
+};
+
+
 const nextCheckout = async () => {
-  if (cliente.name && cliente.cpfCnpj && cliente.email && cliente.billingType && cliente.product && cliente.value) {
+  // Verifica se os campos obrigatórios do primeiro formulário estão preenchidos
+  if (cliente.name && cliente.cpfCnpj && cliente.email && cliente.billingType) {
 
-    cadastroCliente(cliente);
+    await cadastroCliente(cliente); // Função que cadastra o cliente
 
     if (cliente.billingType === "CREDIT_CARD") {
-      showSecondForm.value = true;
+      showSecondForm.value = true;  // Exibe o formulário de cartão de crédito
+      showPixDetails.value = false; // Oculta detalhes do Pix
     } else if (cliente.billingType === "PIX") {
       showSecondForm.value = false; // Garante que o segundo formulário não apareça
-      showPixDetails.value = true;
+      showPixDetails.value = true;  // Exibe detalhes do Pix
     }
 
   } else {
@@ -109,17 +191,16 @@ const nextCheckout = async () => {
   }
 };
 
-
-
-// Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
-
+const efetuarPagamento = async () => {
+  paymentCreditCard(cliente, cartaoCredito, cobranca)
+}
 
 </script>
 
 <template>
   <div class="checkout">
     <!-- Formulário 1 -->
-    <form v-if="!!showSecondForm && !showPixDetails" id="form1" class="formCheckout">
+    <form v-if="!showSecondForm && !showPixDetails" id="form1" class="formCheckout">
       <div>
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" v-model="cliente.name" placeholder="Nome Completo" required />
@@ -178,7 +259,7 @@ const nextCheckout = async () => {
       </div>
 
 
-      <button @click.prevent="paymentCreditCard">Efetuar pagamento</button>
+      <button @click.prevent="efetuarPagamento">Efetuar pagamento</button>
     </form>
 
     <!-- QrCode Pix -->
