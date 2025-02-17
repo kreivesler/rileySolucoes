@@ -69,7 +69,7 @@
     input:focus{
       outline: none;
       border: 3px solid #007bff;
-      border-radius: 5px;
+  
     }
   }
 }
@@ -87,12 +87,23 @@ a:hover{
 button{
   cursor: pointer;
 }
+input{
+  border: 1px solid #222222;
+}
 input:focus{
   outline: none;
   border: 2px solid #0056b3;
-  border-radius: 5px;
 }
-
+textarea {
+  border: 1px solid #222222;
+}
+textarea:focus{
+  outline: none;
+  border: 2px solid #007bff;
+}
+select{
+  border: 1px solid #222222;
+}
 body {
   min-height: 100vh;
   color: var(--color-text);

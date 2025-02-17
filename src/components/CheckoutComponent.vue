@@ -98,8 +98,6 @@ const cadastroCliente = async (cliente) => {
     isLoading.value = false; // Reativa o botão
   }
 };
-
-
 // Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
 const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
   if (isLoading.value) return; // Evita cliques múltiplos
@@ -151,8 +149,12 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
     isLoading.value = false; // Reativa o botão
   }
 };
+//Função para verificar status de pagamento
+const returnStatusPayment = ()=>{
 
-
+}
+returnStatusPayment()
+//Função chamada ao clicar em próximo
 const nextCheckout = async () => {
   // Verifica se os campos obrigatórios do primeiro formulário estão preenchidos
   if (cliente.name && cliente.cpfCnpj && cliente.email && cliente.billingType) {
@@ -250,7 +252,7 @@ const efetuarPagamento = async () => {
 
     <!-- QrCode Pix -->
     <div class="imgpix" v-if="showPixDetails && imageBase64">
-      <h5>Valor do pagamento: R$ {{ valuePayment }}</h5>
+      <h4>Valor do pagamento: R$ {{ valuePayment }}</h4>
       <ImagemUnica :img-path="imageBase64" :base64="true" img-alt="Erro ao gerar imagem" />
       <span>Código copia e cola:</span>
       <p>{{ payload }}</p>
@@ -266,17 +268,16 @@ const efetuarPagamento = async () => {
 .checkout {
   display: flex;
   flex-direction: column;
-  border-style: solid;
+
   border-color: inherit;
   border-width: 2px;
-  border-radius: 10px;
   padding: 30px;
 }
 
 .formCheckout input {
   width: 100%;
   padding: 5px;
-  border-radius: 10px;
+
   border-style: solid;
   border-color: none;
   margin-bottom: 5px;
@@ -285,7 +286,7 @@ const efetuarPagamento = async () => {
 
 .formCheckout button {
   width: 100%;
-  border-radius: 10px;
+
   border-style: none;
   color: white;
   font-weight: 500;
