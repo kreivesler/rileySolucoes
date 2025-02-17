@@ -48,6 +48,8 @@ const showPixDetails = ref(false); // Controla a exibição do Card PIX
 const apiProducao = 'https://app.rileysolucoes.com.br/api'
 const apiLocalhost = 'http://localhost:3000'
 
+const isLoading = ref(false);
+
 
 const apiLista = {
   apiProducao,
@@ -58,25 +60,21 @@ const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `tru
 
 // Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
+  if (isLoading.value) return; // Evita cliques múltiplos
+  isLoading.value = true; // Desativa o botão
+
   try {
     if (!cliente.name || !cliente.cpfCnpj || !cliente.email || !cliente.billingType) {
-      alert('cadastro inválido')
-      return
+      alert('cadastro inválido');
+      return;
     }
 
-    console.log(cliente)
+    console.log(cliente);
 
     const response = await fetch(`${apiLista.apiProducao}/c/create`, {
       method: "POST",
       headers: headerApi.headerApiTeste,
-      body: JSON.stringify({
-        name: cliente.name,
-        cpfCnpj: cliente.cpfCnpj,
-        email: cliente.email,
-        billingType: cliente.billingType,
-        value: cliente.value,
-        product: cliente.product
-      }),
+      body: JSON.stringify(cliente),
     });
 
     if (!response.ok) {
@@ -86,22 +84,27 @@ const cadastroCliente = async (cliente) => {
     }
 
     const obj = await response.json();
-    cobranca.value = obj
+    cobranca.value = obj;
     console.log("Cliente cadastrado com sucesso:", obj);
 
     if (obj.cobranca.billingType === 'PIX') {
-      imageBase64.value = obj.qrCodePix.encodedImage
-      payload.value = obj.qrCodePix.payload
-      expirationDate.value = obj.qrCodePix.expirationDate
+      imageBase64.value = obj.qrCodePix.encodedImage;
+      payload.value = obj.qrCodePix.payload;
+      expirationDate.value = obj.qrCodePix.expirationDate;
     }
-
   } catch (error) {
     console.error("Erro na requisição:", error);
+  } finally {
+    isLoading.value = false; // Reativa o botão
   }
 };
 
+
 // Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
 const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
+  if (isLoading.value) return; // Evita cliques múltiplos
+  isLoading.value = true; // Desativa o botão
+
   try {
     if (!cartaoCredito.name || !cartaoCredito.cpfCnpj || !cartaoCredito.numero ||
       !cartaoCredito.mes || !cartaoCredito.ano || !cartaoCredito.ccv) {
@@ -110,11 +113,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
     }
 
     const obj = cobranca.value;
-
-    console.log({
-      obj: obj,
-      cartao: cartaoCredito
-    });
+    console.log({ obj, cartao: cartaoCredito });
 
     const response = await fetch(`${apiLista.apiProducao}/c/payment`, {
       method: 'POST',
@@ -131,42 +130,25 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       })
     });
 
-    const objResposta = await response.json(); // Lendo o corpo da resposta APENAS uma vez
+    const objResposta = await response.json();
     console.log('Resposta completa da API:', response.status, objResposta);
 
     if (!response.ok) {
       alert(`Não foi possível processar pagamento. \n Motivo: ${objResposta.message || objResposta.error || "Erro desconhecido"}`);
       console.log('Falha no processamento do pagamento: ', objResposta);
-
-      cartaoCredito.numero = "";
-      cartaoCredito.mes = "";
-      cartaoCredito.ano = "";
-      cartaoCredito.ccv = "";
-
       return;
     }
 
     if (objResposta?.message && objResposta?.status) {
       alert(`Mensagem: ${objResposta.message} \n Status: ${objResposta.status}`);
-      cartaoCredito.name = "";
-      cartaoCredito.cpfCnpj = "";
-      cartaoCredito.numero = "";
-      cartaoCredito.mes = "";
-      cartaoCredito.ano = "";
-      cartaoCredito.ccv = "";
     } else {
       alert("Erro ao processar pagamento. Tente novamente.");
     }
-
   } catch (error) {
     console.log('Erro ao efetuar pagamento:', error);
     alert('Erro ao processar pagamento');
-    cartaoCredito.name = "";
-    cartaoCredito.cpfCnpj = "";
-    cartaoCredito.numero = "";
-    cartaoCredito.mes = "";
-    cartaoCredito.ano = "";
-    cartaoCredito.ccv = "";
+  } finally {
+    isLoading.value = false; // Reativa o botão
   }
 };
 
@@ -224,7 +206,9 @@ const efetuarPagamento = async () => {
         </select>
       </div>
 
-      <button @click.prevent="nextCheckout">Próximo</button>
+      <button @click.prevent="nextCheckout" :disabled="isLoading">
+        {{ isLoading ? "Aguarde..." : "Próximo" }}
+      </button>
     </form>
 
     <!-- Formulário Cartao  -->
@@ -254,16 +238,19 @@ const efetuarPagamento = async () => {
 
       <span>Válido até:</span>
       <div class="dataCartao">
-        <input type="text" id="mesCartao" v-model="cartaoCredito.mes" placeholder="Mês" required />
-        <input type="text" id="anoCartao" v-model="cartaoCredito.ano" placeholder="Ano" required />
+        <input type="text" id="mesCartao" v-model="cartaoCredito.mes" placeholder="02" required />
+        <input type="text" id="anoCartao" v-model="cartaoCredito.ano" placeholder="2027" required />
       </div>
 
 
-      <button @click.prevent="efetuarPagamento">Efetuar pagamento</button>
+      <button @click.prevent="efetuarPagamento" :disabled="isLoading">
+        {{ isLoading ? "Processando..." : "Efetuar pagamento" }}
+      </button>
     </form>
 
     <!-- QrCode Pix -->
     <div class="imgpix" v-if="showPixDetails && imageBase64">
+      <h5>Valor do pagamento: R$ {{ valuePayment }}</h5>
       <ImagemUnica :img-path="imageBase64" :base64="true" img-alt="Erro ao gerar imagem" />
       <span>Código copia e cola:</span>
       <p>{{ payload }}</p>
@@ -325,6 +312,10 @@ const efetuarPagamento = async () => {
   word-wrap: break-word;
 }
 
+.imgpix img {
+  padding: 10%;
+}
+
 .imgpix span {
   width: 100%;
 }
@@ -342,15 +333,20 @@ const efetuarPagamento = async () => {
   }
 
   .formCheckout label {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .formCheckout input {
-    font-size: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .formCheckout span {
+    font-size: 0.8rem;
   }
 
   .formCheckout button {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    padding: 5px;
   }
 
   .imgpix img {
@@ -361,15 +357,19 @@ const efetuarPagamento = async () => {
 
 @media only screen and (min-width: 400px) {
   .checkout {
-    width: 100%;
+    width: 90%;
   }
 
   .formCheckout label {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .formCheckout input {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .formCheckout span {
+    font-size: 0.9rem;
   }
 
   .formCheckout button {
@@ -383,10 +383,14 @@ const efetuarPagamento = async () => {
 
 @media only screen and (min-width: 600px) {
   .checkout {
-    width: 100%;
+    width: 70%;
   }
 
   .formCheckout label {
+    font-size: 1rem;
+  }
+
+  .formCheckout span {
     font-size: 1rem;
   }
 
@@ -409,6 +413,10 @@ const efetuarPagamento = async () => {
   }
 
   .formCheckout label {
+    font-size: 1rem;
+  }
+
+  .formCheckout span {
     font-size: 1rem;
   }
 
@@ -438,6 +446,10 @@ const efetuarPagamento = async () => {
     font-size: 1rem;
   }
 
+  .formCheckout span {
+    font-size: 1rem;
+  }
+
   .formCheckout input {
     font-size: 1rem;
   }
@@ -464,6 +476,10 @@ const efetuarPagamento = async () => {
     font-size: 1.2rem;
   }
 
+  .formCheckout span {
+    font-size: 1rem;
+  }
+
   .formCheckout input {
     font-size: 1.2rem;
   }
@@ -477,7 +493,7 @@ const efetuarPagamento = async () => {
   }
 
   .imgpix img {
-    width: 100%;
+    width: 70%;
   }
 }
 </style>
