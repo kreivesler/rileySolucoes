@@ -4,7 +4,12 @@ import ImagemUnica from "./ImagemUnica.vue";
 
 const props = defineProps({
   valuePayment: String,
-  productName: String
+  productName: String,
+  valueDiscount: {
+    type: String,
+    default: '0'
+  },
+  typeDiscount: String
 })
 
 // Estado do cliente
@@ -14,7 +19,11 @@ const cliente = reactive({
   email: "",
   billingType: "",
   value: isNaN(parseFloat(props.valuePayment)) ? 0 : parseFloat(props.valuePayment),
-  product: props.productName
+  product: props.productName,
+  discount: {
+    value: isNaN(parseFloat(props.valueDiscount)) ? 0 : parseFloat(props.valueDiscount),
+    type: props.typeDiscount //Tipo de desconto: 'FIXED' ou 'PERCENTAGE'
+  }
 });
 
 // Estado do cartão de crédito
