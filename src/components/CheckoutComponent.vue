@@ -30,10 +30,13 @@ const cliente = reactive({
 const cartaoCredito = reactive({
   cpfCnpj: "",
   name: "",
+  email: "",
   numero: "",
   mes: "",
   ano: "",
   ccv: "",
+  cep: "",
+  phone: "",
 });
 
 const headerApiTeste = {
@@ -130,10 +133,13 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
         name: cliente.name,
         cpfCnpj: cartaoCredito.cpfCnpj,
         holderName: cartaoCredito.name,
+        email: cartaoCredito.email,
         number: cartaoCredito.numero,
         expiryMonth: cartaoCredito.mes,
         expiryYear: cartaoCredito.ano,
-        ccv: cartaoCredito.ccv
+        ccv: cartaoCredito.ccv,
+        cep: cartaoCredito.cep,
+        phone: cartaoCredito.phone,
       })
     });
 
