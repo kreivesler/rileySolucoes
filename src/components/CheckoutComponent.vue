@@ -259,6 +259,12 @@ const efetuarPagamento = async () => {
         <input type="text" id="anoCartao" v-model="cartaoCredito.ano" placeholder="2027" required />
       </div>
 
+      <span>Informe o CEP e Telefone:</span>
+      <div class="phoneCep">
+        <input type="text" v-model="cartaoCredito.cep" placeholder="CEP:" required >
+        <input type="text" v-model="cartaoCredito.phone" placeholder="Celular com DDD:" required >
+      </div>
+
 
       <button @click.prevent="efetuarPagamento" :disabled="isLoading">
         {{ isLoading ? "Processando..." : "Efetuar pagamento" }}
@@ -322,6 +328,10 @@ const efetuarPagamento = async () => {
   width: 60px;
 }
 
+.phoneCep{
+  display: flex;
+  flex-direction: row;
+}
 .imgpix {
   display: flex;
   flex-direction: column;
