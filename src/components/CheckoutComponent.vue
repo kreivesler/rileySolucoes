@@ -130,7 +130,6 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       headers: headerApi.headerApiTeste,
       body: JSON.stringify({
         id: obj.cobranca.id,
-        name: cliente.name,
         cpfCnpj: cartaoCredito.cpfCnpj,
         holderName: cartaoCredito.name,
         email: cartaoCredito.email,
@@ -198,8 +197,8 @@ const efetuarPagamento = async () => {
 
 <template>
   <div class="checkout">
-    <!-- Formulário 1 -->
-    <form v-if="!showSecondForm && !showPixDetails" id="form1" class="formCheckout">
+    <!-- Formulário 1  -->
+    <form v-if="!showSecondForm && !showPixDetails" id="form1" class="formCheckout" >
       <div>
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" v-model="cliente.name" placeholder="Nome Completo" required />
@@ -228,23 +227,34 @@ const efetuarPagamento = async () => {
       </button>
     </form>
 
-    <!-- Formulário Cartao  -->
-    <form v-if="showSecondForm" id="form2" class="formCheckout">
+    <!-- Formulário Cartao    -->
+    <form v-if="showSecondForm" id="form2" class="formCheckout" >
+      <span style="margin-bottom: 25px; font-size: 1.5rem;" >Informações do Titular do Cartão</span>
+
+      <div>
+        <label for="nomeTitular">Nome titular do cartão:</label>
+        <input type="text" id="nomeTitular" v-model="cartaoCredito.name" placeholder="Nome" required />
+      </div>
+
       <div>
         <label for="cpfCnpjCliente">CPF ou CNPJ do titular do cartão:</label>
         <input type="text" id="cpfCnpjCliente" v-model="cartaoCredito.cpfCnpj" placeholder="CPF/CNPJ" required />
       </div>
 
-
       <div>
-        <label for="nomeTitular">Nome titular do cartão:</label>
-        <input type="text" id="nomeTitular" v-model="cartaoCredito.name" placeholder="Nome do titular" required />
+        <label for="emailCliente">Email do titular:</label>
+        <input type="email" name="" id="emailCliente" v-model="cartaoCredito.email" placeholder="Email" required>
       </div>
 
+      <span>Informe o CEP e Telefone:</span>
+      <div class="phoneCep">
+        <input type="text" v-model="cartaoCredito.cep" placeholder="CEP" required >
+        <input type="text" v-model="cartaoCredito.phone" placeholder="Celular com DDD" required >
+      </div>
 
       <div>
         <label for="numeroCartao">Número do cartão:</label>
-        <input type="text" id="numeroCartao" v-model="cartaoCredito.numero" placeholder="Número do cartão" required />
+        <input type="text" id="numeroCartao" v-model="cartaoCredito.numero" placeholder="9999 9999 9999 9999" required />
       </div>
 
 
@@ -259,20 +269,13 @@ const efetuarPagamento = async () => {
         <input type="text" id="anoCartao" v-model="cartaoCredito.ano" placeholder="2027" required />
       </div>
 
-      <span>Informe o CEP e Telefone:</span>
-      <div class="phoneCep">
-        <input type="text" v-model="cartaoCredito.cep" placeholder="CEP:" required >
-        <input type="text" v-model="cartaoCredito.phone" placeholder="Celular com DDD:" required >
-      </div>
-
-
       <button @click.prevent="efetuarPagamento" :disabled="isLoading">
         {{ isLoading ? "Processando..." : "Efetuar pagamento" }}
       </button>
     </form>
 
-    <!-- QrCode Pix -->
-    <div class="imgpix" v-if="showPixDetails && imageBase64">
+    <!-- QrCode Pix  -->
+    <div class="imgpix" v-if="showPixDetails && imageBase64" >
       <h4>Valor do pagamento: R$ {{ valuePayment }}</h4>
       <ImagemUnica :img-path="imageBase64" :base64="true" img-alt="Erro ao gerar imagem" />
       <span>Código copia e cola:</span>
@@ -289,7 +292,6 @@ const efetuarPagamento = async () => {
 .checkout {
   display: flex;
   flex-direction: column;
-
   border-color: inherit;
   border-width: 2px;
   padding: 30px;
@@ -298,16 +300,10 @@ const efetuarPagamento = async () => {
 .formCheckout input {
   width: 100%;
   padding: 5px;
-
-  border-style: solid;
-  border-color: none;
-  margin-bottom: 5px;
-  color: rgb(2, 2, 2);
 }
 
 .formCheckout button {
   width: 100%;
-
   border-style: none;
   color: white;
   font-weight: 500;

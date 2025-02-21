@@ -66,10 +66,18 @@
       color: var(--vt-c-black);
     }
 
+    input{
+      background-color: transparent;
+      border-style: none;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+      border-color: inherit;
+      color: inherit;
+    }
+
     input:focus{
       outline: none;
-      border: 3px solid #007bff;
-  
+      border-bottom: 3px solid #007bff;
     }
   }
 }
@@ -88,11 +96,18 @@ button{
   cursor: pointer;
 }
 input{
-  border: 1px solid #222222;
+
+  background-color: transparent;
+  border-style: none;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-color: inherit;
+  color: inherit;
+  margin: 5px;
 }
 input:focus{
   outline: none;
-  border: 2px solid #0056b3;
+  border-bottom: 3px solid #0056b3;
 }
 textarea {
   border: 1px solid #222222;
