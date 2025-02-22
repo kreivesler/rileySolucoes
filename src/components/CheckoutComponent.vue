@@ -136,8 +136,8 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
         number: cartaoCredito.numero,
         expiryMonth: cartaoCredito.mes,
         expiryYear: cartaoCredito.ano,
-        ccv: cartaoCredito.ccv,
-        cep: cartaoCredito.cep,
+        cvv: cartaoCredito.ccv,
+        postalCode: cartaoCredito.cep,
         phone: cartaoCredito.phone,
       })
     });
