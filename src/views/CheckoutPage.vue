@@ -11,7 +11,27 @@ import CardComponent from '@/components/CardComponent.vue';
       <span>Por apenas R$55,00 Avista!</span>
       <h5>*Garantia de 7 dias</h5>
     </CardComponent>
+
   </ContainerComponent>
 
 </template>
-<style scoped></style>
+<style scoped>
+@media only screen and (min-width: 300px){
+
+}
+@media only screen and (min-width: 400px){
+
+}
+@media only screen and (min-width: 600px){
+
+}
+@media only screen and (min-width: 768px){
+
+}
+@media only screen and (min-width: 992px){
+
+}
+@media only screen and (min-width: 1200px){
+
+}
+</style>

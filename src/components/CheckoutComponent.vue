@@ -29,13 +29,14 @@ const cliente = reactive({
 // Estado do cartão de crédito
 const cartaoCredito = reactive({
   cpfCnpj: "",
-  name: "",
+  holderName: "",
   email: "",
-  numero: "",
-  mes: "",
-  ano: "",
-  ccv: "",
-  cep: "",
+  number: "",
+  expiryMonth: "",
+  expiryYear: "",
+  cvv: "",
+  postalCode: "",
+  addressNumber: "",
   phone: "",
 });
 
@@ -62,6 +63,30 @@ const apiLocalhost = 'http://localhost:3000'
 
 const isLoading = ref(false);
 
+const resetaFormCartao = (obj) => {
+  return {
+    ...obj,
+    cpfCnpj: "",
+    holderName: "",
+    email: "",
+    number: "",
+    expiryMonth: "",
+    expiryYear: "",
+    cvv: "",
+    postalCode: "",
+    addressNumber: "",
+    phone: "",
+  };
+};
+const resetaForm = (obj) => {
+  return {
+    ...obj,
+    name: "",
+    cpfCnpj: "",
+    email: "",
+    billingType: "",
+  }
+}
 
 const apiLista = {
   apiProducao,
@@ -69,7 +94,6 @@ const apiLista = {
 }
 // Controle do formulário exibido
 const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `true` exibe o segundo
-
 // Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
   if (isLoading.value) return; // Evita cliques múltiplos
@@ -116,8 +140,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
   isLoading.value = true; // Desativa o botão
 
   try {
-    if (!cartaoCredito.name || !cartaoCredito.cpfCnpj || !cartaoCredito.numero ||
-      !cartaoCredito.mes || !cartaoCredito.ano || !cartaoCredito.ccv) {
+    if (!cartaoCredito) {
       alert('Informe corretamente as informações do cartão.');
       return;
     }
@@ -131,13 +154,14 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       body: JSON.stringify({
         id: obj.cobranca.id,
         cpfCnpj: cartaoCredito.cpfCnpj,
-        holderName: cartaoCredito.name,
+        holderName: cartaoCredito.holderName,
         email: cartaoCredito.email,
-        number: cartaoCredito.numero,
-        expiryMonth: cartaoCredito.mes,
-        expiryYear: cartaoCredito.ano,
-        cvv: cartaoCredito.ccv,
-        postalCode: cartaoCredito.cep,
+        number: cartaoCredito.number,
+        expiryMonth: cartaoCredito.expiryMonth,
+        expiryYear: cartaoCredito.expiryYear,
+        cvv: cartaoCredito.cvv,
+        postalCode: cartaoCredito.postalCode,
+        addressNumber: cartaoCredito.addressNumber,
         phone: cartaoCredito.phone,
       })
     });
@@ -151,11 +175,13 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       return;
     }
 
-    if (objResposta?.message && objResposta?.status) {
-      alert(`Mensagem: ${objResposta.message} \n Status: ${objResposta.status}`);
-    } else {
-      alert("Erro ao processar pagamento. Tente novamente.");
+    if (objResposta.message === "Pagamento processado com sucesso!" || objResposta.status === 'CONFIRMED') {
+      cartaoCredito = resetaFormCartao(cartaoCredito)
+      alert(`${objResposta.message}`)
+      cliente = resetaForm(cliente)
+      showSecondForm.value = false
     }
+
   } catch (error) {
     console.log('Erro ao efetuar pagamento:', error);
     alert('Erro ao processar pagamento');
@@ -163,11 +189,6 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
     isLoading.value = false; // Reativa o botão
   }
 };
-//Função para verificar status de pagamento
-const returnStatusPayment = ()=>{
-
-}
-returnStatusPayment()
 //Função chamada ao clicar em próximo
 const nextCheckout = async () => {
   // Verifica se os campos obrigatórios do primeiro formulário estão preenchidos
@@ -198,7 +219,7 @@ const efetuarPagamento = async () => {
 <template>
   <div class="checkout">
     <!-- Formulário 1  -->
-    <form v-if="!showSecondForm && !showPixDetails" id="form1" class="formCheckout" >
+    <form v-if="!showSecondForm && !showPixDetails" id="form1" class="formCheckout">
       <div>
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" v-model="cliente.name" placeholder="Nome Completo" required />
@@ -228,12 +249,12 @@ const efetuarPagamento = async () => {
     </form>
 
     <!-- Formulário Cartao    -->
-    <form v-if="showSecondForm" id="form2" class="formCheckout" >
-      <span style="margin-bottom: 25px; font-size: 1.5rem;" >Informações do Titular do Cartão</span>
+    <form v-if="showSecondForm" id="form2" class="formCheckout">
+      <span style="margin-bottom: 25px; font-size: 1.5rem;">Informações do Titular do Cartão</span>
 
       <div>
         <label for="nomeTitular">Nome titular do cartão:</label>
-        <input type="text" id="nomeTitular" v-model="cartaoCredito.name" placeholder="Nome" required />
+        <input type="text" id="nomeTitular" v-model="cartaoCredito.holderName" placeholder="Nome" required />
       </div>
 
       <div>
@@ -246,28 +267,32 @@ const efetuarPagamento = async () => {
         <input type="email" name="" id="emailCliente" v-model="cartaoCredito.email" placeholder="Email" required>
       </div>
 
-      <span>Informe o CEP e Telefone:</span>
+      <span>Informe o CEP, Número e Telefone:</span>
       <div class="phoneCep">
-        <input type="text" v-model="cartaoCredito.cep" placeholder="CEP" required >
-        <input type="text" v-model="cartaoCredito.phone" placeholder="Celular com DDD" required >
+        <input type="text" v-model="cartaoCredito.postalCode" placeholder="CEP" required>
+        <input type="text" v-model="cartaoCredito.addressNumber" placeholder="Numero" required>
+        <input type="text" v-model="cartaoCredito.phone" placeholder="Celular com DDD" required>
       </div>
 
       <div>
         <label for="numeroCartao">Número do cartão:</label>
-        <input type="text" id="numeroCartao" v-model="cartaoCredito.numero" placeholder="9999 9999 9999 9999" required />
+        <input type="text" id="numeroCartao" v-model="cartaoCredito.number" placeholder="9999 9999 9999 9999"
+          required />
       </div>
 
 
       <span>Código de segurança:</span>
       <div class="dataCartao">
-        <input type="text" id="ccvCartao" v-model="cartaoCredito.ccv" placeholder="123" required />
+        <input type="text" id="ccvCartao" v-model="cartaoCredito.cvv" placeholder="123" required />
       </div>
 
       <span>Válido até:</span>
       <div class="dataCartao">
-        <input type="text" id="mesCartao" v-model="cartaoCredito.mes" placeholder="02" required />
-        <input type="text" id="anoCartao" v-model="cartaoCredito.ano" placeholder="2027" required />
+        <input type="text" id="mesCartao" v-model="cartaoCredito.expiryMonth" placeholder="02" required />
+        <input type="text" id="anoCartao" v-model="cartaoCredito.expiryYear" placeholder="2027" required />
       </div>
+
+      <span id="resPag">{{ respostaPgamento }}</span>
 
       <button @click.prevent="efetuarPagamento" :disabled="isLoading">
         {{ isLoading ? "Processando..." : "Efetuar pagamento" }}
@@ -275,7 +300,7 @@ const efetuarPagamento = async () => {
     </form>
 
     <!-- QrCode Pix  -->
-    <div class="imgpix" v-if="showPixDetails && imageBase64" >
+    <div class="imgpix" v-if="showPixDetails && imageBase64">
       <h4>Valor do pagamento: R$ {{ valuePayment }}</h4>
       <ImagemUnica :img-path="imageBase64" :base64="true" img-alt="Erro ao gerar imagem" />
       <span>Código copia e cola:</span>
@@ -324,10 +349,11 @@ const efetuarPagamento = async () => {
   width: 60px;
 }
 
-.phoneCep{
+.phoneCep {
   display: flex;
   flex-direction: row;
 }
+
 .imgpix {
   display: flex;
   flex-direction: column;
