@@ -6,6 +6,7 @@ import { getCursoInf } from '@/data/servicos';
 import { ref, onMounted } from "vue";
 
 const cursoInf = ref(null);
+const typeDiscount = import.meta.env.VITE_TYPE_DISCOUNT
 
 onMounted(async () => {
   cursoInf.value = await getCursoInf();
@@ -15,7 +16,7 @@ onMounted(async () => {
 <template>
   <ContainerComponent display-type="flex" align-items="center" padding-comp="2%">
     <template v-if="cursoInf">
-      <CheckoutComponent :valuePayment="cursoInf.valor" type-discount="FIXED" productName="Curso de Informática" />
+      <CheckoutComponent :valuePayment="cursoInf.valor" :type-discount="typeDiscount" productName="Curso de Informática" />
       <CardComponent text-align="center" titulo-card="Curso de informática Essencial e Pacote Office"
         paragrafo-card="Faça o pagamento e receba o acesso às aulas!">
         <span>Por apenas R${{ cursoInf.valor }} à vista!</span>
