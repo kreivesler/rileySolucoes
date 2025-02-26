@@ -238,6 +238,27 @@ const efetuarPagamento = async () => {
   paymentCreditCard(cliente, cartaoCredito, cobranca)
 }
 
+const goToRegistro = async () => {
+  try {
+    if (cliente.billingType === 'PIX' && cobranca.value) {
+      const response = await fetch(`${apiLista.apiProducao}/c/${cobranca.value.cobranca.id}`);
+      const obj = await response.json();
+
+      if (obj.status === 'CONFIRMED') {
+        alert('Pagamento concluído! Redirecionando para criação de usuário...');
+        window.location.href = '/criaUser'; // Redireciona para a página de criação de usuário
+      } else {
+        alert(`Pagamento ainda não confirmado. Status atual: ${obj.status}`);
+      }
+    }
+  } catch (err) {
+    console.log('Erro ao direcionar usuário', err);
+  }
+};
+
+// Executa a função após o pagamento
+goToRegistro();
+
 </script>
 
 <template>
@@ -333,8 +354,6 @@ const efetuarPagamento = async () => {
       <span>Data de expiração: {{ expirationDate }}</span>
     </div>
   </div>
-
-
 
 </template>
 

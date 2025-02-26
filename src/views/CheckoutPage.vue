@@ -16,11 +16,11 @@ onMounted(async () => {
 <template>
   <ContainerComponent display-type="flex" align-items="center" padding-comp="2%">
     <template v-if="cursoInf">
-      <CheckoutComponent :valuePayment="cursoInf.valor" :type-discount="typeDiscount" productName="Curso de Informática" />
-      <CardComponent text-align="center" titulo-card="Curso de informática Essencial e Pacote Office"
+      <CheckoutComponent :valuePayment="cursoInf.valor" :type-discount="typeDiscount" :productName="cursoInf.nome" />
+      <CardComponent text-align="center" :titulo-card="cursoInf.nome"
         paragrafo-card="Faça o pagamento e receba o acesso às aulas!">
         <span>Por apenas R${{ cursoInf.valor }} à vista!</span>
-        <h5>*Garantia de 7 dias</h5>
+        <h5>*Garantia de 7 dias após o pagamento</h5>
       </CardComponent>
     </template>
     <p v-else>Carregando informações de pagamento...</p>
@@ -28,22 +28,15 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-@media only screen and (min-width: 300px){
+@media only screen and (min-width: 300px) {}
 
-}
-@media only screen and (min-width: 400px){
+@media only screen and (min-width: 400px) {}
 
-}
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 600px) {}
 
-}
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 768px) {}
 
-}
-@media only screen and (min-width: 992px){
+@media only screen and (min-width: 992px) {}
 
-}
-@media only screen and (min-width: 1200px){
-
-}
+@media only screen and (min-width: 1200px) {}
 </style>
