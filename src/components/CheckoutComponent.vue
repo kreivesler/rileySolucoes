@@ -204,6 +204,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       alert(`${objResposta.message}`)
       cliente = resetaForm(cliente)
       showSecondForm.value = false
+      window.location.href = '/Signup'
     }
 
   } catch (error) {
@@ -246,7 +247,7 @@ const goToRegistro = async () => {
 
       if (obj.status === 'CONFIRMED') {
         alert('Pagamento concluído! Redirecionando para criação de usuário...');
-        window.location.href = '/criaUser'; // Redireciona para a página de criação de usuário
+        window.location.href = '/Signup'; // Redireciona para a página de criação de usuário
       } else {
         alert(`Pagamento ainda não confirmado. Status atual: ${obj.status}`);
       }
