@@ -58,7 +58,7 @@ const payload = ref(""); // Código para pagamento
 const expirationDate = ref(""); // Data de expiração
 const showPixDetails = ref(false); // Controla a exibição do Card PIX
 
-const apiProducao = 'https://app.rileysolucoes.com.br/api'
+const apiProducao = import.meta.env.VITE_API_PRODUCAO;
 const apiLocalhost = 'http://localhost:3000'
 
 const isLoading = ref(false);
