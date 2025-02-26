@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, defineProps } from "vue";
+import { reactive, ref, defineProps, onUnmounted, onMounted } from "vue";
 import ImagemUnica from "./ImagemUnica.vue";
 
 const props = defineProps({
@@ -92,6 +92,30 @@ const apiLista = {
   apiProducao,
   apiLocalhost
 }
+const tempoRestante = ref(180); // 3 minutos em segundos
+let intervalo = null;
+
+onMounted(() => {
+  intervalo = setInterval(() => {
+    if (tempoRestante.value > 0) {
+      tempoRestante.value--;
+    } else {
+      clearInterval(intervalo);
+    }
+  }, 1000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalo);
+});
+
+// Formata os segundos para "mm:ss"
+const formatarTempo = () => {
+  const minutos = Math.floor(tempoRestante.value / 60);
+  const segundos = tempoRestante.value % 60;
+  return `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+};
+
 // Controle do formulário exibido
 const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `true` exibe o segundo
 // Função para cadastrar cliente e criar cobrança
@@ -301,7 +325,8 @@ const efetuarPagamento = async () => {
 
     <!-- QrCode Pix  -->
     <div class="imgpix" v-if="showPixDetails && imageBase64">
-      <h4>Valor do pagamento: R$ {{ valuePayment }}</h4>
+      <h2>Valor do pagamento: R$ {{ valuePayment }}</h2>
+      <h3> Tempo restante: {{ formatarTempo() }}</h3>
       <ImagemUnica :img-path="imageBase64" :base64="true" img-alt="Erro ao gerar imagem" />
       <span>Código copia e cola:</span>
       <p>{{ payload }}</p>
