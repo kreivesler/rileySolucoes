@@ -129,8 +129,6 @@ const cadastroCliente = async (cliente) => {
       return;
     }
 
-    console.log(cliente);
-
     const response = await fetch(`${apiLista.apiProducao}/c/create`, {
       method: "POST",
       headers: headerApi.headerApiTeste,
@@ -145,7 +143,6 @@ const cadastroCliente = async (cliente) => {
 
     const obj = await response.json();
     cobranca.value = obj;
-    console.log("Cliente cadastrado com sucesso:", obj);
 
     if (obj.cobranca.billingType === 'PIX') {
       imageBase64.value = obj.qrCodePix.encodedImage;
@@ -170,7 +167,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
     }
 
     const obj = cobranca.value;
-    console.log({ obj, cartao: cartaoCredito });
+
 
     const response = await fetch(`${apiLista.apiProducao}/c/payment`, {
       method: 'POST',
@@ -191,7 +188,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
     });
 
     const objResposta = await response.json();
-    console.log('Resposta completa da API:', response.status, objResposta);
+
 
     if (!response.ok) {
       alert(`Não foi possível processar pagamento. \n Motivo: ${objResposta.message || objResposta.error || "Erro desconhecido"}`);
@@ -231,7 +228,6 @@ const nextCheckout = async () => {
 
   } else {
     alert("Preencha todos os campos antes de continuar.");
-    console.log(cliente);
   }
 };
 
