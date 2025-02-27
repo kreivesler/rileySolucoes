@@ -27,16 +27,3 @@ onMounted(async () => {
   </ContainerComponent>
 </template>
 
-<style scoped>
-@media only screen and (min-width: 300px) {}
-
-@media only screen and (min-width: 400px) {}
-
-@media only screen and (min-width: 600px) {}
-
-@media only screen and (min-width: 768px) {}
-
-@media only screen and (min-width: 992px) {}
-
-@media only screen and (min-width: 1200px) {}
-</style>
