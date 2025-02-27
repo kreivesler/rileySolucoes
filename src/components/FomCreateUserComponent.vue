@@ -1,4 +1,50 @@
 <script setup>
+import { reactive, computed } from 'vue';
+import { headerApi } from '@/data/api';
+const api = import.meta.env.VITE_API_PRODUCAO
+
+
+const userData = reactive({
+  email: "",
+  password: "",
+  twoPassword: "",
+})
+
+const senha = computed(()=>{
+  return userData.password === userData.twoPassword ? userData.password : ""
+})
+
+
+const submitForm = async ()=>{
+  try{
+    const usuario = userData.value
+    if(!usuario.email || !senha.value){
+      return alert('Preencha todos os campos corretamente')
+    }
+
+    const cadastraUser = await fetch(`${api}`,{
+      method: 'POST',
+      headers: headerApi.headerApiTeste,
+      body: JSON.stringify({
+        userIdCheckout: '' ,
+        userEmail: usuario.email,
+        userPassword: toString(senha),
+        cursoId: ''
+      })
+    })
+
+    if(!cadastraUser.ok){
+      const erroCadastro = cadastraUser.json().catch(()=> response.text())
+      throw new Error('Erro ao cadastrar usuário: '+ JSON.stringify(erroCadastro))
+    }
+
+    const response = cadastraUser.json()
+
+  } catch (err){
+    console.log('Erro ao criar acesso para usuário', err)
+  }
+}
+
 </script>
 <template>
   <form class="formulario" @submit.prevent="submitForm">
@@ -7,6 +53,8 @@
 
     <label for="passUser">Sua senha:</label>
     <input type="password" id="passUser" v-model="password" placeholder="Digite sua senha" required>
+
+    <input type="password" v-model="twoPassword" placeholder="Digite novamente" required>
 
     <button type="submit">Criar acesso</button>
   </form>

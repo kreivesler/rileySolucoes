@@ -4,7 +4,7 @@ import CardComponent from '@/components/CardComponent.vue';
 import FomCreateUserComponent from '@/components/FomCreateUserComponent.vue';
 </script>
 <template>
-  <span id="msg"  >Pagina indisponível no momento!</span>
+  <!--<span id="msg"  >Pagina indisponível no momento!</span>-->
   <ContainerComponent id="container1" display-type="flex" flex-d="row">
     <CardComponent titulo-card="Criar usuário" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Preencha o formulário para ter acesso ao curso adquirido." />
 

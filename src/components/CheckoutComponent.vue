@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref, defineProps, onUnmounted, onMounted } from "vue";
+import { headerApi } from "@/data/api";
 import ImagemUnica from "./ImagemUnica.vue";
 
 const props = defineProps({
@@ -40,18 +41,6 @@ const cartaoCredito = reactive({
   phone: "",
 });
 
-const headerApiTeste = {
-  "Content-Type": "application/json",
-  "User-Agent": "Projeto teste"
-}
-const headerApiProd = {
-  "Content-Type": "application/json",
-  "User-Agent": "Kr Riley Soluções"
-}
-const headerApi = {
-  headerApiProd,
-  headerApiTeste
-}
 const cobranca = ref(null); // Armazena os dados da cobrança
 const imageBase64 = ref(""); // Base64 da imagem do QR Code
 const payload = ref(""); // Código para pagamento
