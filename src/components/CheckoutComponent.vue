@@ -1,8 +1,10 @@
 <script setup>
 import { reactive, ref, defineProps, onUnmounted, onMounted } from "vue";
 import { headerApi } from "@/data/api";
+import { dadosCheckout } from "@/data/servicos";
+import { useRouter } from "vue-router";
 import ImagemUnica from "./ImagemUnica.vue";
-
+const router = useRouter()
 const props = defineProps({
   valuePayment: String,
   productName: String,
@@ -41,7 +43,6 @@ const cartaoCredito = reactive({
   phone: "",
 });
 
-const cobranca = ref(null); // Armazena os dados da cobrança
 const imageBase64 = ref(""); // Base64 da imagem do QR Code
 const payload = ref(""); // Código para pagamento
 const expirationDate = ref(""); // Data de expiração
@@ -131,7 +132,7 @@ const cadastroCliente = async (cliente) => {
     }
 
     const obj = await response.json();
-    cobranca.value = obj;
+    dadosCheckout.value = obj;
 
     if (obj.cobranca.billingType === 'PIX') {
       imageBase64.value = obj.qrCodePix.encodedImage;
@@ -145,7 +146,7 @@ const cadastroCliente = async (cliente) => {
   }
 };
 // Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
-const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
+const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
   if (isLoading.value) return; // Evita cliques múltiplos
   isLoading.value = true; // Desativa o botão
 
@@ -155,7 +156,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       return;
     }
 
-    const obj = cobranca.value;
+    const obj = dadosCheckout.value;
 
 
     const response = await fetch(`${apiLista.apiProducao}/c/payment`, {
@@ -190,7 +191,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, cobranca) => {
       alert(`${objResposta.message}`)
       cliente = resetaForm(cliente)
       showSecondForm.value = false
-      window.location.href = '/signup'
+      router.push('/signup')
     }
 
   } catch (error) {
@@ -221,18 +222,18 @@ const nextCheckout = async () => {
 };
 
 const efetuarPagamento = async () => {
-  paymentCreditCard(cliente, cartaoCredito, cobranca)
+  paymentCreditCard(cliente, cartaoCredito, dadosCheckout)
 }
 
 const goToRegistro = async () => {
   try {
-    if (cliente.billingType === 'PIX' && cobranca.value) {
-      const response = await fetch(`${apiLista.apiProducao}/c/${cobranca.value.cobranca.id}`);
+    if (cliente.billingType === 'PIX' && dadosCheckout.value) {
+      const response = await fetch(`${apiLista.apiProducao}/c/${dadosCheckout.value.cobranca.id}`);
       const obj = await response.json();
 
       if (obj.status === 'CONFIRMED') {
         alert('Pagamento concluído! Redirecionando para criação de usuário...');
-        window.location.href = '/signup'; // Redireciona para a página de criação de usuário
+        router.push('/signup') // Redireciona para a página de criação de usuário
       } else {
         alert(`Pagamento ainda não confirmado. Status atual: ${obj.status}`);
       }
