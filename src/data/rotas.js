@@ -4,8 +4,7 @@ const rotasMenu = [
   { name: 'Servicos', path: '/servicos' },
   { name: 'Contato', path: '/contato' },
   { name: 'Login', path: '/login'},
-  { name: 'Checkout', path: '/checkout'},
-  { name: 'Signup', path: '/signup'}
+  { name: 'Curso', path: '/Curso-de-informatica'}
 ]
 
 export {rotasMenu}
