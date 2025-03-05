@@ -1,22 +1,25 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
+import { headerApi } from '@/data/api';
+const api = import.meta.env.VITE_API_PRODUCAO
 
-// Variáveis reativas para os dados do formulário
-const email = ref('');
-const password = ref('');
+const dataUser = reactive({
+  name: "",
+  email: "",
+  password: ""
+})
 
 // Função para enviar o formulário
 const submitForm = async () => {
   try {
-    const response = await fetch('https://h0pbbgw41p79.share.zrok.io/api/login' , {
+    if(!dataUser.name || !dataUser.email || !dataUser.password){
+      return alert('Credenciais invalidas, tente novamente')
+    }
+
+    const response = await fetch(`${api}/a/login` , {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value,
-      }),
+      headers: headerApi.headerApiTeste ,
+      body: JSON.stringify(dataUser),
     });
 
     if (!response.ok) {
@@ -35,11 +38,14 @@ const submitForm = async () => {
 
 <template>
   <form class="formulario" @submit.prevent="submitForm">
-    <label for="emailUser">Escreva seu e-mail:</label>
-    <input id="emailUser" v-model="email" type="email" placeholder="Digite seu e-mail" required>
+    <label for="nameUser">Nome completo:</label>
+    <input type="text" id="nameUser" v-model="dataUser.name" placeholder="Nome" required>
 
-    <label for="passUser">Sua senha:</label>
-    <input type="password" id="passUser" v-model="password" placeholder="Digite sua senha" required>
+    <label for="emailUser">Informe seu email:</label>
+    <input id="emailUser" v-model="dataUser.email" type="email" placeholder="Email" required>
+
+    <label for="passUser">Informe sua senha:</label>
+    <input type="password" id="passUser" v-model="dataUser.password" placeholder="Senha" required>
 
     <button type="submit">Fazer login</button>
   </form>
