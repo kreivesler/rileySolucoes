@@ -3,12 +3,12 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import { imagenSite } from '@/data/images';
+import { apresentacao, escritorio, planilha, estudo } from '@/data/images';
 import { conteudoTexto, conteudoServicos } from '@/data/texts';
 import { RouterLink } from 'vue-router';
 </script>
 <template>
-  <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="imagenSite[6]">
+  <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="escritorio">
   </ContainerComponent>
 
 
@@ -25,7 +25,7 @@ import { RouterLink } from 'vue-router';
 
     </CardComponent>
 
-    <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
+    <ImagemUnica :imgPath="apresentacao"></ImagemUnica>
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">
@@ -35,7 +35,7 @@ import { RouterLink } from 'vue-router';
 
   <ContainerComponent displayType="flex" height-comp="300px">
 
-    <ImagemUnica :imgPath="imagenSite[9]"></ImagemUnica>
+    <ImagemUnica :imgPath="planilha"></ImagemUnica>
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
@@ -61,7 +61,7 @@ import { RouterLink } from 'vue-router';
 
   </ContainerComponent>
 
-  <ContainerComponent :bg-image="imagenSite[7]">
+  <ContainerComponent :bg-image="estudo">
     <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 

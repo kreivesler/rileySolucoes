@@ -4,12 +4,12 @@ import GridItem from '@/components/GridItem.vue';
 import { conteudoServicos } from '@/data/texts';
 import CardComponent from '@/components/CardComponent.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import { imagenSite } from '@/data/images';
+import { astronauta, exSite, exSite2, estatSite, contato, astroObserva } from '@/data/images';
 import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <ContainerComponent id="container1" display-type="grid" :bg-image="imagenSite[6]">
+  <ContainerComponent id="container1" display-type="grid" :bg-image="astronauta">
     <GridItem :-titulo="conteudoServicos[0].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
       border-rad="10px" />
     <GridItem :-titulo="conteudoServicos[1].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
@@ -38,13 +38,13 @@ import { RouterLink } from 'vue-router';
 
     </CardComponent>
 
-    <ImagemUnica :imgPath="imagenSite[8]"></ImagemUnica>
+    <ImagemUnica :imgPath="exSite"></ImagemUnica>
 
   </ContainerComponent>
 
   <ContainerComponent display-type="flex" flex-d="column">
 
-    <ImagemUnica :imgPath="imagenSite[10]"></ImagemUnica>
+    <ImagemUnica :imgPath="exSite2"></ImagemUnica>
 
     <CardComponent class="cardServices" :titulo-card="conteudoServicos[1].titulo" text-align="left">
       <p>{{ conteudoServicos[1].descricao }}</p>
@@ -74,13 +74,13 @@ import { RouterLink } from 'vue-router';
 
     </CardComponent>
 
-    <ImagemUnica :imgPath="imagenSite[9]"></ImagemUnica>
+    <ImagemUnica :imgPath="estatSite"></ImagemUnica>
 
   </ContainerComponent>
 
   <ContainerComponent display-type="flex" flex-d="column">
 
-    <ImagemUnica :imgPath="imagenSite[11]"></ImagemUnica>
+    <ImagemUnica :imgPath="contato"></ImagemUnica>
 
     <CardComponent class="cardServices" :titulo-card="conteudoServicos[3].titulo" text-align="left">
       <p>{{ conteudoServicos[3].descricao }}</p>
@@ -95,7 +95,7 @@ import { RouterLink } from 'vue-router';
 
   </ContainerComponent>
 
-  <ContainerComponent display-type="flex" flex-d="column" :bg-image="imagenSite[7]">
+  <ContainerComponent display-type="flex" flex-d="column" :bg-image="astroObserva">
 
 
 
