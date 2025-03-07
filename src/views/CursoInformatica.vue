@@ -5,7 +5,17 @@ import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { apresentacao, escritorio, planilha, estudo } from '@/data/images';
 import { conteudoTexto, conteudoServicos } from '@/data/texts';
-import { RouterLink } from 'vue-router';
+import { idProduto } from '@/data/servicos';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+
+const goToCheckout = ()=>{
+  router.push('/checkout')
+  idProduto.value = import.meta.env.VITE_PROD_C_INFORMATICA
+}
+
 </script>
 <template>
   <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="escritorio">
@@ -17,12 +27,7 @@ import { RouterLink } from 'vue-router';
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
-      <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
-        Entrar em contato
-      </RouterLink>
-
-
-
+      <button class="button-router" @click="goToCheckout" >Comprar agora</button>
     </CardComponent>
 
     <ImagemUnica :imgPath="apresentacao"></ImagemUnica>
@@ -41,9 +46,7 @@ import { RouterLink } from 'vue-router';
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
-      <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
-        Entrar em contato
-      </RouterLink>
+      <button class="button-router" @click="goToCheckout" >Comprar agora</button>
 
 
     </CardComponent>
@@ -65,9 +68,7 @@ import { RouterLink } from 'vue-router';
     <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
 
-      <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
-        Entrar em contato
-      </RouterLink>
+      <button class="button-router" @click="goToCheckout" >Comprar agora</button>
 
     </CardComponent>
   </ContainerComponent>

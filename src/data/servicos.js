@@ -1,11 +1,11 @@
 import { ref } from "vue";
 
 const chave = import.meta.env.VITE_API_PRODUCAO;
-const idProduto =  1 //ref(null)
+const idProduto = ref(null)
 
 async function getCursoInf() {
   try {
-    const response = await fetch(`${chave}/p/${idProduto}`);
+    const response = await fetch(`${chave}/p/${idProduto.value}`);
     const servicoUm = await response.json();
 
     return {
