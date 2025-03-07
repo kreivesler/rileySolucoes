@@ -34,13 +34,37 @@ const cardTexto6 = {
   opcao4: '✅ Empreendedores que querem organizar melhor seu negócio e suas finanças'
 }
 
+const cardTexto7 = new criaCardTexto(
+  'Microsoft Excel ',
+  'Domine Planilhas e Organize seus Dados como um Profissional',
+  'Aprenda a criar e formatar planilhas, usar fórmulas e funções essenciais, gerar gráficos e relatórios dinâmicos. Torne-se mais produtivo e destaque-se no mercado com habilidades avançadas em Excel!'
+)
+const cardTexto8 = new criaCardTexto(
+  'Microsoft Word',
+  'Criação de Documentos Profissionais de Forma Simples e Rápida',
+  'Saiba como formatar textos, criar tabelas, usar cabeçalhos e rodapés, além de automatizar tarefas com mala direta. Com essas habilidades, seus relatórios, contratos e documentos terão um acabamento impecável!'
+)
+const cardTexto9 = new criaCardTexto(
+  'Microsoft PowerPoint',
+  'Apresentações Impactantes e Profissionais',
+  'Crie apresentações que impressionam! Aprenda a estruturar slides, aplicar animações, transições e imagens para transmitir suas ideias de forma clara, objetiva e envolvente.'
+)
+const cardTexto10 = new criaCardTexto(
+  'E-mail (Outlook)',
+  'Comunicação Eficiente e Organização Profissional',
+  'Gerencie e-mails, contatos e compromissos de forma inteligente.'
+)
 const conteudo = [
   cardTexto1,
   cardTexto2,
   cardTexto3,
   cardTexto4,
   cardTexto5,
-  cardTexto6
+  cardTexto6,
+  cardTexto7,
+  cardTexto8,
+  cardTexto9,
+  cardTexto10
 ]
 
 export {
