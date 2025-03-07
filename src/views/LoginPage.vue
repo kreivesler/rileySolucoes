@@ -6,7 +6,7 @@ import FormLoginComponent from '@/components/FormLoginComponent.vue';
 <template>
   <span id="msg"  >Pagina indisponível no momento!</span>
   <ContainerComponent id="container1" display-type="flex" flex-d="row">
-    <CardComponent titulo-card="Faça login" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Preencha o formulário para ter acesso ao curso adquirido." />
+    <CardComponent id="lUser" titulo-card="Faça login" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Preencha o formulário para ter acesso ao curso adquirido." />
 
     <FormLoginComponent/>
   </ContainerComponent>
@@ -25,6 +25,9 @@ import FormLoginComponent from '@/components/FormLoginComponent.vue';
   position: absolute;
   background-color: rgba(0, 0, 0, 0.644);
 
+}
+#lUser{
+  justify-content: flex-start;
 }
 @media only screen and (min-width:300px) {
 

@@ -25,24 +25,26 @@ const toggleMenuVertical = () => {
   </header>
 
   <!-- Condicionalmente renderiza o MenuVertical -->
-  <div class="menuVertical" >
+  <div class="menuVertical">
     <MenuVertical height-menu="100vh" v-if="isMenuVerticalActive" :Rotas="rotasMenu" />
   </div>
 
   <RouterView />
 
 
-    <ContainerComponent id="container2" display-type="flex" bg-color="black" flex-d="row">
+  <ContainerComponent id="container2" display-type="flex" bg-color="black" flex-d="row">
     <div class="cardFooter">
       <span>Treinamentos:</span>
       <nav>
-        <a
-          href="https://www.udemy.com/course/javascript-do-basico-ao-avancado-orientado-a-objetos/?referralCode=9F4A4286CA81D5381F16">JavaScript
-          Orientado a Objetos</a>
-        <a href="https://www.udemy.com/course/curso-de-informatica-essencial/?referralCode=EB7A53AB3FDC78443041">Informática
-          e Pacote Office</a>
-        <a href="https://www.udemy.com/course/microsoft-excel-intermediario/?referralCode=CE4301E4AC8E4D423FF2">Microsoft
-          Excel</a>
+        <RouterLink :to="{ path: '/Curso-javascript' }">
+          JavaScript Orientado a Objetos
+        </RouterLink>
+        <RouterLink :to="{ path: '/Curso-de-informatica' }">
+          Curso de Informática e Pacote Office
+        </RouterLink>
+        <RouterLink :to="{ path: '/Curso-excel' }">
+          Curso de Microsoft Excel
+        </RouterLink>
       </nav>
     </div>
 
@@ -50,16 +52,16 @@ const toggleMenuVertical = () => {
       <span>Nossos Serviços:</span>
       <nav>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[0].titulo } }">
-            {{ conteudoServicos[0].titulo }}
+          {{ conteudoServicos[0].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[1].titulo } }">
-            {{ conteudoServicos[1].titulo }}
+          {{ conteudoServicos[1].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[2].titulo } }">
-            {{ conteudoServicos[2].titulo }}
+          {{ conteudoServicos[2].titulo }}
         </RouterLink>
         <RouterLink :to="{ path: '/servicos', query: { titulo: conteudoServicos[3].titulo } }">
-            {{ conteudoServicos[3].titulo }}
+          {{ conteudoServicos[3].titulo }}
         </RouterLink>
       </nav>
     </div>
@@ -68,10 +70,10 @@ const toggleMenuVertical = () => {
       <span>Institucional:</span>
       <nav>
         <RouterLink :to="{ path: '/', query: { titulo: 'Home' } }">
-            Home page
+          Home page
         </RouterLink>
         <RouterLink :to="{ path: '/sobre', query: { titulo: 'Quem somos' } }">
-            Quem somos
+          Quem somos
         </RouterLink>
         <RouterLink :to="{ path: '/privacidade', query: { titulo: 'Política de privacidade' } }">
           Política de privacidade
@@ -96,20 +98,20 @@ const toggleMenuVertical = () => {
   </ContainerComponent>
 
   <footer>
-    <FooterComponent msg="Feito por Kr Riley Soluções"
-      footer-bg="black" />
+    <FooterComponent msg="Feito por Kr Riley Soluções" footer-bg="black" />
   </footer>
 </template>
 <style scoped>
-.menuVertical{
+.menuVertical {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
-@media only screen and (min-width: 1200px){
 
-#container2 {
-  height: 300px !important;
-}
+@media only screen and (min-width: 1200px) {
+
+  #container2 {
+    height: 300px !important;
+  }
 }
 </style>

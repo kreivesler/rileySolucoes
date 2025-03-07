@@ -6,7 +6,7 @@ import FomCreateUserComponent from '@/components/FomCreateUserComponent.vue';
 <template>
   <!--<span id="msg"  >Pagina indisponível no momento!</span>-->
   <ContainerComponent id="container1" display-type="flex" flex-d="row">
-    <CardComponent titulo-card="Criar usuário" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Preencha o formulário para ter acesso ao curso adquirido." />
+    <CardComponent id="cUser" titulo-card="Criar usuário" font-sizespan="2rem" font-weightspan="800" paragrafo-card="Preencha o formulário para ter acesso ao curso adquirido." />
 
     <FomCreateUserComponent/>
   </ContainerComponent>
@@ -25,6 +25,9 @@ import FomCreateUserComponent from '@/components/FomCreateUserComponent.vue';
   position: absolute;
   background-color: rgba(0, 0, 0, 0.644);
 
+}
+#cUser{
+  justify-content: flex-start;
 }
 @media only screen and (min-width:300px) {
 
