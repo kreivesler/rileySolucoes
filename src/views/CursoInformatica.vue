@@ -79,6 +79,7 @@ const goToCheckout = ()=>{
   <ContainerComponent id="container2" display-type="flex">
     <CardComponent :titulo-card="conteudo[4].titulo" font-sizespan="2rem" font-weightspan="800"
       :paragrafo-card="conteudo[4].descricao" max-linesp="10" font-sizep="1rem" font-weightp="500"></CardComponent>
+      <button class="button-router" @click="goToCheckout" >Comprar agora</button>
   </ContainerComponent>
 
 </template>
