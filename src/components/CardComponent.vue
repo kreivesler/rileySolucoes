@@ -7,6 +7,7 @@ const props = defineProps({
   boxShad: String,
   borderRad: String,
   tituloCard: String,
+  subtitulo: String,
   paragrafoCard: String,
   fontWeightspan: {
     type: String,
@@ -16,9 +17,17 @@ const props = defineProps({
     type: String,
     default: '16px'
   },
-  fontWeightp: {
+  fontWeightsub: {
     type: String,
     default: '500'
+  },
+  fontSizesub: {
+    type: String,
+    default: '16px'
+  },
+  fontWeightp: {
+    type: String,
+    default: '400'
   },
   fontSizep: {
     type: String,
@@ -55,6 +64,14 @@ const props = defineProps({
       color: props.spanColor,
       textShadow: props.spanShad
     }">{{ props.tituloCard }}</span>
+    <span :style="{
+      fontWeight: props.fontWeightsub,
+      fontSize: props.fontSizesub,
+      color: props.spanColor,
+      textShadow: props.spanShad
+    }" >
+      {{ props.subtitulo }}
+    </span>
     <p :style="{
       fontWeight: props.fontWeightp,
       fontSize: props.fontSizep,

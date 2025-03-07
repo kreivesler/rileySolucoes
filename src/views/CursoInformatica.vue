@@ -4,7 +4,7 @@ import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { apresentacao, escritorio, planilha, estudo } from '@/data/images';
-import { conteudoTexto, conteudoServicos } from '@/data/texts';
+import { conteudo } from '@/data/pagCursoInformatica';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 
@@ -24,8 +24,8 @@ const goToCheckout = ()=>{
 
 
   <ContainerComponent displayType="flex" height-comp="300px">
-    <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
+    <CardComponent borderRad="10px" :titulo-card="conteudo[0].titulo" font-sizespan="2rem" font-weightspan="800" :subtitulo="conteudo[0].subtitulo" font-sizesub="1.5rem"
+      :paragrafo-card="conteudo[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
       <button class="button-router" @click="goToCheckout" >Comprar agora</button>
     </CardComponent>
@@ -34,8 +34,8 @@ const goToCheckout = ()=>{
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">
-    <CardComponent :titulo-card="conteudoTexto[1].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[1].descricao" max-linesp="10" font-sizep="1rem" font-weightp="500"></CardComponent>
+    <CardComponent :titulo-card="conteudo[1].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudo[1].descricao" max-linesp="10" font-sizep="1rem" font-weightp="500"></CardComponent>
   </ContainerComponent>
 
   <ContainerComponent displayType="flex" height-comp="300px">
@@ -43,8 +43,8 @@ const goToCheckout = ()=>{
     <ImagemUnica :imgPath="planilha"></ImagemUnica>
 
 
-    <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
+    <CardComponent borderRad="10px" :titulo-card="conteudo[2].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudo[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
 
       <button class="button-router" @click="goToCheckout" >Comprar agora</button>
 
@@ -53,26 +53,33 @@ const goToCheckout = ()=>{
   </ContainerComponent>
 
   <ContainerComponent id="container1" display-type="grid">
-    <GridItem :-titulo="conteudoServicos[0].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+    <GridItem :-titulo="conteudo[6].titulo" :-paragrafo="conteudo[6].descricao" font-s="1.2rem" border-st="none" border-wd="2px"
       border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[1].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+    <GridItem :-titulo="conteudo[7].titulo" :-paragrafo="conteudo[7].descricao" font-s="1.2rem" border-st="none" border-wd="2px"
       border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[2].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+    <GridItem :-titulo="conteudo[8].titulo" :-paragrafo="conteudo[8].descricao" font-s="1.2rem" border-st="none" border-wd="2px"
       border-rad="10px" />
-    <GridItem :-titulo="conteudoServicos[3].titulo" font-s="1.2rem" border-st="solid" border-wd="2px"
+    <GridItem :-titulo="conteudo[9].titulo" :-paragrafo="conteudo[9].descricao" font-s="1.2rem" border-st="none" border-wd="2px"
       border-rad="10px" />
 
   </ContainerComponent>
 
-  <ContainerComponent :bg-image="estudo">
-    <CardComponent :titulo-card="conteudoTexto[3].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[3].descricao" font-sizep="1rem" font-weightp="500">
+  <ContainerComponent >
+    <CardComponent :titulo-card="conteudo[3].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudo[3].descricao" font-sizep="1rem" font-weightp="500">
 
       <button class="button-router" @click="goToCheckout" >Comprar agora</button>
 
     </CardComponent>
   </ContainerComponent>
 
+  <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="estudo">
+  </ContainerComponent>
+
+  <ContainerComponent id="container2" display-type="flex">
+    <CardComponent :titulo-card="conteudo[4].titulo" font-sizespan="2rem" font-weightspan="800"
+      :paragrafo-card="conteudo[4].descricao" max-linesp="10" font-sizep="1rem" font-weightp="500"></CardComponent>
+  </ContainerComponent>
 
 </template>
 <style scoped>
@@ -124,7 +131,7 @@ const goToCheckout = ()=>{
   }
 
   #container1 {
-    padding: 10rem !important;
+    padding: 5rem !important;
     grid-template-columns: repeat(4, 1fr);
   }
 
