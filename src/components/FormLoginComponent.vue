@@ -1,7 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
 import { headerApi } from '@/data/api';
-import { tokenLogin } from '@/data/api';
 const api = import.meta.env.VITE_API_PRODUCAO
 
 const dataUser = reactive({
@@ -13,34 +12,34 @@ const dataUser = reactive({
 // Função para enviar o formulário
 const submitForm = async () => {
   try {
-    if(!dataUser.name || !dataUser.email || !dataUser.password){
-      return alert('Credenciais invalidas, tente novamente')
+    if (!dataUser.name?.trim() || !dataUser.email?.trim() || !dataUser.password?.trim()) {
+      return alert("Preencha todos os campos corretamente!");
     }
 
-    const response = await fetch(`${api}/a/login` , {
-      method: 'POST',
-      headers: headerApi.headerApiTeste ,
+    const response = await fetch(`${api}/a/login`, {
+      method: "POST",
+      headers: headerApi.headerApiTeste,
+      credentials: "include",
       body: JSON.stringify({
         userName: dataUser.name,
         userEmail: dataUser.email,
-        userPassword: dataUser.password
+        userPassword: dataUser.password,
       }),
     });
 
     if (!response.ok) {
-      throw new Error('Erro ao fazer login');
+      throw new Error("Erro ao fazer login");
     }
 
     const data = await response.json();
-    console.log('Resposta da API:', data);
-    alert('Login bem-sucedido!');
-    tokenLogin.value = data.token
-    console.log(`Tokem de login: ${tokenLogin.value}`)
+
+    alert(`${data.message}`);
   } catch (error) {
     console.error(error);
-    alert('Falha ao fazer login. Verifique suas credenciais.');
+    alert(error.message || "Falha ao fazer login. Verifique suas credenciais.");
   }
 };
+
 </script>
 
 <template>
