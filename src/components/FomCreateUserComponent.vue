@@ -1,9 +1,10 @@
 <script setup>
 import { reactive, computed } from 'vue';
+import { useRouter } from "vue-router";
 import { headerApi } from '@/data/api';
 import { dadosCheckout, idProduto } from '@/data/servicos';
 const api = import.meta.env.VITE_API_PRODUCAO
-
+const router = useRouter()
 
 const userData = reactive({
   email: "",
@@ -11,8 +12,6 @@ const userData = reactive({
   twoPassword: "",
 })
 
-console.log(`Cobrança id: ${dadosCheckout.value.cobranca.id}`)
-console.log(`Produto id: ${idProduto}`)
 
 const senha = computed(() => {
   return userData.password === userData.twoPassword ? userData.password : ""
@@ -33,7 +32,7 @@ const submitForm = async () => {
         userIdCheckout: dadosCheckout.value.cobranca.id,
         userEmail: userData.email,
         userPassword: senha.value, // Não precisa de .toString()
-        cursoId: idProduto
+        cursoId: idProduto.value
       })
     });
 
@@ -44,7 +43,9 @@ const submitForm = async () => {
 
     const response = await cadastraUser.json(); // Aguarde a resposta da API
 
-    alert(`Cadastro realizado: ${response}`);
+    alert(`Cadastro realizado com sucesso!`);
+    router.push('/Login')
+
   } catch (err) {
     console.log('Erro ao criar acesso para usuário', err);
   }
