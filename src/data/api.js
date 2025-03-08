@@ -1,3 +1,4 @@
+import { ref } from "vue"
 const headerApiTeste = {
   "Content-Type": "application/json",
   "User-Agent": "Projeto teste"
@@ -10,5 +11,6 @@ const headerApi = {
   headerApiProd,
   headerApiTeste
 }
+const tokenLogin = ref(null)
 
-export { headerApi }
+export { headerApi, tokenLogin }

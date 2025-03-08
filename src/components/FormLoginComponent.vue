@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { headerApi } from '@/data/api';
+import { tokenLogin } from '@/data/api';
 const api = import.meta.env.VITE_API_PRODUCAO
 
 const dataUser = reactive({
@@ -19,7 +20,11 @@ const submitForm = async () => {
     const response = await fetch(`${api}/a/login` , {
       method: 'POST',
       headers: headerApi.headerApiTeste ,
-      body: JSON.stringify(dataUser),
+      body: JSON.stringify({
+        userName: dataUser.name,
+        userEmail: dataUser.email,
+        userPassword: dataUser.password
+      }),
     });
 
     if (!response.ok) {
@@ -29,6 +34,8 @@ const submitForm = async () => {
     const data = await response.json();
     console.log('Resposta da API:', data);
     alert('Login bem-sucedido!');
+    tokenLogin.value = data.token
+    console.log(`Tokem de login: ${tokenLogin.value}`)
   } catch (error) {
     console.error(error);
     alert('Falha ao fazer login. Verifique suas credenciais.');
