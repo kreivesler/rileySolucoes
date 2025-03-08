@@ -5,16 +5,23 @@ const props = defineProps({
     required: true
   },
   boxShad: String,
-  borderRad: String
+  borderRad: String,
+  widthVideo: String,
+  heightVideo: String,
+  contVideo: Boolean,
+  autoPlay: Boolean,
+  mutedVideo: Boolean
 })
 </script>
 
 <template>
-  <video class="meu-video" controls
+  <video class="meu-video" :controls="props.contVideo" :autoplay="props.autoPlay" :muted="props.mutedVideo"
   :style="{
         boxShadow: props.boxShad,
         borderRadius: props.borderRad,
-        width: props.widthVideo
+        width: props.widthVideo,
+        height: props.heightVideo,
+        objectFit: 'cover'
       }"
   >
     <source :src="props.videoPath" type="video/mp4">

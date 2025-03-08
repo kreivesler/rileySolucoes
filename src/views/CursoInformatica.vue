@@ -7,9 +7,10 @@ import { escritorio, planilha, estudo } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
-
+import VideoComponent from '@/components/VideoComponent.vue';
 const router = useRouter()
 
+const conteudoVideo = import.meta.env.VITE_VIDEO_C_INFORMATICA
 
 const goToCheckout = ()=>{
   router.push('/checkout')
@@ -18,7 +19,8 @@ const goToCheckout = ()=>{
 
 </script>
 <template>
-  <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="escritorio">
+  <ContainerComponent  displayType="flex"  >
+    <VideoComponent id="video" :cont-video="false" :auto-play="true" :muted-video="true" :video-path="conteudoVideo" />
   </ContainerComponent>
 
 
@@ -139,7 +141,10 @@ const goToCheckout = ()=>{
   #container2 {
     height: 400px !important;
   }
-
+  #video{
+    width: 100%;
+    height: 450px;
+  }
 
 }
 </style>
