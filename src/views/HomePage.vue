@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router';
 
   <ContainerComponent displayType="flex" height-comp="300px">
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
+      :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" >
 
       <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         Entrar em contato
@@ -40,7 +40,7 @@ import { RouterLink } from 'vue-router';
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500" text-align="center">
+      :paragrafo-card="conteudoTexto[2].descricao" font-sizep="1rem" font-weightp="500">
 
       <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         Entrar em contato

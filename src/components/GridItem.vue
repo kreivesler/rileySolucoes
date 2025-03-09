@@ -40,6 +40,14 @@ const props = defineProps({
   heightImgComp: {
     type: String,
     default: '100%'
+  },
+  fontSizep: {
+    type: String,
+    default: '1rem'
+  },
+  textAlign: {
+    type: String,
+    default: 'left'
   }
 })
 </script>
@@ -68,11 +76,15 @@ const props = defineProps({
     <h3 :style="{
       color: props.tituloColor,
       fontWeight: props.fontWeight,
+      textAlign: props.textAlign,
       fontSize: props.fontS
     }">{{ props.Titulo }}</h3>
     <p :style="{
+      fontSize: props.fontSizep,
+      textAlign: props.textAlign,
       color: props.paragrafoColor
     }">{{ props.Paragrafo }}</p>
+    <slot></slot>
   </div>
 </template>
 
@@ -87,7 +99,6 @@ const props = defineProps({
   padding: 10px;
   background-position: center;
   background-size: cover;
-  text-align: center;
   transition: 0.6s;
   box-sizing: border-box;
 }
@@ -112,12 +123,14 @@ img:hover {
 }
 
 h3 {
+  width: 100%;
   font-size: 1.2rem;
   font-weight: 800;
 }
 
 p {
-  font-size: 1rem;
+
+  margin-bottom: 5px;
 }
 
 @media (prefers-color-scheme: light) {

@@ -33,7 +33,6 @@ const props = defineProps({
     type: String,
     default: '16px'
   },
-  textAlign: String,
   spanColor: String,
   paragrafoColor: String,
   maxLinesp: {
@@ -41,7 +40,11 @@ const props = defineProps({
     default: '5'
   },
   spanShad: String,
-  paragrafoShad: String
+  paragrafoShad: String,
+  textAlign: {
+    type: String,
+    default: 'left'
+  }
 })
 
 </script>
@@ -55,18 +58,19 @@ const props = defineProps({
       borderColor: props.borderCo,
       boxShadow: props.boxShad,
       borderRadius: props.borderRad,
-      textAlign: props.textAlign
     }"
   >
     <span :style="{
       fontWeight: props.fontWeightspan,
       fontSize: props.fontSizespan,
       color: props.spanColor,
+      textAlign: props.textAlign,
       textShadow: props.spanShad
     }">{{ props.tituloCard }}</span>
     <span :style="{
       fontWeight: props.fontWeightsub,
       fontSize: props.fontSizesub,
+      textAlign: props.textAlign,
       color: props.spanColor,
       textShadow: props.spanShad
     }" >
@@ -77,6 +81,7 @@ const props = defineProps({
       fontSize: props.fontSizep,
       color: props.paragrafoColor,
       maxLines: props.maxLinesp,
+      textAlign: props.textAlign,
       textShadow: props.paragrafoShad
     }">{{ props.paragrafoCard }}</p>
     <slot></slot>
