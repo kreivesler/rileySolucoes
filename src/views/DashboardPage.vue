@@ -4,6 +4,7 @@ import GridItem from '@/components/GridItem.vue';
 
 </script>
 <template>
+  <ContainerComponent/>
   <ContainerComponent display-type="grid">
     <GridItem font-sizep="0.7rem" -titulo="Curso de Informática Essencial e Pacote Office" -paragrafo="Aprenda informática essencial e o Pacote Office (Word, Excel, PowerPoint e Outlook). Ideal para melhorar sua produtividade e se destacar no mercado.">
       <button>Começar</button>
@@ -15,6 +16,7 @@ import GridItem from '@/components/GridItem.vue';
       <button>Começar</button>
     </GridItem>
   </ContainerComponent>
+
 </template>
 <style scoped>
 </style>
