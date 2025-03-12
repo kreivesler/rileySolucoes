@@ -170,7 +170,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
         number: cartaoCredito.number,
         expiryMonth: cartaoCredito.expiryMonth,
         expiryYear: cartaoCredito.expiryYear,
-        cvv: cartaoCredito.cvv,
+        ccv: cartaoCredito.cvv,
         postalCode: cartaoCredito.postalCode,
         addressNumber: cartaoCredito.addressNumber,
         phone: cartaoCredito.phone,
