@@ -2,6 +2,7 @@ import { ref } from "vue";
 
 const chave = import.meta.env.VITE_API_PRODUCAO;
 const idProduto = ref(null)
+const idAlunoAfterLogin = ref(null)
 
 async function getCursoInf() {
   try {
@@ -22,4 +23,4 @@ async function getCursoInf() {
 
 const dadosCheckout = ref(null)
 
-export { getCursoInf, dadosCheckout, idProduto };
+export { getCursoInf, dadosCheckout, idProduto, idAlunoAfterLogin };

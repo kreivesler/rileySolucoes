@@ -1,7 +1,10 @@
 <script setup>
 import { reactive } from 'vue';
 import { headerApi } from '@/data/api';
+import { idAlunoAfterLogin } from '@/data/servicos';
+import { useRouter } from 'vue-router';
 const api = import.meta.env.VITE_API_PRODUCAO
+const router = useRouter()
 
 const dataUser = reactive({
   name: "",
@@ -33,7 +36,9 @@ const submitForm = async () => {
 
     const data = await response.json();
 
-    alert(`${data.message}`);
+    alert(`${data.message}`); //Mensagem de sucesso
+    idAlunoAfterLogin.value = data.alunoId //Coleta id do aluno
+    router.push('/dashboard') //Vai para a pagina
   } catch (error) {
     console.error(error);
     alert(error.message || "Falha ao fazer login. Verifique suas credenciais.");
