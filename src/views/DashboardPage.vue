@@ -1,7 +1,15 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import GridItem from '@/components/GridItem.vue';
+import { onMounted } from 'vue';
+import { getAllCursos } from '@/data/servicos';
+import { listaCursos } from '@/data/servicos';
 
+onMounted(()=>{
+  getAllCursos()
+})
+//pega o indice da lista contendo alunoId e cursoId dataAquisicao
+console.log(listaCursos.value[0].cursoId) //retorna 1
 </script>
 <template>
   <ContainerComponent -gap-comp="25px" display-type="grid">

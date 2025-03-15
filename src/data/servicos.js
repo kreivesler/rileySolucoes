@@ -3,6 +3,7 @@ import { ref } from "vue";
 const chave = import.meta.env.VITE_API_PRODUCAO;
 const idProduto = ref(null)
 const idAlunoAfterLogin = ref(null)
+const listaCursos = ref(null)
 
 async function getCursoInf() {
   try {
@@ -21,6 +22,19 @@ async function getCursoInf() {
   }
 }
 
+async function getAllCursos(){
+  try{
+    const response = await fetch(`${chave}/a/c/${idAlunoAfterLogin.value}`)
+    const lista = await response.json()
+
+   listaCursos.value = lista
+   return lista
+  } catch (error) {
+    console.error("Erro ao buscar cursos:", error);
+    return null; // Retorna null em caso de erro
+  }
+}
+
 const dadosCheckout = ref(null)
 
-export { getCursoInf, dadosCheckout, idProduto, idAlunoAfterLogin };
+export { getCursoInf, getAllCursos, dadosCheckout, idProduto, idAlunoAfterLogin, listaCursos };
