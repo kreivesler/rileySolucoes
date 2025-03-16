@@ -1,33 +1,48 @@
 <script setup>
-import ContainerComponent from '@/components/ContainerComponent.vue';
-import GridItem from '@/components/GridItem.vue';
-import { onMounted } from 'vue';
-import { getAllCursos } from '@/data/servicos';
-import { listaCursos } from '@/data/servicos';
+import { ref, onMounted } from 'vue';
+import { getCursoInf } from '@/data/servicos'; // Importa a função getCursoInf
+import { listaCursos } from '@/data/servicos'; // Importa a lista de cursos
 
-onMounted(()=>{
-  getAllCursos()
-})
-//pega o indice da lista contendo alunoId e cursoId dataAquisicao
-console.log(listaCursos.value[0].cursoId) //retorna 1
+// Array para armazenar os detalhes dos cursos
+const cursosDetalhados = ref([]);
+
+//listaCursos.value[0].cursoId
+// Função que carrega os detalhes de todos os cursos
+async function carregarCursos() {
+  // Verifica se listaCursos possui dados
+  if (listaCursos.value && listaCursos.value.length > 0) {
+    cursosDetalhados.value = []; // Limpa o array antes de adicionar novos dados
+    for (let i = 0; i < listaCursos.value.length; i++) {
+      const cursoId = listaCursos.value[i].cursoId; // Obtém o cursoId de cada item na lista
+      const cursoInfo = await getCursoInf(cursoId); // Obtém as informações do curso com o cursoId
+
+      // Se a função getCursoInf retornar dados válidos, adicione ao array cursosDetalhados
+      if (cursoInfo) {
+        cursosDetalhados.value.push({
+          ...listaCursos.value[i], // Junta as informações do curso com os dados retornados
+          ...cursoInfo
+        });
+      }
+    }
+  }
+}
+
+// Carregar os cursos ao montar o componente
+onMounted(() => {
+  carregarCursos();
+});
 </script>
+
 <template>
   <ContainerComponent -gap-comp="25px" display-type="grid">
-    <GridItem class="itemC" font-sizep="0.7rem" border-rad="2px" border-st="solid"
-      -titulo="Curso de Informática Essencial e Pacote Office"
-      -paragrafo="Aprenda informática essencial e o Pacote Office (Word, Excel, PowerPoint e Outlook). Ideal para melhorar sua produtividade e se destacar no mercado.">
-      <button>Começar</button>
-    </GridItem>
-    <GridItem class="itemC" font-sizep="0.7rem" border-rad="2px" border-st="solid" -titulo="Curso de JavaScript Orientado a Objetos"
-      -paragrafo="Aprenda JavaScript orientado a objetos: classes, herança, encapsulamento e polimorfismo. Escreva códigos mais organizados e reutilizáveis.">
-      <button>Começar</button>
-    </GridItem>
-    <GridItem class="itemC" font-sizep="0.7rem" border-rad="2px" border-st="solid" -titulo="Curso de Microsoft Excel"
-      -paragrafo="Domine o Microsoft Excel! Aprenda desde funções básicas até fórmulas avançadas, tabelas dinâmicas e gráficos para otimizar sua produtividade.">
-      <button>Começar</button>
-    </GridItem>
+    <!-- Itera sobre cursosDetalhados para exibir os cursos -->
+    <div class="itemC" v-for="curso in cursosDetalhados" :key="curso.cursoId">
+      <span>{{ curso.nome }}</span> <!-- Exibe o nome do curso -->
+      <p>{{ curso.descricao }}</p> <!-- Exibe a descrição do curso -->
+      <p>Valor: {{ curso.valor }}</p> <!-- Exibe o valor do curso -->
+      <button>Aprender</button> <!-- Botão para iniciar o curso -->
+    </div>
   </ContainerComponent>
-
 </template>
 <style scoped>
 .itemC button {
