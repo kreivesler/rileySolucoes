@@ -3,7 +3,7 @@ import { ref } from "vue";
 const chave = import.meta.env.VITE_API_PRODUCAO;
 const idProduto = ref(null)
 const idAlunoAfterLogin = ref(null)
-const listaCursos = ref(null)
+const listaCursos = []
 
 async function getCursoInf() {
   try {
@@ -26,8 +26,11 @@ async function getAllCursos(){
   try{
     const response = await fetch(`${chave}/a/c/${idAlunoAfterLogin.value}`)
     const lista = await response.json()
-
-   listaCursos.value = lista
+    console.log(`Esta é a lista:`)
+    console.log(lista)
+   listaCursos.push(lista)
+   console.log(`Esta é a listaCursos:`)
+   console.log(listaCursos)
    return lista
   } catch (error) {
     console.error("Erro ao buscar cursos:", error);

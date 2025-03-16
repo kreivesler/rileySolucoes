@@ -1,24 +1,42 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
-import { onMounted } from 'vue';
+import GridItem from '@/components/GridItem.vue';
+import { ref, onMounted } from 'vue';
 import { getAllCursos, getCursoInf } from '@/data/servicos';
 import { listaCursos } from '@/data/servicos';
 
-onMounted(()=>{
-  getAllCursos()
-})
-//pega o indice da lista contendo alunoId e cursoId dataAquisicao
-console.log(listaCursos.value[0].cursoId) //retorna 1
+// Array para armazenar os detalhes dos cursos
+const cursosDetalhados = ref([]);
+
+// Chama a função que obtém todos os cursos ao montar o componente
+onMounted(() => {
+  getAllCursos();
+  listagem(listaCursos); // Chama a função de listagem com a lista de cursos
+});
+console.log(listaCursos)
+// Função para obter os detalhes de cada curso e armazenar
+async function listagem(lista) {
+  // Itera sobre cada item na lista de cursos
+  for (let i = 0;lista.length >= i; i++) {
+    const cursoId = lista[i].cursoId; // Obtém o cursoId de cada item na lista
+    const cursoInfo = await getCursoInf(cursoId); // Obtém os detalhes do curso
+    console.log(cursoInfo)
+    if (cursoInfo) {
+      cursosDetalhados.value.push(cursoInfo); // Armazena os dados do curso detalhado
+    }
+    return
+  }
+}
+
 </script>
+
 <template>
   <ContainerComponent -gap-comp="25px" display-type="grid">
-    <div v-for="" >
-      <span>{{  }}</span>
-      <p>{{  }}</p>
+    <!-- Itera sobre cursosDetalhados para exibir os cursos -->
+    <GridItem v-for="curso in cursosDetalhados" :key="curso.id" class="itemC" :-titulo="curso.nome" :-paragrafo="curso.descricao" font-weight="500" font-sizep="0.7rem" font-s="1rem" >
       <button>Aprender</button>
-    </div>
+    </GridItem>
   </ContainerComponent>
-
 </template>
 <style scoped>
 .itemC button {
