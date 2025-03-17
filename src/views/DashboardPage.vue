@@ -7,25 +7,25 @@ import { listaCursos } from '@/data/servicos';
 
 // Array para armazenar os detalhes dos cursos
 const cursosDetalhados = ref([]);
-
+const lista  = listaCursos.value.lista
 // Chama a função que obtém todos os cursos ao montar o componente
 onMounted(() => {
   getAllCursos();
-  listagem(listaCursos); // Chama a função de listagem com a lista de cursos
+  listagem(lista); // Chama a função de listagem com a lista de cursos
 });
-console.log(listaCursos)
+console.log(`Lista no painel:`)
+console.log(lista)
+
 // Função para obter os detalhes de cada curso e armazenar
 async function listagem(lista) {
   // Itera sobre cada item na lista de cursos
-  for (let i = 0;lista.length >= i; i++) {
+  for (let i = 0; i < lista.length; i++) {
     const cursoId = lista[i].cursoId; // Obtém o cursoId de cada item na lista
     const cursoInfo = await getCursoInf(cursoId); // Obtém os detalhes do curso
-    console.log(cursoInfo)
-    if (cursoInfo) {
-      cursosDetalhados.value.push(cursoInfo); // Armazena os dados do curso detalhado
-    }
-    return
+    cursosDetalhados.value.push(cursoInfo); // Adiciona ao array
   }
+
+  console.log('cursosDetalhados:', cursosDetalhados.value);
 }
 
 </script>
