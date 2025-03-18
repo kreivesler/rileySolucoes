@@ -38,7 +38,7 @@ const submitForm = async () => {
 
     alert(`${data.message}`); //Mensagem de sucesso
     idAlunoAfterLogin.value = data.alunoId //Coleta id do aluno
-    router.push('/dashboard') //Vai para a pagina
+    router.push('/painel') //Vai para a pagina
   } catch (error) {
     console.error(error);
     alert(error.message || "Falha ao fazer login. Verifique suas credenciais.");
