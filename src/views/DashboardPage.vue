@@ -7,14 +7,14 @@ import { listaCursos } from '@/data/servicos';
 
 // Array para armazenar os detalhes dos cursos
 const cursosDetalhados = ref([]);
-const lista  = listaCursos.value.lista
+const cursos  = listaCursos.value
 // Chama a função que obtém todos os cursos ao montar o componente
 onMounted(() => {
   getAllCursos();
-  listagem(lista); // Chama a função de listagem com a lista de cursos
+  listagem(cursos.lista); // Chama a função de listagem com a lista de cursos
 });
 console.log(`Lista no painel:`)
-console.log(lista)
+console.log(cursos.lista)
 
 // Função para obter os detalhes de cada curso e armazenar
 async function listagem(lista) {
