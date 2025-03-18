@@ -42,7 +42,8 @@ async function listagem(lista) {
   console.log('cursosDetalhados:', cursosDetalhados.value);
 }
 
-const goToPageMember = () => {
+const goToPageMember = (cursoId) => {
+  console.log('curso id:',cursoId)
   router.push('/learning');
 };
 </script>
@@ -50,12 +51,12 @@ const goToPageMember = () => {
 <template>
   <ContainerComponent -gap-comp="25px" display-type="grid">
     <GridItem v-for="curso in cursosDetalhados" :key="curso.id" class="itemC"
-      :titulo="curso.nome"
-      :paragrafo="curso.descricao"
+      :-titulo="curso.nome"
+      :-paragrafo="curso.descricao"
       font-weight="500"
       font-sizep="0.7rem"
       font-s="1rem">
-      <button @click="goToPageMember()">Aprender</button>
+      <button @click="goToPageMember(curso.id)">Aprender</button>
     </GridItem>
   </ContainerComponent>
 </template>
