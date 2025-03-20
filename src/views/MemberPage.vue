@@ -1,8 +1,7 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
-import { cursoInformatica } from '@/data/videos';
-import { ref, computed, watch } from 'vue';
+import { ref } from 'vue';
 import { modulos, getAllModulosForCursoId, idCurso } from '@/data/servicos';
 import { onMounted } from 'vue';
 
@@ -15,84 +14,24 @@ onMounted(async () => {
 
   console.log('curso id:', idCurso.value)
   console.log('Modulos', modulos)
-  console.log('Lista completa: ', listaDeModulos.value[0].nome) //exibe o nome do modulo no indice 0
+  console.log('Lista completa: ', listaDeModulos.value) //exibe o nome do modulo no indice 0
 
 })
 
-// Estados reativos para módulo e vídeo
-const currentModuloIndex = ref(0);
-const currentVideoIndex = ref(0);
 
-// Observa mudanças no módulo para redefinir o índice do vídeo
-watch(currentModuloIndex, () => {
-  currentVideoIndex.value = 0; // Redefine para o primeiro vídeo ao mudar de módulo
-});
-
-// Gera uma chave única para o componente de vídeo
-const videoKey = computed(() => `${currentModuloIndex.value}-${currentVideoIndex.value}`);
-
-// Funções de navegação de módulo
-const nextModulo = () => {
-  if (currentModuloIndex.value < cursoInformatica.length - 1) {
-    currentModuloIndex.value++;
-  }
-};
-
-const prevModulo = () => {
-  if (currentModuloIndex.value > 0) {
-    currentModuloIndex.value--;
-  }
-};
-
-// Funções de navegação de vídeo
-const nextVideo = () => {
-  if (currentVideoIndex.value < cursoInformatica[currentModuloIndex.value].video.length - 1) {
-    currentVideoIndex.value++;
-  }
-};
-
-const prevVideo = () => {
-  if (currentVideoIndex.value > 0) {
-    currentVideoIndex.value--;
-  }
-};
 </script>
 
 <template>
   <ContainerComponent display-type="flex" flex-d="column" alignItems="flex-start">
     <div class="caixaVideo">
       <!-- Componente de vídeo com chave dinâmica -->
-      <VideoComponent id="videoAula" :key="videoKey"
-        :video-path="cursoInformatica[currentModuloIndex].video[currentVideoIndex]" border-rad="8px" />
-      <span>{{ cursoInformatica[currentModuloIndex].aula[currentVideoIndex] }}</span>
+      <VideoComponent id="videoAula"
+        video-path="https://app.rileysolucoes.com.br/videos/modulo_informatica/aula1.mp4" border-rad="8px" />
+      <span>{{  }}</span>
     </div>
 
-    <div class="infoCurso">
-      <span>Módulo: {{ cursoInformatica[currentModuloIndex].modulo }}</span>
-
-      <div class="btnAula">
-        <button @click="prevModulo" :disabled="currentModuloIndex === 0">
-          Módulo Anterior
-        </button>
-        <button @click="nextModulo" :disabled="currentModuloIndex === cursoInformatica.length - 1">
-          Próximo Módulo
-        </button>
-      </div>
-
-      <div class="infoAula">
-        <span>{{ cursoInformatica[currentModuloIndex].aula[currentVideoIndex] }}</span>
-      </div>
-
-      <div class="btnAula">
-        <button @click="prevVideo" :disabled="currentVideoIndex === 0">
-          Aula Anterior
-        </button>
-        <button @click="nextVideo"
-          :disabled="currentVideoIndex === cursoInformatica[currentModuloIndex].video.length - 1">
-          Próxima Aula
-        </button>
-      </div>
-    </div>
+    <span v-if="listaDeModulos.length > 0">{{ listaDeModulos[0].nome }}</span>
+    <span v-else>Carregando módulos...</span>
   </ContainerComponent>
 </template>
 
