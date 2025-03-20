@@ -1,9 +1,11 @@
 import { ref } from "vue";
 
 const chave = import.meta.env.VITE_API_PRODUCAO;
-const idProduto = ref(null)
-const idAlunoAfterLogin = ref(null)
-const listaCursos = ref(null)
+const idProduto = ref(null);
+const idAlunoAfterLogin = ref(null);
+const listaCursos = ref(null);
+const modulos = ref(null);
+const idCurso = ref(null);
 
 async function getCursoInf(idProduto) {
   try {
@@ -14,7 +16,7 @@ async function getCursoInf(idProduto) {
       id: servicoUm.id,
       nome: servicoUm.nome,
       descricao: servicoUm.descricao,
-      valor: servicoUm.valor
+      valor: servicoUm.valor,
     };
   } catch (error) {
     console.error("Erro ao buscar serviço:", error);
@@ -22,20 +24,42 @@ async function getCursoInf(idProduto) {
   }
 }
 
-async function getAllCursos(){
-  try{
-    const response = await fetch(`${chave}/a/c/${idAlunoAfterLogin.value}`)
-    const obj = await response.json()
+async function getAllCursos() {
+  try {
+    const response = await fetch(`${chave}/a/c/${idAlunoAfterLogin.value}`);
+    const obj = await response.json();
 
-    console.log(`Esta é a lista:`)
-    console.log(obj)
-   return listaCursos.value = obj
+    console.log(`Esta é a lista:`);
+    console.log(obj);
+    return (listaCursos.value = obj);
   } catch (error) {
     console.error("Erro ao buscar cursos:", error);
     return null; // Retorna null em caso de erro
   }
 }
 
-const dadosCheckout = ref(null)
+async function getAllModulosForCursoId(cursoId) {
+  try {
+    const response = await fetch(`${chave}/m/${cursoId}`);
+    const modulos = await response.json();
 
-export { getCursoInf, getAllCursos, dadosCheckout, idProduto, idAlunoAfterLogin, listaCursos };
+    return (modulos.value = modulos);
+  } catch (error) {
+    console.error("Erro ao buscar modulos:", error);
+    return null; // Retorna null em caso de erro
+  }
+}
+
+const dadosCheckout = ref(null);
+
+export {
+  getCursoInf,
+  getAllCursos,
+  dadosCheckout,
+  idProduto,
+  idAlunoAfterLogin,
+  listaCursos,
+  modulos,
+  getAllModulosForCursoId,
+  idCurso,
+};

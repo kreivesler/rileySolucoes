@@ -3,8 +3,9 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import { ref, onMounted } from 'vue';
 import { getAllCursos, getCursoInf } from '@/data/servicos';
-import { listaCursos } from '@/data/servicos';
+import { listaCursos, idCurso } from '@/data/servicos';
 import { useRouter } from 'vue-router';
+
 
 const router = useRouter();
 
@@ -43,7 +44,7 @@ async function listagem(lista) {
 }
 
 const goToPageMember = (cursoId) => {
-  console.log('curso id:',cursoId)
+  idCurso.value = cursoId.value
   router.push('/learning');
 };
 </script>

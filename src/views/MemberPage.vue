@@ -3,6 +3,17 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
 import { cursoInformatica } from '@/data/videos';
 import { ref, computed, watch } from 'vue';
+import { modulos, getAllModulosForCursoId, idCurso } from '@/data/servicos';
+import { onMounted } from 'vue';
+const listaModulos = ref(null)
+
+onMounted(async ()=>{
+  const cursoId = idCurso.value
+  await getAllModulosForCursoId(cursoId)
+
+  listaModulos.value = modulos.value.lista
+  console.log(`Modulos retornados:`, listaModulos.value.lista)
+})
 
 // Estados reativos para módulo e vídeo
 const currentModuloIndex = ref(0);
