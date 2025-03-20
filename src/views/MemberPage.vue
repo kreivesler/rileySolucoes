@@ -5,14 +5,18 @@ import { cursoInformatica } from '@/data/videos';
 import { ref, computed, watch } from 'vue';
 import { modulos, getAllModulosForCursoId, idCurso } from '@/data/servicos';
 import { onMounted } from 'vue';
-const listaModulos = ref(null)
 
-onMounted(async ()=>{
-  const cursoId = idCurso.value
-  await getAllModulosForCursoId(cursoId)
+const listaDeModulos = ref([])
 
-  listaModulos.value = modulos.value.lista
-  console.log(`Modulos retornados:`, listaModulos.value.lista)
+onMounted(async () => {
+  await getAllModulosForCursoId(idCurso.value)
+
+  listaDeModulos.value = modulos.value.lista || []
+
+  console.log('curso id:', idCurso.value)
+  console.log('Modulos', modulos)
+  console.log('Lista completa: ', listaDeModulos.value[0].nome) //exibe o nome do modulo no indice 0
+
 })
 
 // Estados reativos para módulo e vídeo

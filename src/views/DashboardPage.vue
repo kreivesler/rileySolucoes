@@ -44,7 +44,7 @@ async function listagem(lista) {
 }
 
 const goToPageMember = (cursoId) => {
-  idCurso.value = cursoId.value
+ idCurso.value = cursoId
   router.push('/learning');
 };
 </script>

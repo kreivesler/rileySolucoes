@@ -41,9 +41,9 @@ async function getAllCursos() {
 async function getAllModulosForCursoId(cursoId) {
   try {
     const response = await fetch(`${chave}/m/${cursoId}`);
-    const modulos = await response.json();
+    const lista = await response.json();
 
-    return (modulos.value = modulos);
+    return (modulos.value = lista);
   } catch (error) {
     console.error("Erro ao buscar modulos:", error);
     return null; // Retorna null em caso de erro
