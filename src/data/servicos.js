@@ -6,6 +6,7 @@ const idAlunoAfterLogin = ref(null);
 const listaCursos = ref(null);
 const modulos = ref(null);
 const idCurso = ref(null);
+const aulas = ref(null);
 
 async function getCursoInf(idProduto) {
   try {
@@ -50,6 +51,18 @@ async function getAllModulosForCursoId(cursoId) {
   }
 }
 
+async function getAllAulasForModuloId(moduloID, cursoID) {
+  try {
+    const response = await fetch(`${chave}/m/${moduloID}/${cursoID}`);
+    const lista = await response.json();
+
+    return (aulas.value = lista);
+  } catch (error) {
+    console.error("Erro ao buscar aulas:", error);
+    return null; // Retorna null em caso de erro
+  }
+}
+
 const dadosCheckout = ref(null);
 
 export {
@@ -62,4 +75,5 @@ export {
   modulos,
   getAllModulosForCursoId,
   idCurso,
+  getAllAulasForModuloId,
 };
