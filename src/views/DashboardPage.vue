@@ -3,7 +3,7 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import { ref, onMounted } from 'vue';
 import { getAllCursos, getCursoInf } from '@/data/servicos';
-import { listaCursos, idCurso } from '@/data/servicos';
+import { listaCursos, idCurso, getAllModulosForCursoId, listaDeModulos, modulos } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 
 
@@ -43,8 +43,10 @@ async function listagem(lista) {
   console.log('cursosDetalhados:', cursosDetalhados.value);
 }
 
-const goToPageMember = (cursoId) => {
+const goToPageMember =async (cursoId) => {
  idCurso.value = cursoId
+ await getAllModulosForCursoId(idCurso.value)
+ listaDeModulos.value = modulos.value.lista || []
   router.push('/learning');
 };
 </script>

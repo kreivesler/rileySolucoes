@@ -1,22 +1,13 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
-import { ref } from 'vue';
-import { modulos, getAllModulosForCursoId, idCurso } from '@/data/servicos';
-import { onMounted } from 'vue';
+import { idCurso, listaDeModulos, } from '@/data/servicos';
 
-const listaDeModulos = ref([])
+console.log('curso id:', idCurso.value)
+console.log('Modulos', listaDeModulos.value)
+console.log('Lista completa: ', listaDeModulos.value[0].nome) //exibe o nome do modulo no indice 0
+console.log('id', listaDeModulos.value[0].id) //Exibe o primeiro id do modulo no indice 0
 
-onMounted(async () => {
-  await getAllModulosForCursoId(idCurso.value)
-
-  listaDeModulos.value = modulos.value.lista || []
-
-  console.log('curso id:', idCurso.value)
-  console.log('Modulos', modulos)
-  console.log('Lista completa: ', listaDeModulos.value) //exibe o nome do modulo no indice 0
-
-})
 
 
 </script>
@@ -25,13 +16,15 @@ onMounted(async () => {
   <ContainerComponent display-type="flex" flex-d="column" alignItems="flex-start">
     <div class="caixaVideo">
       <!-- Componente de vídeo com chave dinâmica -->
-      <VideoComponent id="videoAula"
-        video-path="https://app.rileysolucoes.com.br/videos/modulo_informatica/aula1.mp4" border-rad="8px" />
-      <span>{{  }}</span>
+      <VideoComponent id="videoAula" video-path="" border-rad="8px" />
+      <div id="caixaBtn">
+        <button>Aula anterior</button>
+        <button>Próxima aula</button>
+      </div>
+
     </div>
 
-    <span v-if="listaDeModulos.length > 0">{{ listaDeModulos[0].nome }}</span>
-    <span v-else>Carregando módulos...</span>
+    <span>{{ listaDeModulos.value[0].nome }}</span>
   </ContainerComponent>
 </template>
 
@@ -90,6 +83,12 @@ button {
   width: 20%;
   display: flex;
   flex-direction: row;
+}
+
+#caixaBtn {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
 }
 
 @media only screen and (min-width: 300px) {
@@ -217,7 +216,7 @@ button {
 
 @media only screen and (min-width: 1200px) {
   .caixaVideo {
-    width: 80%;
+    width: 60%;
 
   }
 

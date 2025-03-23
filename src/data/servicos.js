@@ -4,6 +4,7 @@ const chave = import.meta.env.VITE_API_PRODUCAO;
 const idProduto = ref(null);
 const idAlunoAfterLogin = ref(null);
 const listaCursos = ref(null);
+const listaDeModulos = ref([]);
 const modulos = ref(null);
 const idCurso = ref(null);
 const aulas = ref(null);
@@ -76,4 +77,5 @@ export {
   getAllModulosForCursoId,
   idCurso,
   getAllAulasForModuloId,
+  listaDeModulos,
 };
