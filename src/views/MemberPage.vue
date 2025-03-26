@@ -1,13 +1,17 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
-import { idCurso, listaDeModulos, } from '@/data/servicos';
+import { idCurso, getAllAulasForModuloId, aulas, modulos } from '@/data/servicos';
 
 console.log('curso id:', idCurso.value)
-console.log('Modulos', listaDeModulos.value)
-console.log('Lista completa: ', listaDeModulos.value[0].nome) //exibe o nome do modulo no indice 0
-console.log('id', listaDeModulos.value[0].id) //Exibe o primeiro id do modulo no indice 0
+console.log('Modulos', modulos)
+console.log('Lista completa: ', modulos.value) //exibe o nome do modulo no indice 0
+console.log('id', modulos.value[0].id) //Exibe o primeiro id do modulo no indice 0
 
+getAllAulasForModuloId(modulos.value[0].id, idCurso.value)
+
+console.log('Aulas do modulo 1:', aulas.value)
+console.log('Aula 1: ', aulas.value[0].titulo)
 
 
 </script>
@@ -24,7 +28,13 @@ console.log('id', listaDeModulos.value[0].id) //Exibe o primeiro id do modulo no
 
     </div>
 
-    <span>{{ listaDeModulos.value[0].nome }}</span>
+    <span>Modulo 1</span>
+    <div>
+      <span>{{  }}</span>
+      <ul>
+        <li><button>{{  }}</button></li>
+      </ul>
+    </div>
   </ContainerComponent>
 </template>
 
@@ -69,6 +79,11 @@ button {
   padding: 5px;
 }
 
+#videoAula{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.288);
+}
 
 
 .infoAula {

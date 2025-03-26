@@ -3,7 +3,7 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import { ref, onMounted } from 'vue';
 import { getAllCursos, getCursoInf } from '@/data/servicos';
-import { listaCursos, idCurso, getAllModulosForCursoId, listaDeModulos, modulos } from '@/data/servicos';
+import { listaCursos, idCurso, getAllModulosForCursoId } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 
 
@@ -17,8 +17,8 @@ onMounted(async () => {
   await getAllCursos(); // Aguarda os cursos serem carregados
   cursos.value = listaCursos.value || []; // Atualiza cursos com a lista carregada
 
-  console.log('Lista no painel:', cursos.value.lista);
-  listagem(cursos.value.lista);
+  console.log('Lista no painel:', cursos.value);
+  listagem(cursos.value);
 });
 
 // Função para obter os detalhes de cada curso e armazenar
@@ -46,7 +46,6 @@ async function listagem(lista) {
 const goToPageMember =async (cursoId) => {
  idCurso.value = cursoId
  await getAllModulosForCursoId(idCurso.value)
- listaDeModulos.value = modulos.value.lista || []
   router.push('/learning');
 };
 </script>
