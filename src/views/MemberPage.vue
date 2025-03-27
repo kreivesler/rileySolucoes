@@ -6,13 +6,12 @@ import { idCurso, getAllAulasForModuloId, aulas, modulos } from '@/data/servicos
 console.log('curso id:', idCurso.value)
 console.log('Modulos', modulos)
 console.log('Lista completa: ', modulos.value) //exibe o nome do modulo no indice 0
-console.log('id', modulos.value[0].id) //Exibe o primeiro id do modulo no indice 0
+console.log('modulo id', modulos.value[0].id) //Exibe o primeiro id do modulo no indice 0
 
 getAllAulasForModuloId(modulos.value[0].id, idCurso.value)
 
-console.log('Aulas do modulo 1:', aulas.value)
-console.log('Aula 1: ', aulas.value[0].titulo)
-
+console.log('Aulas do modulo 1:', aulas)
+console.log('Aula 1: ', aulas[0].titulo)
 
 </script>
 
@@ -28,11 +27,14 @@ console.log('Aula 1: ', aulas.value[0].titulo)
 
     </div>
 
-    <span>Modulo 1</span>
     <div>
-      <span>{{  }}</span>
+      <span>modulo atual</span>
+      <div>
+        <button>Proximo módulo</button>
+        <button>Módulo anterior</button>
+      </div>
       <ul>
-        <li><button>{{  }}</button></li>
+        <li><button>aulas em video</button></li>
       </ul>
     </div>
   </ContainerComponent>

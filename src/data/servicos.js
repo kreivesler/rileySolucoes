@@ -7,7 +7,7 @@ const listaCursos = ref(null);
 const listaDeModulos = ref(null);
 const modulos = ref(null);
 const idCurso = ref(null);
-const aulas = ref(null);
+let aulas
 
 async function getCursoInf(idProduto) {
   try {
@@ -56,8 +56,8 @@ async function getAllAulasForModuloId(moduloID, cursoID) {
   try {
     const response = await fetch(`${chave}/m/${moduloID}/${cursoID}`);
     const lista = await response.json();
-
-    return (aulas.value = lista);
+    console.log('lista de aulas api:', lista)
+    return (aulas = lista);
   } catch (error) {
     console.error("Erro ao buscar aulas:", error);
     return null; // Retorna null em caso de erro
