@@ -7,7 +7,8 @@ const listaCursos = ref(null);
 const listaDeModulos = ref(null);
 const modulos = ref(null);
 const idCurso = ref(null);
-let aulas
+const aulas = ref(null)
+const videoAula = ref(null)
 
 async function getCursoInf(idProduto) {
   try {
@@ -57,10 +58,22 @@ async function getAllAulasForModuloId(moduloID, cursoID) {
     const response = await fetch(`${chave}/m/${moduloID}/${cursoID}`);
     const lista = await response.json();
     console.log('lista de aulas api:', lista)
-    return (aulas = lista);
+    return (aulas.value = lista);
   } catch (error) {
     console.error("Erro ao buscar aulas:", error);
     return null; // Retorna null em caso de erro
+  }
+}
+
+async function carregaVideo(aulaId) {
+  try{
+    const response = await fetch(`${chave}/m/a/${aulaId}`)
+    const obj = await response.json()
+    console.log('Videoaula retornado: ', obj)
+    return ( videoAula.value = obj )
+  } catch (error){
+    console.error('Erro ao buscar videoaula: ', error)
+    return null
   }
 }
 
@@ -79,4 +92,6 @@ export {
   getAllAulasForModuloId,
   listaDeModulos,
   aulas,
+  carregaVideo,
+  videoAula
 };

@@ -1,44 +1,109 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
-import { idCurso, getAllAulasForModuloId, aulas, modulos } from '@/data/servicos';
+import { idCurso, getAllAulasForModuloId, modulos, aulas, videoAula, carregaVideo } from '@/data/servicos';
+import { onMounted, ref, watch } from 'vue';
 
-console.log('curso id:', idCurso.value)
-console.log('Modulos', modulos)
-console.log('Lista completa: ', modulos.value) //exibe o nome do modulo no indice 0
-console.log('modulo id', modulos.value[0].id) //Exibe o primeiro id do modulo no indice 0
+const indiceModulo = ref(0);
+const indiceAula = ref(0); // Índice da aula dentro do módulo
+const aulasLista = ref([]); // Lista de aulas do módulo atual
+const videoPath = ref(null);
 
-getAllAulasForModuloId(modulos.value[0].id, idCurso.value)
+onMounted(async () => {
+  console.log('Curso ID:', idCurso.value);
+  console.log('Lista completa:', modulos.value);
 
-console.log('Aulas do modulo 1:', aulas)
-console.log('Aula 1: ', aulas[0].titulo)
+  if (modulos.value.length > 0) {
+    console.log('Módulo ID:', modulos.value[0].id);
+    await getAllAulasForModuloId(modulos.value[0].id, idCurso.value);
+    listarAulas();
+  }
+});
 
+// Atualiza a lista de aulas e reseta o índice quando muda de módulo
+watch(indiceModulo, async (novoIndice) => {
+  if (modulos.value[novoIndice]) {
+    await getAllAulasForModuloId(modulos.value[novoIndice].id, idCurso.value);
+    listarAulas();
+    indiceAula.value = 0; // Reseta para a primeira aula do novo módulo
+    carregarAula(); // Carrega o primeiro vídeo do novo módulo
+  }
+});
+
+// Atualiza a lista de aulas do módulo atual
+const listarAulas = () => {
+  aulasLista.value = aulas.value.map((aula) => ({
+    titulo: aula.titulo,
+    id: aula.id
+  }));
+};
+
+// Carrega o vídeo da aula atual
+const carregarAula = () => {
+  if (aulasLista.value.length > 0) {
+    const aulaId = aulasLista.value[indiceAula.value].id;
+    carregaVideo(aulaId);
+    videoPath.value = videoAula.value;
+  }
+};
+
+// Navegar para a próxima aula
+const nextAula = () => {
+  if (indiceAula.value < aulasLista.value.length - 1) {
+    indiceAula.value++;
+    carregarAula();
+  }
+};
+
+// Navegar para a aula anterior
+const beforeAula = () => {
+  if (indiceAula.value > 0) {
+    indiceAula.value--;
+    carregarAula();
+  }
+};
+
+// Mudar para o próximo módulo
+const nextModulo = () => {
+  if (indiceModulo.value < modulos.value.length - 1) {
+    indiceModulo.value++;
+  }
+};
+
+// Mudar para o módulo anterior
+const beforeModulo = () => {
+  if (indiceModulo.value > 0) {
+    indiceModulo.value--;
+  }
+};
 </script>
 
 <template>
   <ContainerComponent display-type="flex" flex-d="column" alignItems="flex-start">
     <div class="caixaVideo">
-      <!-- Componente de vídeo com chave dinâmica -->
-      <VideoComponent id="videoAula" video-path="" border-rad="8px" />
+      <VideoComponent id="videoAula" :video-path="videoPath" border-rad="8px" />
       <div id="caixaBtn">
-        <button>Aula anterior</button>
-        <button>Próxima aula</button>
+        <button @click="beforeAula" :disabled="indiceAula === 0">Aula anterior</button>
+        <button @click="nextAula" :disabled="indiceAula === aulasLista.length - 1">Próxima aula</button>
       </div>
-
     </div>
 
     <div>
-      <span>modulo atual</span>
+      <span v-if="modulos.length > 0">{{ modulos[indiceModulo].nome }}</span>
       <div>
-        <button>Proximo módulo</button>
-        <button>Módulo anterior</button>
+        <button @click="nextModulo" :disabled="indiceModulo === modulos.length - 1">Próximo módulo</button>
+        <button @click="beforeModulo" :disabled="indiceModulo === 0">Módulo anterior</button>
       </div>
+
       <ul>
-        <li><button>aulas em video</button></li>
+        <li v-for="(aula, index) in aulasLista" :key="aula.id">
+          <button @click="indiceAula = index; carregarAula()">{{ aula.titulo }}</button>
+        </li>
       </ul>
     </div>
   </ContainerComponent>
 </template>
+
 
 <style scoped>
 ul {
@@ -81,7 +146,7 @@ button {
   padding: 5px;
 }
 
-#videoAula{
+#videoAula {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.288);
