@@ -5,32 +5,36 @@ import { idCurso, getAllAulasForModuloId, modulos, aulas, videoAula, carregaVide
 import { onMounted, ref, watch } from 'vue';
 
 const indiceModulo = ref(0);
-const indiceAula = ref(0); // Índice da aula dentro do módulo
-const aulasLista = ref([]); // Lista de aulas do módulo atual
+const indiceAula = ref(0);
+const aulasLista = ref([]);
 const videoPath = ref(null);
+const videoKey = ref(0); // Força a remontagem do vídeo
 
 onMounted(async () => {
-  console.log('Curso ID:', idCurso.value);
-  console.log('Lista completa:', modulos.value);
-
   if (modulos.value.length > 0) {
-    console.log('Módulo ID:', modulos.value[0].id);
     await getAllAulasForModuloId(modulos.value[0].id, idCurso.value);
     listarAulas();
+    carregarAula(); // Carrega a primeira aula automaticamente
   }
 });
 
-// Atualiza a lista de aulas e reseta o índice quando muda de módulo
+// Atualiza a lista de aulas quando o módulo muda
 watch(indiceModulo, async (novoIndice) => {
   if (modulos.value[novoIndice]) {
     await getAllAulasForModuloId(modulos.value[novoIndice].id, idCurso.value);
     listarAulas();
-    indiceAula.value = 0; // Reseta para a primeira aula do novo módulo
-    carregarAula(); // Carrega o primeiro vídeo do novo módulo
+    indiceAula.value = 0; // Sempre começa pela primeira aula do módulo
+    carregarAula();
   }
 });
 
-// Atualiza a lista de aulas do módulo atual
+// Atualiza `videoPath` quando `videoAula` mudar
+watch(videoAula, () => {
+  videoPath.value = videoAula.value;
+  videoKey.value++; // Força a remontagem do componente de vídeo
+});
+
+// Preenche a lista de aulas
 const listarAulas = () => {
   aulasLista.value = aulas.value.map((aula) => ({
     titulo: aula.titulo,
@@ -38,16 +42,15 @@ const listarAulas = () => {
   }));
 };
 
-// Carrega o vídeo da aula atual
+// Carrega a aula atual
 const carregarAula = () => {
   if (aulasLista.value.length > 0) {
     const aulaId = aulasLista.value[indiceAula.value].id;
     carregaVideo(aulaId);
-    videoPath.value = videoAula.value;
   }
 };
 
-// Navegar para a próxima aula
+// Navega para a próxima aula
 const nextAula = () => {
   if (indiceAula.value < aulasLista.value.length - 1) {
     indiceAula.value++;
@@ -55,7 +58,7 @@ const nextAula = () => {
   }
 };
 
-// Navegar para a aula anterior
+// Volta para a aula anterior
 const beforeAula = () => {
   if (indiceAula.value > 0) {
     indiceAula.value--;
@@ -63,14 +66,14 @@ const beforeAula = () => {
   }
 };
 
-// Mudar para o próximo módulo
+// Muda para o próximo módulo
 const nextModulo = () => {
   if (indiceModulo.value < modulos.value.length - 1) {
     indiceModulo.value++;
   }
 };
 
-// Mudar para o módulo anterior
+// Volta para o módulo anterior
 const beforeModulo = () => {
   if (indiceModulo.value > 0) {
     indiceModulo.value--;
@@ -81,7 +84,9 @@ const beforeModulo = () => {
 <template>
   <ContainerComponent display-type="flex" flex-d="column" alignItems="flex-start">
     <div class="caixaVideo">
-      <VideoComponent id="videoAula" :video-path="videoPath" border-rad="8px" />
+      <!-- 🔄 Apenas o componente do vídeo será recriado ao mudar de aula -->
+      <VideoComponent :key="videoKey" id="videoAula" :video-path="videoPath" border-rad="8px" />
+
       <div id="caixaBtn">
         <button @click="beforeAula" :disabled="indiceAula === 0">Aula anterior</button>
         <button @click="nextAula" :disabled="indiceAula === aulasLista.length - 1">Próxima aula</button>
