@@ -9,6 +9,7 @@ const indiceAula = ref(0);
 const aulasLista = ref([]);
 const videoPath = ref(null);
 const videoKey = ref(0); // Força a remontagem do vídeo
+const tituloAulaAtual = ref(''); // Nova variável para armazenar o título da aula atual
 
 onMounted(async () => {
   if (modulos.value.length > 0) {
@@ -30,8 +31,10 @@ watch(indiceModulo, async (novoIndice) => {
 
 // Atualiza `videoPath` quando `videoAula` mudar
 watch(videoAula, () => {
-  videoPath.value = videoAula.value;
+  videoPath.value = videoAula.value.url;
   videoKey.value++; // Força a remontagem do componente de vídeo
+  // Atualiza o título da aula atual
+  tituloAulaAtual.value = aulasLista.value[indiceAula.value].titulo;
 });
 
 // Preenche a lista de aulas
@@ -85,8 +88,9 @@ const beforeModulo = () => {
   <ContainerComponent display-type="flex" flex-d="column" alignItems="flex-start">
     <div class="caixaVideo">
       <!-- 🔄 Apenas o componente do vídeo será recriado ao mudar de aula -->
-      <VideoComponent :key="videoKey" id="videoAula" :video-path="videoPath" border-rad="8px" />
-
+      <VideoComponent :key="videoKey" id="videoAula" :cont-video="true" :video-path="videoPath" border-rad="8px" />
+      <!-- Exibe o título da aula atual -->
+      <span>{{ tituloAulaAtual }}</span>
       <div id="caixaBtn">
         <button @click="beforeAula" :disabled="indiceAula === 0">Aula anterior</button>
         <button @click="nextAula" :disabled="indiceAula === aulasLista.length - 1">Próxima aula</button>
@@ -108,7 +112,6 @@ const beforeModulo = () => {
     </div>
   </ContainerComponent>
 </template>
-
 
 <style scoped>
 ul {

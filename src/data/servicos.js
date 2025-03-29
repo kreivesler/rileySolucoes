@@ -57,6 +57,7 @@ async function getAllAulasForModuloId(moduloID, cursoID) {
   try {
     const response = await fetch(`${chave}/m/${moduloID}/${cursoID}`);
     const lista = await response.json();
+    console.log('moduloId', moduloID)
     console.log('lista de aulas api:', lista)
     return (aulas.value = lista);
   } catch (error) {
@@ -67,7 +68,7 @@ async function getAllAulasForModuloId(moduloID, cursoID) {
 
 async function carregaVideo(aulaId) {
   try{
-    const response = await fetch(`${chave}/m/a/${aulaId}`)
+    const response = await fetch(`${chave}/v/${aulaId}`)
     const obj = await response.json()
     console.log('Videoaula retornado: ', obj)
     return ( videoAula.value = obj )
