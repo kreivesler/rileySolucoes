@@ -4,12 +4,13 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import { getCursoInf } from '@/data/servicos';
 import { ref, onMounted } from "vue";
+import { idProduto } from '@/data/servicos';
 
 const cursoInf = ref(null);
 const typeDiscount = import.meta.env.VITE_TYPE_DISCOUNT
 
 onMounted(async () => {
-  cursoInf.value = await getCursoInf();
+  cursoInf.value = await getCursoInf(idProduto.value);
 });
 </script>
 
