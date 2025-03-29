@@ -39,6 +39,7 @@ const submitForm = async () => {
     if (!cadastraUser.ok) {
       const erroCadastro = await cadastraUser.json().catch(() => response.text());
       throw new Error('Erro ao cadastrar usuário: ' + JSON.stringify(erroCadastro));
+
     }
 
     const response = await cadastraUser.json(); // Aguarde a resposta da API
