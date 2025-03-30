@@ -161,19 +161,6 @@ button {
 }
 
 
-.infoAula {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  padding: 2px;
-
-}
-
-.btnAula {
-  width: 20%;
-  display: flex;
-  flex-direction: row;
-}
 
 .caixaBtn {
   display: flex;
@@ -239,17 +226,6 @@ button {
     width: 100%;
   }
 
-  .infoAula {
-    flex-direction: column;
-  }
-
-  .infoCurso {
-    width: 100%;
-  }
-
-  .btnAula {
-    width: 100%;
-  }
 
   button {
     font-size: 1rem;
@@ -293,18 +269,6 @@ button {
 
   }
 
-  .infoAula {
-    flex-direction: column;
-  }
-
-  .infoCurso {
-    width: 100%;
-  }
-
-  .btnAula {
-    width: 100%;
-  }
-
   button {
     font-size: 1rem;
   }
@@ -346,13 +310,7 @@ button {
 
   }
 
-  .infoCurso {
-    width: 100%;
-  }
 
-  .btnAula {
-    width: 100%;
-  }
 
   button {
     font-size: 1rem;
@@ -395,13 +353,8 @@ button {
 
   }
 
-  .infoCurso {
-    width: 100%;
-  }
 
-  .btnAula {
-    width: 100%;
-  }
+
 
   button {
     font-size: 1rem;
@@ -444,13 +397,8 @@ button {
 
   }
 
-  .infoCurso {
-    width: 100%;
-  }
 
-  .btnAula {
-    width: 100%;
-  }
+
 
   button {
     font-size: 1rem;
@@ -493,14 +441,6 @@ button {
 
   }
 
-  .infoCurso {
-    width: 40%;
-  }
-
-  .btnAula {
-    width: 100%;
-  }
-
   button {
     font-size: 1rem;
   }
@@ -510,7 +450,7 @@ button {
   }
 
   .caixaVideo span {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .caixaBtn button {
