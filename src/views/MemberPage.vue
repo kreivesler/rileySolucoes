@@ -91,20 +91,20 @@ const beforeModulo = () => {
       <VideoComponent :key="videoKey" id="videoAula" :cont-video="true" :video-path="videoPath" border-rad="8px" />
       <!-- Exibe o título da aula atual -->
       <span>{{ tituloAulaAtual }}</span>
-      <div id="caixaBtn">
+      <div class="caixaBtn">
         <button @click="beforeAula" :disabled="indiceAula === 0">Aula anterior</button>
         <button @click="nextAula" :disabled="indiceAula === aulasLista.length - 1">Próxima aula</button>
       </div>
     </div>
 
-    <div>
-      <span v-if="modulos.length > 0">{{ modulos[indiceModulo].nome }}</span>
-      <div>
-        <button @click="nextModulo" :disabled="indiceModulo === modulos.length - 1">Próximo módulo</button>
+    <div class="menuLateral">
+      <span v-if="modulos.length > 0">Modulo atual: {{ modulos[indiceModulo].nome }}</span>
+      <div class="caixaBtn2">
         <button @click="beforeModulo" :disabled="indiceModulo === 0">Módulo anterior</button>
+        <button @click="nextModulo" :disabled="indiceModulo === modulos.length - 1">Próximo módulo</button>
       </div>
 
-      <ul>
+      <ul class="listaAulas">
         <li v-for="(aula, index) in aulasLista" :key="aula.id">
           <button @click="indiceAula = index; carregarAula()">{{ aula.titulo }}</button>
         </li>
@@ -150,7 +150,7 @@ button {
 }
 
 .caixaVideo span {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 5px;
 }
 
@@ -175,10 +175,64 @@ button {
   flex-direction: row;
 }
 
-#caixaBtn {
+.caixaBtn {
   display: flex;
   flex-direction: row;
   padding: 15px;
+}
+
+.caixaBtn button {
+  margin: 5px;
+  width: 20%;
+
+}
+.caixaBtn button:hover{
+  border-color: #0056b3;
+}
+
+.caixaBtn2 {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.caixaBtn2 button {
+  width: 30%;
+  margin-right: 10px;
+
+}
+.caixaBtn2 button:hover{
+  border-color: #0056b3;
+}
+
+
+.menuLateral {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.menuLateral span {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.listaAulas{
+  width: 100%;
+}
+.listaAulas button {
+  width: 100%;
+  font-size: 0.9rem;
+  text-align: left;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+}
+.listaAulas button:hover{
+  border-color: #0056b3;
+  color: #0056b3;
 }
 
 @media only screen and (min-width: 300px) {
