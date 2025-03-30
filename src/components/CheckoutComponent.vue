@@ -182,7 +182,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
 
     if (!response.ok) {
       alert(`Não foi possível processar pagamento. \n Motivo: ${objResposta.message || objResposta.error || "Erro desconhecido"}`);
-      console.log('Falha no processamento do pagamento: ', objResposta);
+
       return;
     }
 
