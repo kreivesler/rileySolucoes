@@ -183,10 +183,11 @@ button {
 
 .caixaBtn button {
   margin: 5px;
-  width: 20%;
+
 
 }
-.caixaBtn button:hover{
+
+.caixaBtn button:hover {
   border-color: #0056b3;
 }
 
@@ -198,30 +199,27 @@ button {
 }
 
 .caixaBtn2 button {
-  width: 30%;
   margin-right: 10px;
 
 }
-.caixaBtn2 button:hover{
+
+.caixaBtn2 button:hover {
   border-color: #0056b3;
 }
 
 
 .menuLateral {
   display: flex;
-  width: 40%;
   flex-direction: column;
   padding: 5px;
 }
 
-.menuLateral span {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-}
 
-.listaAulas{
+
+.listaAulas {
   width: 100%;
 }
+
 .listaAulas button {
   width: 100%;
   font-size: 0.9rem;
@@ -230,7 +228,8 @@ button {
   border-left-style: none;
   border-right-style: none;
 }
-.listaAulas button:hover{
+
+.listaAulas button:hover {
   border-color: #0056b3;
   color: #0056b3;
 }
@@ -260,6 +259,32 @@ button {
   #videoAula {
     width: 100%;
   }
+
+  .caixaVideo span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn button {
+    padding: 5px;
+    width: 50%;
+  }
+
+  .menuLateral {
+    width: 100%;
+  }
+
+  .menuLateral span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn2 button {
+    width: 50%;
+    font-size: 0.9rem;
+  }
+
+  .listaAulas button {
+    font-size: 0.8rem;
+  }
 }
 
 @media only screen and (min-width: 400px) {
@@ -287,6 +312,32 @@ button {
   #videoAula {
     width: 100%;
   }
+
+  .caixaVideo span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn button {
+    padding: 5px;
+    width: 50%;
+  }
+
+  .menuLateral {
+    width: 100%;
+  }
+
+  .menuLateral span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn2 button {
+    width: 50%;
+    font-size: 0.9rem;
+  }
+
+  .listaAulas button {
+    font-size: 0.8rem;
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -310,11 +361,37 @@ button {
   #videoAula {
     width: 100%;
   }
+
+  .caixaVideo span {
+    font-size: 1.2rem;
+  }
+
+  .caixaBtn button {
+    padding: 5px;
+    width: 50%;
+  }
+
+  .menuLateral {
+    width: 100%;
+  }
+
+  .menuLateral span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn2 button {
+    width: 50%;
+    font-size: 0.9rem;
+  }
+
+  .listaAulas button {
+    font-size: 0.8rem;
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .caixaVideo {
-    width: 80%;
+    width: 60%;
 
   }
 
@@ -332,12 +409,38 @@ button {
 
   #videoAula {
     width: 100%;
+  }
+
+  .caixaVideo span {
+    font-size: 1.2rem;
+  }
+
+  .caixaBtn button {
+    padding: 5px;
+    width: 50%;
+  }
+
+  .menuLateral {
+    width: 40%;
+  }
+
+  .menuLateral span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn2 button {
+    width: 50%;
+    font-size: 0.9rem;
+  }
+
+  .listaAulas button {
+    font-size: 0.8rem;
   }
 }
 
 @media only screen and (min-width: 992px) {
   .caixaVideo {
-    width: 80%;
+    width: 60%;
 
   }
 
@@ -355,6 +458,32 @@ button {
 
   #videoAula {
     width: 100%;
+  }
+
+  .caixaVideo span {
+    font-size: 1.2rem;
+  }
+
+  .caixaBtn button {
+    padding: 5px;
+    width: 50%;
+  }
+
+  .menuLateral {
+    width: 40%;
+  }
+
+  .menuLateral span {
+    font-size: 1.2rem;
+  }
+
+  .caixaBtn2 button {
+    width: 50%;
+    font-size: 0.9rem;
+  }
+
+  .listaAulas button {
+    font-size: 0.8rem;
   }
 }
 
@@ -378,6 +507,33 @@ button {
 
   #videoAula {
     width: 100%;
+  }
+
+  .caixaVideo span {
+    font-size: 1rem;
+  }
+
+  .caixaBtn button {
+    padding: 5px;
+    width: 20%;
+  }
+
+  .menuLateral {
+    width: 40%;
+  }
+
+  .menuLateral span {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .caixaBtn2 button {
+    width: 30%;
+    font-size: 0.9rem;
+  }
+
+  .listaAulas button {
+    font-size: 0.8rem;
   }
 }
 </style>
