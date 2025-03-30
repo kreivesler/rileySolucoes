@@ -32,8 +32,6 @@ async function getAllCursos() {
     const response = await fetch(`${chave}/a/c/${idAlunoAfterLogin.value}`);
     const obj = await response.json();
 
-    console.log(`Esta é a lista:`);
-    console.log(obj);
     return (listaCursos.value = obj);
   } catch (error) {
     console.error("Erro ao buscar cursos:", error);
@@ -57,8 +55,7 @@ async function getAllAulasForModuloId(moduloID, cursoID) {
   try {
     const response = await fetch(`${chave}/m/${moduloID}/${cursoID}`);
     const lista = await response.json();
-    console.log('moduloId', moduloID)
-    console.log('lista de aulas api:', lista)
+
     return (aulas.value = lista);
   } catch (error) {
     console.error("Erro ao buscar aulas:", error);
@@ -70,7 +67,7 @@ async function carregaVideo(aulaId) {
   try{
     const response = await fetch(`${chave}/v/${aulaId}`)
     const obj = await response.json()
-    console.log('Videoaula retornado: ', obj)
+
     return ( videoAula.value = obj )
   } catch (error){
     console.error('Erro ao buscar videoaula: ', error)

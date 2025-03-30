@@ -17,7 +17,6 @@ onMounted(async () => {
   await getAllCursos(); // Aguarda os cursos serem carregados
   cursos.value = listaCursos.value || []; // Atualiza cursos com a lista carregada
 
-  console.log('Lista no painel:', cursos.value);
   listagem(cursos.value);
 });
 
@@ -40,7 +39,6 @@ async function listagem(lista) {
     }
   }
 
-  console.log('cursosDetalhados:', cursosDetalhados.value);
 }
 
 const goToPageMember =async (cursoId) => {
