@@ -15,6 +15,7 @@ const props = defineProps({
   typeDiscount: String
 })
 
+const pagina = ref(null)
 // Estado do cliente
 const cliente = reactive({
   name: "",
@@ -49,7 +50,6 @@ const expirationDate = ref(""); // Data de expiração
 const showPixDetails = ref(false); // Controla a exibição do Card PIX
 
 const apiProducao = import.meta.env.VITE_API_PRODUCAO;
-const apiLocalhost = 'http://localhost:3000'
 
 const isLoading = ref(false);
 
@@ -78,10 +78,6 @@ const resetaForm = (obj) => {
   }
 }
 
-const apiLista = {
-  apiProducao,
-  apiLocalhost
-}
 const tempoRestante = ref(180); // 3 minutos em segundos
 let intervalo = null;
 
@@ -108,6 +104,67 @@ const formatarTempo = () => {
 
 // Controle do formulário exibido
 const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `true` exibe o segundo
+
+const verificarCadastro = async () => {
+  try {
+    const response = await fetch(`${apiProducao}/a/verificar`, {
+      method: 'POST',
+      headers: headerApi.headerApiTeste,
+      body: JSON.stringify({
+        nomeCliente: cliente.name,
+        emailCliente: cliente.email
+      })
+    });
+
+    if (response.status === 200) {
+      console.log('Aluno já cadastrado. Redirecionar para login.');
+      return pagina.value = '/login'
+    }
+
+    if (response.status === 404) {
+      console.log('Aluno não encontrado. Permitir cadastro.');
+      return pagina.value = '/signup'
+    }
+
+    console.log('Erro ao verificar cadastro:', response.status);
+    return null;
+
+  } catch (err) {
+    console.error('Erro ao verificar cadastro:', err);
+    return null;
+  }
+};
+
+const goToRegistro = async () => {
+  try {
+    if (dadosCheckout.value) {
+      const response = await fetch(`${apiProducao}/c/${dadosCheckout.value.cobranca.id}`);
+      const obj = await response.json();
+
+      console.log("Resposta da API de pagamento:", obj); // Debugando a resposta da API
+
+      if (obj.status === 'CONFIRMED') {
+        alert('Pagamento concluído!');
+
+        await verificarCadastro(); // Garante que o cadastro seja verificado antes do redirecionamento
+
+        console.log("Página de redirecionamento:", pagina.value); // Verifica se está correta
+
+        if (pagina.value) {
+          router.push(pagina.value);
+        } else {
+          alert("Erro ao redirecionar. Tente novamente.");
+        }
+      }
+    } else {
+      alert("Erro ao verificar o pagamento. Tente novamente.");
+    }
+  } catch (err) {
+    console.log('Erro ao direcionar usuário', err);
+  }
+};
+
+
 // Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
   if (isLoading.value) return; // Evita cliques múltiplos
@@ -115,36 +172,45 @@ const cadastroCliente = async (cliente) => {
 
   try {
     if (!cliente.name || !cliente.cpfCnpj || !cliente.email || !cliente.billingType) {
-      alert('cadastro inválido');
+      alert('Cadastro inválido');
       return;
     }
 
-    const response = await fetch(`${apiLista.apiProducao}/c/create`, {
+    const response = await fetch(`${apiProducao}/c/create`, {
       method: "POST",
       headers: headerApi.headerApiTeste,
       body: JSON.stringify(cliente),
     });
 
-    if (!response.ok) {
-      const errorResponse = await response.json().catch(() => response.text());
-      console.error("Erro na resposta do servidor:", errorResponse);
-      throw new Error("Erro ao cadastrar cliente: " + JSON.stringify(errorResponse));
+    const obj = await response.json().catch(() => null); // Evita erro ao processar JSON inválido
+
+    if (!response.ok || !obj) {
+      console.error("Erro na resposta do servidor:", obj);
+      throw new Error(`Erro ao cadastrar cliente: ${JSON.stringify(obj)}`);
     }
 
-    const obj = await response.json();
     dadosCheckout.value = obj;
 
     if (obj.cobranca.billingType === 'PIX') {
       imageBase64.value = obj.qrCodePix.encodedImage;
       payload.value = obj.qrCodePix.payload;
       expirationDate.value = obj.qrCodePix.expirationDate;
+      await goToRegistro();
+    } else if (obj.cobranca.billingType === 'CREDIT_CARD') {
+      alert("Agora, insira os dados do cartão para pagamento.");
+      showSecondForm.value = true; // Exibe o formulário do cartão
+    } else {
+      alert("Tipo de pagamento não reconhecido.");
     }
+
   } catch (error) {
     console.error("Erro na requisição:", error);
+    alert("Erro ao cadastrar cliente. Tente novamente.");
   } finally {
     isLoading.value = false; // Reativa o botão
   }
 };
+
 // Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
 const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
   if (isLoading.value) return; // Evita cliques múltiplos
@@ -159,7 +225,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
     const obj = dadosCheckout.value;
 
 
-    const response = await fetch(`${apiLista.apiProducao}/c/payment`, {
+    const response = await fetch(`${apiProducao}/c/payment`, {
       method: 'POST',
       headers: headerApi.headerApiTeste,
       body: JSON.stringify({
@@ -191,7 +257,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
       alert(`${objResposta.message}`)
       cliente = resetaForm(cliente)
       showSecondForm.value = false
-      router.push('/signup')
+      await goToRegistro()
     }
 
   } catch (error) {
@@ -222,29 +288,8 @@ const nextCheckout = async () => {
 };
 
 const efetuarPagamento = async () => {
-  paymentCreditCard(cliente, cartaoCredito, dadosCheckout)
+ await paymentCreditCard(cliente, cartaoCredito, dadosCheckout)
 }
-
-const goToRegistro = async () => {
-  try {
-    if (cliente.billingType === 'PIX' && dadosCheckout.value) {
-      const response = await fetch(`${apiLista.apiProducao}/c/${dadosCheckout.value.cobranca.id}`);
-      const obj = await response.json();
-
-      if (obj.status === 'CONFIRMED') {
-        alert('Pagamento concluído! Redirecionando para criação de usuário...');
-        router.push('/signup') // Redireciona para a página de criação de usuário
-      } else {
-        alert(`Pagamento ainda não confirmado. Status atual: ${obj.status}`);
-      }
-    }
-  } catch (err) {
-    console.log('Erro ao direcionar usuário', err);
-  }
-};
-
-// Executa a função após o pagamento
-goToRegistro();
 
 </script>
 
