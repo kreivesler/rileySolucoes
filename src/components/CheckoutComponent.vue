@@ -135,20 +135,30 @@ const verificarCadastro = async () => {
   }
 };
 
+const verificarStatus = async (idOperation)=>{
+  try{
+    const response = await fetch(`${apiProducao}/c/s/${idOperation}`)
+
+    if(response.status === 200){
+      alert(`Pagamento CONCLUIDO com sucesso!`)
+    } else {
+      alert(`${response.json().status}`)
+    }
+  } catch(err){
+    console.log('Erro ao verificar status', err)
+  }
+}
+
 const goToRegistro = async () => {
   try {
     if (dadosCheckout.value) {
+      //Verifica se a cobrança foi criada apenas
       const response = await fetch(`${apiProducao}/c/${dadosCheckout.value.cobranca.id}`);
-      const obj = await response.json();
 
-      console.log("Resposta da API de pagamento:", obj); // Debugando a resposta da API
-
-      if (obj.status === 'CONFIRMED') {
-        alert('Pagamento concluído!');
+      if (response.status === 200) {
+        await verificarStatus(dadosCheckout.value.cobranca.id)
 
         await verificarCadastro(); // Garante que o cadastro seja verificado antes do redirecionamento
-
-        console.log("Página de redirecionamento:", pagina.value); // Verifica se está correta
 
         if (pagina.value) {
           router.push(pagina.value);
@@ -163,7 +173,6 @@ const goToRegistro = async () => {
     console.log('Erro ao direcionar usuário', err);
   }
 };
-
 
 // Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
@@ -254,10 +263,9 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
 
     if (objResposta.message === "Pagamento processado com sucesso!" || objResposta.status === 'CONFIRMED') {
       cartaoCredito = resetaFormCartao(cartaoCredito)
-      alert(`${objResposta.message}`)
+      await goToRegistro()
       cliente = resetaForm(cliente)
       showSecondForm.value = false
-      await goToRegistro()
     }
 
   } catch (error) {
