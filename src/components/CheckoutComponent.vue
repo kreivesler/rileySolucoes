@@ -12,7 +12,8 @@ const props = defineProps({
     type: String,
     default: '0'
   },
-  typeDiscount: String
+  typeDiscount: String,
+  productId: String
 })
 
 const pagina = ref(null)
@@ -29,6 +30,11 @@ const cliente = reactive({
     type: props.typeDiscount //Tipo de desconto: 'FIXED' ou 'PERCENTAGE'
   }
 });
+
+const produto = reactive({
+  id: parseInt(props.productId),
+  nome: props.productName
+})
 
 // Estado do cartão de crédito
 const cartaoCredito = reactive({
@@ -134,6 +140,32 @@ const verificarCadastro = async () => {
     return null;
   }
 };
+
+const verificarCurso = async ()=>{
+  try{
+    const resposta = await fetch(`${apiProducao}/a/c/verificar`,{
+      method: 'POST',
+      headers: headerApi.headerApiTeste,
+      body: JSON.stringify({
+        userName: cliente.name,
+        userEmail: cliente.email,
+        idProduto: produto.id
+      })
+    })
+    if(resposta.status === 404){
+      //aluno não encontrado
+        return pagina.value = '/signup'
+    }
+    if(resposta.status === 200){
+      //aluno já possui o curso cadastrado
+    }
+    if(resposta.status === 201){
+      //curso registrado com sucesso para o aluno
+    }
+  } catch(err){
+    console.log('Erro ao buscar informação', err)
+  }
+}
 
 const verificarStatus = async (idOperation)=>{
   try{

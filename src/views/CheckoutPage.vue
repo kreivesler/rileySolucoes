@@ -17,7 +17,7 @@ onMounted(async () => {
 <template>
   <ContainerComponent display-type="flex" align-items="center" padding-comp="2%">
     <template v-if="cursoInf">
-      <CheckoutComponent :valuePayment="cursoInf.valor" :type-discount="typeDiscount" :productName="cursoInf.nome" />
+      <CheckoutComponent :product-id="idProduto.value" :valuePayment="cursoInf.valor" :type-discount="typeDiscount" :productName="cursoInf.nome" />
       <CardComponent id="prodInfo" text-align="center" font-sizespan="1.5rem" :titulo-card="cursoInf.nome"
         paragrafo-card="Faça o pagamento e receba o acesso às aulas!">
         <span>R${{ cursoInf.valor }} a vista!</span>
