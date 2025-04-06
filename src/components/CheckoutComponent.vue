@@ -4,6 +4,7 @@ import { headerApi } from "@/data/api";
 import { dadosCheckout } from "@/data/servicos";
 import { useRouter } from "vue-router";
 import ImagemUnica from "./ImagemUnica.vue";
+import { idProduto } from '@/data/servicos';
 
 const router = useRouter();
 
@@ -15,8 +16,7 @@ const props = defineProps({
     type: String,
     default: '0'
   },
-  typeDiscount: String,
-  productId: String
+  typeDiscount: String
 });
 
 // Evitar mutações diretas em props
@@ -38,7 +38,7 @@ const cliente = reactive({
 });
 
 const produto = reactive({
-  id: parseInt(props.productId),
+  id: parseInt(idProduto.value),
   nome: props.productName
 });
 
@@ -95,6 +95,58 @@ const resetaForm = () => Object.assign(cliente, {
 });
 
 // Verificações
+const goToPage = async () => {
+  if (cliente.billingType === "CREDIT_CARD") {
+    showSecondForm.value = true;
+    showPixDetails.value = false;
+  } else if (cliente.billingType === "PIX") {
+    showSecondForm.value = false;
+    showPixDetails.value = true;
+  }
+}
+
+const cadastrarProduto = async () => {
+  console.log('Chamando cadastrarProduto...');
+  const cadastrar = await fetch(`${apiProducao}/a/c/verificar`, {
+    method: 'POST',
+    headers: headerApi.headerApiTeste,
+    body: JSON.stringify({
+      userName: cliente.name,
+      userEmail: cliente.email,
+      idProduto: produto.id
+    })
+  })
+
+  console.log('Resposta status:', cadastrar.status);
+  if (cadastrar.status === 200){
+    alert('Você já possui este curso, vá para a pagina de login')
+  }
+  if(cadastrar.status === 201){
+    alert('curso obtido com sucesso!')
+    return router.push('/login')
+  }
+}
+
+const verificarAluno = async () => {
+  const verificarAluno = await fetch(`${apiProducao}/a/verificar`, {
+    method: 'POST',
+    headers: headerApi.headerApiTeste,
+    body: JSON.stringify({
+      nomeCliente: cliente.name,
+      emailCliente: cliente.email
+    })
+  });
+
+  if (verificarAluno.status === 404) {
+    //aluno não existe
+    return router.push('/signup')
+  }
+
+  if(verificarAluno.status === 200){
+    //aluno já existe
+    return await cadastrarProduto()
+  }
+}
 
 const cadastroCliente = async (cliente) => {
   if (isLoading.value) return;
@@ -116,6 +168,7 @@ const cadastroCliente = async (cliente) => {
 
     if (!response.ok || !obj) {
       console.error("Erro na resposta do servidor:", obj);
+      alert(`${obj.message}`)
       throw new Error("Erro ao cadastrar cliente");
     }
 
@@ -126,6 +179,8 @@ const cadastroCliente = async (cliente) => {
       payload.value = obj.qrCodePix?.payload || '';
       expirationDate.value = obj.qrCodePix?.expirationDate || '';
     }
+
+    goToPage()
 
   } catch (error) {
     console.error("Erro na requisição:", error);
@@ -172,9 +227,9 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
     }
 
     if (objResposta.status === 'CONFIRMED') {
+      await verificarAluno();
       resetaFormCartao();
       resetaForm();
-      await verificarAluno();
       showSecondForm.value = false;
     }
 
@@ -186,77 +241,13 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
   }
 };
 
-const goToPage = async () => {
-  if (cliente.billingType === "CREDIT_CARD") {
-    showSecondForm.value = true;
-    showPixDetails.value = false;
-  } else if (cliente.billingType === "PIX") {
-    showSecondForm.value = false;
-    showPixDetails.value = true;
-  }
-}
-
-const cadastrarProduto = async () => {
-  const cadastrar = await fetch(`${apiProducao}/a/c/verificar`, {
-    method: 'POST',
-    headers: headerApi.headerApiTeste,
-    body: JSON.stringify({
-      userName: cliente.name,
-      userEmail: cliente.email,
-      idProduto: produto.id
-    })
-  })
-
-  if (cadastrar.status === 200){
-    return alert('Você já possui este curso, vá para a pagina de login')
-  }
-  if(cadastrar.status === 201){
-    return alert('curso obtido com sucesso!')
-  }
-}
-
-const verificarAluno = async () => {
-  const verificarAluno = await fetch(`${apiProducao}/a/verificar`, {
-    method: 'POST',
-    headers: headerApi.headerApiTeste,
-    body: JSON.stringify({
-      nomeCliente: cliente.name,
-      emailCliente: cliente.email
-    })
-  });
-
-  if (verificarAluno.status === 404) {
-    //aluno não existe
-    return router.push('/signup')
-  }
-
-  if(verificarAluno.status === 200){
-    //aluno já existe
-    await cadastrarProduto()
-    return router.push('/login')
-  }
-}
-
 const proximoPasso = async () => {
   try {
-
-    const verificarCurso = await fetch(`${apiProducao}/a/c/`, {
-      method: 'POST',
-      headers: headerApi.headerApiTeste,
-      body: JSON.stringify({
-        nomeCliente: cliente.name,
-        emailCliente: cliente.email,
-        idProduto: produto.id
-      })
-    });
-
-    if (verificarCurso.status === 404) {
-      await cadastroCliente(cliente) //gerar cobrança para aluno pagar
-      await goToPage()
-
-    } else {
-      alert(`Você já possui uma compra registrada deste curso para o email atual, vá para pagina de login ou altere o email. ${cliente.email}`)
+    if(!cliente.name || !cliente.email || !cliente.cpfCnpj){
+      return alert('Todos os campos devem ser preenchidos!')
     }
+
+    await cadastroCliente(cliente)
 
   } catch (err) {
     console.error('Erro ao pressionar próximo passo:', err);
@@ -345,7 +336,6 @@ const efetuarPagamento = async () => {
         <input type="text" id="anoCartao" v-model="cartaoCredito.expiryYear" placeholder="2027" required />
       </div>
 
-      <span id="resPag">{{ respostaPgamento }}</span>
 
       <button @click.prevent="efetuarPagamento" :disabled="isLoading">
         {{ isLoading ? "Processando..." : "Efetuar pagamento" }}
