@@ -118,10 +118,10 @@ const cadastrarProduto = async () => {
   })
 
   console.log('Resposta status:', cadastrar.status);
-  if (cadastrar.status === 200){
+  if (cadastrar.status === 200) {
     alert('Você já possui este curso, vá para a pagina de login')
   }
-  if(cadastrar.status === 201){
+  if (cadastrar.status === 201) {
     alert('curso obtido com sucesso!')
     return router.push('/login')
   }
@@ -178,7 +178,7 @@ const verificarAluno = async () => {
     return router.push('/signup')
   }
 
-  if(verificarAluno.status === 200){
+  if (verificarAluno.status === 200) {
     //aluno já existe
     return await cadastrarProduto()
   }
@@ -281,7 +281,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
 
 const proximoPasso = async () => {
   try {
-    if(!cliente.name || !cliente.email || !cliente.cpfCnpj){
+    if (!cliente.name || !cliente.email || !cliente.cpfCnpj) {
       return alert('Todos os campos devem ser preenchidos!')
     }
 
@@ -296,7 +296,6 @@ const efetuarPagamento = async () => {
   await paymentCreditCard(cliente, cartaoCredito, dadosCheckout);
 };
 </script>
-
 
 <template>
   <div class="checkout">
@@ -319,10 +318,10 @@ const efetuarPagamento = async () => {
 
       <div>
         <label for="billingType">Forma de pagamento:</label>
-        <select v-model="cliente.billingType" id="billingType" required>
-          <option value="PIX">PIX</option>
-          <option value="CREDIT_CARD">Cartão de Crédito</option>
-        </select>
+        <div class="btnOpt">
+          <button :class="{ selected: cliente.billingType === 'PIX' }" @click.prevent="cliente.billingType = 'PIX'">PIX</button>
+          <button :class="{ selected: cliente.billingType === 'CREDIT_CARD' }" @click.prevent="cliente.billingType = 'CREDIT_CARD'">Cartão de crédito</button>
+        </div>
       </div>
 
       <button @click.prevent="proximoPasso" :disabled="isLoading">
@@ -452,6 +451,22 @@ const efetuarPagamento = async () => {
   cursor: pointer;
   font-size: 0.7rem;
   color: #034386;
+}
+
+.btnOpt{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.btnOpt button {
+  margin: 5px;
+  background-color: transparent;
+}
+.btnOpt button.selected{
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
 }
 
 @media only screen and (min-width: 300px) {
