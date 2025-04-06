@@ -127,6 +127,42 @@ const cadastrarProduto = async () => {
   }
 }
 
+const verificarStatusPix = async () => {
+  if (!dadosCheckout.value?.cobranca?.id) return;
+
+  const idOperacao = dadosCheckout.value.cobranca.id;
+  const tempoTotal = 180; // Tempo em segundos
+  let tempoDecorrido = 0;
+  const intervalo = 5000; // 5 segundos
+
+  const verificarStatus = async () => {
+    try {
+      const res = await fetch(`${apiProducao}/c/s/${idOperacao}`, {
+        method: "GET",
+        headers: headerApi.headerApiTeste
+      });
+
+      const resultado = await res.json();
+
+      if (res.status === 200 && resultado.status === "CONFIRMED") {
+        clearInterval(verificador);
+        // Verifica se o cliente já tem o produto ou cadastra
+        await verificarAluno();
+      }
+
+      tempoDecorrido += intervalo / 1000;
+      if (tempoDecorrido >= tempoTotal) {
+        clearInterval(verificador);
+        alert("Tempo expirado! O pagamento via PIX não foi confirmado.");
+      }
+    } catch (error) {
+      console.error("Erro ao verificar status do pagamento:", error);
+    }
+  };
+
+  const verificador = setInterval(verificarStatus, intervalo);
+};
+
 const verificarAluno = async () => {
   const verificarAluno = await fetch(`${apiProducao}/a/verificar`, {
     method: 'POST',
@@ -178,6 +214,8 @@ const cadastroCliente = async (cliente) => {
       imageBase64.value = obj.qrCodePix?.encodedImage || '';
       payload.value = obj.qrCodePix?.payload || '';
       expirationDate.value = obj.qrCodePix?.expirationDate || '';
+
+      verificarStatusPix();
     }
 
     goToPage()
