@@ -56,7 +56,6 @@ const cartaoCredito = reactive({
   phone: "",
 });
 
-const pagina = ref(null);
 const imageBase64 = ref("");
 const payload = ref("");
 const expirationDate = ref("");
@@ -175,7 +174,7 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
     if (objResposta.status === 'CONFIRMED') {
       resetaFormCartao();
       resetaForm();
-      await goToRegistro();
+      await verificarAluno();
       showSecondForm.value = false;
     }
 
@@ -187,26 +186,78 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
   }
 };
 
+const goToPage = async () => {
+  if (cliente.billingType === "CREDIT_CARD") {
+    showSecondForm.value = true;
+    showPixDetails.value = false;
+  } else if (cliente.billingType === "PIX") {
+    showSecondForm.value = false;
+    showPixDetails.value = true;
+  }
+}
+
+const cadastrarProduto = async () => {
+  const cadastrar = await fetch(`${apiProducao}/a/c/verificar`, {
+    method: 'POST',
+    headers: headerApi.headerApiTeste,
+    body: JSON.stringify({
+      userName: cliente.name,
+      userEmail: cliente.email,
+      idProduto: produto.id
+    })
+  })
+
+  if (cadastrar.status === 200){
+    return alert('Você já possui este curso, vá para a pagina de login')
+  }
+  if(cadastrar.status === 201){
+    return alert('curso obtido com sucesso!')
+  }
+}
+
+const verificarAluno = async () => {
+  const verificarAluno = await fetch(`${apiProducao}/a/verificar`, {
+    method: 'POST',
+    headers: headerApi.headerApiTeste,
+    body: JSON.stringify({
+      nomeCliente: cliente.name,
+      emailCliente: cliente.email
+    })
+  });
+
+  if (verificarAluno.status === 404) {
+    //aluno não existe
+    return router.push('/signup')
+  }
+
+  if(verificarAluno.status === 200){
+    //aluno já existe
+    await cadastrarProduto()
+    return router.push('/login')
+  }
+}
 
 const proximoPasso = async () => {
   try {
 
-    if(cliente.billingType.value === 'PIX'){
-
-    }
-    const verificarAluno = await fetch(`${apiProducao}/a/verificar`, {
+    const verificarCurso = await fetch(`${apiProducao}/a/c/`, {
       method: 'POST',
       headers: headerApi.headerApiTeste,
       body: JSON.stringify({
         nomeCliente: cliente.name,
-        emailCliente: cliente.email
+        emailCliente: cliente.email,
+        idProduto: produto.id
       })
     });
 
-    if(verificarAluno.status === 404){
-      //aluno não existe
-     await cadastroCliente(cliente)
+    if (verificarCurso.status === 404) {
+      await cadastroCliente(cliente) //gerar cobrança para aluno pagar
+      await goToPage()
+
+    } else {
+      alert(`Você já possui uma compra registrada deste curso para o email atual, vá para pagina de login ou altere o email. ${cliente.email}`)
     }
+
   } catch (err) {
     console.error('Erro ao pressionar próximo passo:', err);
   }
