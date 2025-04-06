@@ -1,10 +1,13 @@
 <script setup>
-import { reactive, ref, defineProps, onUnmounted, onMounted } from "vue";
+import { reactive, ref, defineProps, onUnmounted, onMounted, computed } from "vue";
 import { headerApi } from "@/data/api";
 import { dadosCheckout } from "@/data/servicos";
 import { useRouter } from "vue-router";
 import ImagemUnica from "./ImagemUnica.vue";
-const router = useRouter()
+
+const router = useRouter();
+
+// Props
 const props = defineProps({
   valuePayment: String,
   productName: String,
@@ -14,29 +17,32 @@ const props = defineProps({
   },
   typeDiscount: String,
   productId: String
-})
+});
 
-const pagina = ref(null)
+// Evitar mutações diretas em props
+const valuePaymentParsed = computed(() => parseFloat(props.valuePayment) || 0);
+const valueDiscountParsed = computed(() => parseFloat(props.valueDiscount) || 0);
+
 // Estado do cliente
 const cliente = reactive({
   name: "",
   cpfCnpj: "",
   email: "",
   billingType: "",
-  value: isNaN(parseFloat(props.valuePayment)) ? 0 : parseFloat(props.valuePayment),
+  value: valuePaymentParsed.value,
   product: props.productName,
   discount: {
-    value: isNaN(parseFloat(props.valueDiscount)) ? 0 : parseFloat(props.valueDiscount),
-    type: props.typeDiscount //Tipo de desconto: 'FIXED' ou 'PERCENTAGE'
+    value: valueDiscountParsed.value,
+    type: props.typeDiscount
   }
 });
 
 const produto = reactive({
   id: parseInt(props.productId),
   nome: props.productName
-})
+});
 
-// Estado do cartão de crédito
+// Cartão de crédito
 const cartaoCredito = reactive({
   cpfCnpj: "",
   holderName: "",
@@ -50,166 +56,50 @@ const cartaoCredito = reactive({
   phone: "",
 });
 
-const imageBase64 = ref(""); // Base64 da imagem do QR Code
-const payload = ref(""); // Código para pagamento
-const expirationDate = ref(""); // Data de expiração
-const showPixDetails = ref(false); // Controla a exibição do Card PIX
-
-const apiProducao = import.meta.env.VITE_API_PRODUCAO;
-
+const pagina = ref(null);
+const imageBase64 = ref("");
+const payload = ref("");
+const expirationDate = ref("");
+const showPixDetails = ref(false);
+const showSecondForm = ref(false);
 const isLoading = ref(false);
 
-const resetaFormCartao = (obj) => {
-  return {
-    ...obj,
-    cpfCnpj: "",
-    holderName: "",
-    email: "",
-    number: "",
-    expiryMonth: "",
-    expiryYear: "",
-    cvv: "",
-    postalCode: "",
-    addressNumber: "",
-    phone: "",
-  };
-};
-const resetaForm = (obj) => {
-  return {
-    ...obj,
-    name: "",
-    cpfCnpj: "",
-    email: "",
-    billingType: "",
-  }
-}
-
-const tempoRestante = ref(180); // 3 minutos em segundos
+// Timer
+const tempoRestante = ref(180);
 let intervalo = null;
 
 onMounted(() => {
   intervalo = setInterval(() => {
-    if (tempoRestante.value > 0) {
-      tempoRestante.value--;
-    } else {
-      clearInterval(intervalo);
-    }
+    if (tempoRestante.value > 0) tempoRestante.value--;
+    else clearInterval(intervalo);
   }, 1000);
 });
 
-onUnmounted(() => {
-  clearInterval(intervalo);
-});
+onUnmounted(() => clearInterval(intervalo));
 
-// Formata os segundos para "mm:ss"
 const formatarTempo = () => {
   const minutos = Math.floor(tempoRestante.value / 60);
   const segundos = tempoRestante.value % 60;
   return `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
 };
 
-// Controle do formulário exibido
-const showSecondForm = ref(false); // `false` exibe o primeiro formulário, `true` exibe o segundo
+const apiProducao = import.meta.env.VITE_API_PRODUCAO;
 
-const verificarCadastro = async () => {
-  try {
-    const response = await fetch(`${apiProducao}/a/verificar`, {
-      method: 'POST',
-      headers: headerApi.headerApiTeste,
-      body: JSON.stringify({
-        nomeCliente: cliente.name,
-        emailCliente: cliente.email
-      })
-    });
+// Reset
+const resetaFormCartao = () => Object.assign(cartaoCredito, {
+  cpfCnpj: "", holderName: "", email: "", number: "", expiryMonth: "",
+  expiryYear: "", cvv: "", postalCode: "", addressNumber: "", phone: ""
+});
 
-    if (response.status === 200) {
-      console.log('Aluno já cadastrado. Redirecionar para login.');
-      return pagina.value = '/login'
-    }
+const resetaForm = () => Object.assign(cliente, {
+  name: "", cpfCnpj: "", email: "", billingType: ""
+});
 
-    if (response.status === 404) {
-      console.log('Aluno não encontrado. Permitir cadastro.');
-      return pagina.value = '/signup'
-    }
+// Verificações
 
-    console.log('Erro ao verificar cadastro:', response.status);
-    return null;
-
-  } catch (err) {
-    console.error('Erro ao verificar cadastro:', err);
-    return null;
-  }
-};
-
-const verificarCurso = async ()=>{
-  try{
-    const resposta = await fetch(`${apiProducao}/a/c/verificar`,{
-      method: 'POST',
-      headers: headerApi.headerApiTeste,
-      body: JSON.stringify({
-        userName: cliente.name,
-        userEmail: cliente.email,
-        idProduto: produto.id
-      })
-    })
-    if(resposta.status === 404){
-      //aluno não encontrado
-        return pagina.value = '/signup'
-    }
-    if(resposta.status === 200){
-      //aluno já possui o curso cadastrado
-    }
-    if(resposta.status === 201){
-      //curso registrado com sucesso para o aluno
-    }
-  } catch(err){
-    console.log('Erro ao buscar informação', err)
-  }
-}
-
-const verificarStatus = async (idOperation)=>{
-  try{
-    const response = await fetch(`${apiProducao}/c/s/${idOperation}`)
-
-    if(response.status === 200){
-      alert(`Pagamento CONCLUIDO com sucesso!`)
-    } else {
-      alert(`${response.json().status}`)
-    }
-  } catch(err){
-    console.log('Erro ao verificar status', err)
-  }
-}
-
-const goToRegistro = async () => {
-  try {
-    if (dadosCheckout.value) {
-      //Verifica se a cobrança foi criada apenas
-      const response = await fetch(`${apiProducao}/c/${dadosCheckout.value.cobranca.id}`);
-
-      if (response.status === 200) {
-        await verificarStatus(dadosCheckout.value.cobranca.id)
-
-        await verificarCadastro(); // Garante que o cadastro seja verificado antes do redirecionamento
-
-        if (pagina.value) {
-          router.push(pagina.value);
-        } else {
-          alert("Erro ao redirecionar. Tente novamente.");
-        }
-      }
-    } else {
-      alert("Erro ao verificar o pagamento. Tente novamente.");
-    }
-  } catch (err) {
-    console.log('Erro ao direcionar usuário', err);
-  }
-};
-
-// Função para cadastrar cliente e criar cobrança
 const cadastroCliente = async (cliente) => {
-  if (isLoading.value) return; // Evita cliques múltiplos
-  isLoading.value = true; // Desativa o botão
+  if (isLoading.value) return;
+  isLoading.value = true;
 
   try {
     if (!cliente.name || !cliente.cpfCnpj || !cliente.email || !cliente.billingType) {
@@ -220,51 +110,42 @@ const cadastroCliente = async (cliente) => {
     const response = await fetch(`${apiProducao}/c/create`, {
       method: "POST",
       headers: headerApi.headerApiTeste,
-      body: JSON.stringify(cliente),
+      body: JSON.stringify(cliente)
     });
 
-    const obj = await response.json().catch(() => null); // Evita erro ao processar JSON inválido
+    const obj = await response.json().catch(() => null);
 
     if (!response.ok || !obj) {
       console.error("Erro na resposta do servidor:", obj);
-      throw new Error(`Erro ao cadastrar cliente: ${JSON.stringify(obj)}`);
+      throw new Error("Erro ao cadastrar cliente");
     }
 
     dadosCheckout.value = obj;
 
-    if (obj.cobranca.billingType === 'PIX') {
-      imageBase64.value = obj.qrCodePix.encodedImage;
-      payload.value = obj.qrCodePix.payload;
-      expirationDate.value = obj.qrCodePix.expirationDate;
-      await goToRegistro();
-    } else if (obj.cobranca.billingType === 'CREDIT_CARD') {
-      alert("Agora, insira os dados do cartão para pagamento.");
-      showSecondForm.value = true; // Exibe o formulário do cartão
-    } else {
-      alert("Tipo de pagamento não reconhecido.");
+    if (obj.cobranca?.billingType === 'PIX') {
+      imageBase64.value = obj.qrCodePix?.encodedImage || '';
+      payload.value = obj.qrCodePix?.payload || '';
+      expirationDate.value = obj.qrCodePix?.expirationDate || '';
     }
 
   } catch (error) {
     console.error("Erro na requisição:", error);
-    alert("Erro ao cadastrar cliente. Tente novamente.");
+    alert("Erro ao cadastrar cliente.");
   } finally {
-    isLoading.value = false; // Reativa o botão
+    isLoading.value = false;
   }
 };
 
-// Função chamada ao clicar no botão "Efetuar pagamento" cartao de credito
 const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
-  if (isLoading.value) return; // Evita cliques múltiplos
-  isLoading.value = true; // Desativa o botão
+  if (isLoading.value) return;
+  isLoading.value = true;
 
   try {
-    if (!cartaoCredito) {
-      alert('Informe corretamente as informações do cartão.');
+    const obj = dadosCheckout?.value;
+    if (!obj?.cobranca?.id) {
+      alert("Erro no ID de cobrança.");
       return;
     }
-
-    const obj = dadosCheckout.value;
-
 
     const response = await fetch(`${apiProducao}/c/payment`, {
       method: 'POST',
@@ -286,52 +167,56 @@ const paymentCreditCard = async (cliente, cartaoCredito, dadosCheckout) => {
 
     const objResposta = await response.json();
 
-
     if (!response.ok) {
-      alert(`Não foi possível processar pagamento. \n Motivo: ${objResposta.message || objResposta.error || "Erro desconhecido"}`);
-
+      alert(`Pagamento recusado: ${objResposta.message || objResposta.error || "Erro desconhecido"}`);
       return;
     }
 
-    if (objResposta.message === "Pagamento processado com sucesso!" || objResposta.status === 'CONFIRMED') {
-      cartaoCredito = resetaFormCartao(cartaoCredito)
-      await goToRegistro()
-      cliente = resetaForm(cliente)
-      showSecondForm.value = false
+    if (objResposta.status === 'CONFIRMED') {
+      resetaFormCartao();
+      resetaForm();
+      await goToRegistro();
+      showSecondForm.value = false;
     }
 
   } catch (error) {
-    console.log('Erro ao efetuar pagamento:', error);
+    console.error('Erro ao efetuar pagamento:', error);
     alert('Erro ao processar pagamento');
   } finally {
-    isLoading.value = false; // Reativa o botão
+    isLoading.value = false;
   }
 };
-//Função chamada ao clicar em próximo
-const nextCheckout = async () => {
-  // Verifica se os campos obrigatórios do primeiro formulário estão preenchidos
-  if (cliente.name && cliente.cpfCnpj && cliente.email && cliente.billingType) {
 
-    await cadastroCliente(cliente); // Função que cadastra o cliente
 
-    if (cliente.billingType === "CREDIT_CARD") {
-      showSecondForm.value = true;  // Exibe o formulário de cartão de crédito
-      showPixDetails.value = false; // Oculta detalhes do Pix
-    } else if (cliente.billingType === "PIX") {
-      showSecondForm.value = false; // Garante que o segundo formulário não apareça
-      showPixDetails.value = true;  // Exibe detalhes do Pix
+const proximoPasso = async () => {
+  try {
+
+    if(cliente.billingType.value === 'PIX'){
+
     }
+    const verificarAluno = await fetch(`${apiProducao}/a/verificar`, {
+      method: 'POST',
+      headers: headerApi.headerApiTeste,
+      body: JSON.stringify({
+        nomeCliente: cliente.name,
+        emailCliente: cliente.email
+      })
+    });
 
-  } else {
-    alert("Preencha todos os campos antes de continuar.");
+    if(verificarAluno.status === 404){
+      //aluno não existe
+     await cadastroCliente(cliente)
+    }
+  } catch (err) {
+    console.error('Erro ao pressionar próximo passo:', err);
   }
 };
 
 const efetuarPagamento = async () => {
- await paymentCreditCard(cliente, cartaoCredito, dadosCheckout)
-}
-
+  await paymentCreditCard(cliente, cartaoCredito, dadosCheckout);
+};
 </script>
+
 
 <template>
   <div class="checkout">
@@ -360,7 +245,7 @@ const efetuarPagamento = async () => {
         </select>
       </div>
 
-      <button @click.prevent="nextCheckout" :disabled="isLoading">
+      <button @click.prevent="proximoPasso" :disabled="isLoading">
         {{ isLoading ? "Aguarde..." : "Próximo" }}
       </button>
     </form>
