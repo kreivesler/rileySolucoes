@@ -144,7 +144,7 @@ const verificarStatusPix = async () => {
 
       const resultado = await res.json();
 
-      if (res.status === 200 && resultado.status === "CONFIRMED") {
+      if (res.status === 200 && resultado.status === "CONFIRMED" || resultado.status === "RECEIVED") {
         clearInterval(verificador);
         // Verifica se o cliente já tem o produto ou cadastra
         await verificarAluno();
