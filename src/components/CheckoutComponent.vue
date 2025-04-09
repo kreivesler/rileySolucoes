@@ -142,9 +142,9 @@ const verificarStatusPix = async () => {
         headers: headerApi.headerApiTeste
       });
 
-      const resultado = await res.json();
 
-      if (res.status === 200 && resultado.status === "CONFIRMED" || resultado.status === "RECEIVED") {
+      if (res.status === 200) {
+        alert('Pagamento concluido!')
         clearInterval(verificador);
         // Verifica se o cliente já tem o produto ou cadastra
         await verificarAluno();
