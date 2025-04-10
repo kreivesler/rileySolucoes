@@ -36,14 +36,11 @@ const toggleMenuVertical = () => {
     <div class="cardFooter">
       <span>Treinamentos:</span>
       <nav>
-        <RouterLink :to="{ path: '/Curso-javascript' }">
+        <RouterLink :to="{ path: '/curso-javascript' }">
           JavaScript Orientado a Objetos
         </RouterLink>
-        <RouterLink :to="{ path: '/Curso-de-informatica' }">
+        <RouterLink :to="{ path: '/curso-de-informatica' }">
           Curso de Informática e Pacote Office
-        </RouterLink>
-        <RouterLink :to="{ path: '/Curso-excel' }">
-          Curso de Microsoft Excel
         </RouterLink>
       </nav>
     </div>

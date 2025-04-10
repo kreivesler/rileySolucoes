@@ -72,6 +72,11 @@ const router = createRouter({
       path: '/curso-de-informatica',
       name: 'curso-informatica',
       component: ()=> import('@/views/CursoInformatica.vue')
+    },
+    {
+      path: '/curso-javascript',
+      name: 'curso-javascript',
+      component: ()=> import( '@/views/CursoJavascript.vue')
     }
   ]
 })
