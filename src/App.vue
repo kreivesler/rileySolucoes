@@ -78,6 +78,9 @@ const toggleMenuVertical = () => {
         <RouterLink :to="{ path: '/politica-servicos', query: { titulo: 'Política de serviços' } }">
           Política de serviços
         </RouterLink>
+        <RouterLink :to="{ path: '/termo-uso', query: { titulo: 'Termo de Uso' } }">
+          Termo de Uso
+        </RouterLink>
       </nav>
     </div>
 

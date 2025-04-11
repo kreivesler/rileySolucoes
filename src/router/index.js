@@ -29,6 +29,11 @@ const router = createRouter({
       component: Sobre
     },
     {
+      path: '/termo-uso',
+      name: 'termo-de-uso',
+      component: ()=> import('@/views/TermoUso.vue')
+    },
+    {
       path: '/privacidade',
       name: 'privacidade',
       component: Privacidade

@@ -3,6 +3,7 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
+import DetailsComponent from '@/components/DetailsComponent.vue'
 import { imgCodigoUm, imgCodigoDois, estudo } from '@/data/images';
 import { conteudoJavascript } from '@/data/pagCursoJavascript';
 import { idProduto } from '@/data/servicos';
@@ -81,6 +82,10 @@ const goToCheckout = () => {
   </ContainerComponent>
 
   <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="estudo">
+  </ContainerComponent>
+
+  <ContainerComponent paddingComp="10px" display-type="flex" flexD="column" >
+    <DetailsComponent/>
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">

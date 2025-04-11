@@ -324,7 +324,7 @@ const efetuarPagamento = async () => {
         </div>
       </div>
 
-      <span>Ao clicar em continuar você concorda com nosso <a href="">termo de uso</a>.</span>
+      <span>Ao clicar em continuar você concorda com nosso <a href="/termo-uso">termo de uso</a>.</span>
 
       <button @click.prevent="proximoPasso" :disabled="isLoading">
         {{ isLoading ? "Aguarde..." : "Continuar" }}

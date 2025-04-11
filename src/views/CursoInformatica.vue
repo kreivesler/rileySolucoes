@@ -2,7 +2,7 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
-import DetailsComponente from '@/components/DetailsComponent.vue'
+import DetailsComponent from '@/components/DetailsComponent.vue'
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { escritorio, planilha, estudo } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
@@ -82,7 +82,7 @@ const goToCheckout = () => {
 
 
   <ContainerComponent paddingComp="10px" display-type="flex" flexD="column" >
-    <DetailsComponente/>
+    <DetailsComponent/>
   </ContainerComponent>
 
 
