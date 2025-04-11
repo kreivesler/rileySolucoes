@@ -42,6 +42,19 @@
     background-color: var(--vt-c-indigo);
     color: var(--vt-c-text-dark-1);
   }
+
+  details summary {
+    list-style: none;
+    padding: 10px;
+    background-color: #0f1a42;
+    cursor: pointer;
+    color: white;
+  }
+  
+  details summary:hover {
+    background-color: #024ea0;
+  }
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -78,6 +91,17 @@
     input:focus{
       outline: none;
       border-bottom: 3px solid #007bff;
+    }
+
+    details summary {
+      list-style: none;
+      padding: 10px;
+      background-color: #0f1a42;
+      cursor: pointer;
+    }
+    
+    details summary:hover {
+      background-color: #024ea0;
     }
   }
 }

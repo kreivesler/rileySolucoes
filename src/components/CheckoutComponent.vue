@@ -324,8 +324,10 @@ const efetuarPagamento = async () => {
         </div>
       </div>
 
+      <span>Ao clicar em continuar você concorda com nosso <a href="">termo de uso</a>.</span>
+
       <button @click.prevent="proximoPasso" :disabled="isLoading">
-        {{ isLoading ? "Aguarde..." : "Próximo" }}
+        {{ isLoading ? "Aguarde..." : "Continuar" }}
       </button>
     </form>
 
@@ -409,7 +411,6 @@ const efetuarPagamento = async () => {
 .formCheckout button {
   width: 100%;
   border-style: none;
-  color: white;
   font-weight: 500;
   background-color: #007bff;
   margin-top: 15px;
@@ -461,12 +462,30 @@ const efetuarPagamento = async () => {
 }
 .btnOpt button {
   margin: 5px;
+  color: inherit;
   background-color: transparent;
+}
+.btnOpt button:hover{
+  color: white;
 }
 .btnOpt button.selected{
   background-color: #4CAF50;
   color: white;
   border-color: #4CAF50;
+}
+a{
+  color: #0056b3;
+}
+@media (prefers-color-scheme: dark){
+  .formCheckout button{
+    color: white;
+  }
+  .btnOpt button{
+    color: white;
+  }
+  .btnOpt button:hover{
+  color: white;
+}
 }
 
 @media only screen and (min-width: 300px) {
