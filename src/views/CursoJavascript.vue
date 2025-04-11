@@ -3,14 +3,14 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import { escritorio, planilha, estudo } from '@/data/images';
+import { imgCodigoUm, imgCodigoDois, estudo } from '@/data/images';
 import { conteudoJavascript } from '@/data/pagCursoJavascript';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 import VideoComponent from '@/components/VideoComponent.vue';
 const router = useRouter()
 
-const conteudoVideo = import.meta.env.VITE_VIDEO_C_INFORMATICA
+const conteudoVideo = import.meta.env.VITE_VIDEO_C_JAVASCRIPT
 
 const conteudo = conteudoJavascript
 
@@ -35,7 +35,7 @@ const goToCheckout = () => {
       <button class="button-router" @click="goToCheckout">Comprar agora</button>
     </CardComponent>
 
-    <ImagemUnica :imgPath="escritorio"></ImagemUnica>
+    <ImagemUnica :imgPath="imgCodigoUm"></ImagemUnica>
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">
@@ -45,7 +45,7 @@ const goToCheckout = () => {
 
   <ContainerComponent displayType="flex" height-comp="300px">
 
-    <ImagemUnica :imgPath="planilha"></ImagemUnica>
+    <ImagemUnica :imgPath="imgCodigoDois"></ImagemUnica>
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudo[2].titulo" font-sizespan="2rem" font-weightspan="800"
