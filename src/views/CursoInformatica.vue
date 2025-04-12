@@ -4,7 +4,7 @@ import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import DetailsComponent from '@/components/DetailsComponent.vue'
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import { escritorio, planilha, estudo } from '@/data/images';
+import { planilha, estudo, estudante } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
@@ -39,7 +39,7 @@ const goToCheckout = () => {
       <button class="button-router" @click="goToCheckout">Comprar agora</button>
     </CardComponent>
 
-    <ImagemUnica :imgPath="escritorio"></ImagemUnica>
+    <ImagemUnica :imgPath="estudante"></ImagemUnica>
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">

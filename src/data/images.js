@@ -10,6 +10,7 @@ import apresentacao from "@/assets/images/curso1a.webp";
 import escritorio from "@/assets/images/curso1b.webp";
 import planilha from "@/assets/images/curso1c.webp";
 import estudo from "@/assets/images/curso1d.webp";
+import estudante from '@/assets/images/curso1e.webp'
 //imagens pagina curso de javascript
 import imgCodigoUm from "@/assets/images/curso2a.webp";
 import imgCodigoDois from "@/assets/images/curso2b.webp";
@@ -27,4 +28,5 @@ export {
   estudo,
   imgCodigoUm,
   imgCodigoDois,
+  estudante,
 };
