@@ -6,7 +6,7 @@ import DetailsComponent from '@/components/DetailsComponent.vue'
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { planilha, estudo, estudante } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
-import { idProduto } from '@/data/servicos';
+import { idProduto, liberaCheckout } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
@@ -19,6 +19,7 @@ onMounted(()=>{
 })
 
 const goToCheckout = () => {
+  liberaCheckout.checkoutLiberado = true
   router.push('/checkout')
   idProduto.value = import.meta.env.VITE_PROD_C_INFORMATICA
 }

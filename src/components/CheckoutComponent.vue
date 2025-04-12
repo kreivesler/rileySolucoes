@@ -4,7 +4,7 @@ import { headerApi } from "@/data/api";
 import { dadosCheckout } from "@/data/servicos";
 import { useRouter } from "vue-router";
 import ImagemUnica from "./ImagemUnica.vue";
-import { idProduto } from '@/data/servicos';
+import { idProduto, pagamentoStore } from '@/data/servicos';
 
 const router = useRouter();
 
@@ -175,6 +175,7 @@ const verificarAluno = async () => {
 
   if (verificarAluno.status === 404) {
     //aluno não existe
+    pagamentoStore.pagamentoConcluido = true;
     return router.push('/signup')
   }
 

@@ -1,5 +1,5 @@
 import { ref } from "vue";
-
+import { reactive } from "vue";
 const chave = import.meta.env.VITE_API_PRODUCAO;
 const idProduto = ref(null);
 const idAlunoAfterLogin = ref(null);
@@ -7,8 +7,17 @@ const listaCursos = ref(null);
 const listaDeModulos = ref(null);
 const modulos = ref(null);
 const idCurso = ref(null);
-const aulas = ref(null)
-const videoAula = ref(null)
+const aulas = ref(null);
+const videoAula = ref(null);
+const pagamentoStore = reactive({
+  pagamentoConcluido: false,
+});
+const confirmaLogin = reactive({
+  loginConfirmado: false,
+});
+const liberaCheckout = reactive({
+  checkoutLiberado: false,
+})
 
 async function getCursoInf(idProduto) {
   try {
@@ -64,14 +73,14 @@ async function getAllAulasForModuloId(moduloID, cursoID) {
 }
 
 async function carregaVideo(aulaId) {
-  try{
-    const response = await fetch(`${chave}/v/${aulaId}`)
-    const obj = await response.json()
+  try {
+    const response = await fetch(`${chave}/v/${aulaId}`);
+    const obj = await response.json();
 
-    return ( videoAula.value = obj )
-  } catch (error){
-    console.error('Erro ao buscar videoaula: ', error)
-    return null
+    return (videoAula.value = obj);
+  } catch (error) {
+    console.error("Erro ao buscar videoaula: ", error);
+    return null;
   }
 }
 
@@ -91,5 +100,8 @@ export {
   listaDeModulos,
   aulas,
   carregaVideo,
-  videoAula
+  videoAula,
+  pagamentoStore,
+  confirmaLogin,
+  liberaCheckout,
 };

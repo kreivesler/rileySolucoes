@@ -6,6 +6,7 @@ import Privacidade from '@/views/PoliticPage.vue'
 import PolicyService  from '../views/PolicyServicePage.vue'
 import Contato from '@/views/ContatoPage.vue'
 import LoginPage from '@/views/LoginPage.vue'
+import { pagamentoStore, confirmaLogin, liberaCheckout } from '@/data/servicos'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -56,22 +57,50 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'signup',
-      component: ()=> import('@/views/CreateUser.vue')
+      component: ()=> import('@/views/CreateUser.vue'),
+      beforeEnter: (to, from, next) => {
+        if (pagamentoStore.pagamentoConcluido) {
+          next(); // Libera acesso
+        } else {
+          next('/'); // Ou redireciona pra onde quiser
+        }
+      }
     },
     {
       path: '/painel',
       name: 'painel',
-      component: () => import('@/views/DashboardPage.vue')
+      component: () => import('@/views/DashboardPage.vue'),
+      beforeEnter: (to, from, next) => {
+        if (confirmaLogin.loginConfirmado) {
+          next(); // Libera acesso
+        } else {
+          next('/login'); // Ou redireciona pra onde quiser
+        }
+      }
     },
     {
       path: '/learning',
       name: 'learn',
-      component: ()=> import('@/views/MemberPage.vue')
+      component: ()=> import('@/views/MemberPage.vue'),
+      beforeEnter: (to, from, next) => {
+        if (confirmaLogin.loginConfirmado) {
+          next(); // Libera acesso
+        } else {
+          next('/login'); // Ou redireciona pra onde quiser
+        }
+      }
     },
     {
       path: '/checkout',
       name: 'checkout',
-      component: ()=> import('@/views/CheckoutPage.vue')
+      component: ()=> import('@/views/CheckoutPage.vue'),
+      beforeEnter: (to, from, next) => {
+        if (liberaCheckout.checkoutLiberado) {
+          next(); // Libera acesso
+        } else {
+          next('/'); // Ou redireciona pra onde quiser
+        }
+      }
     },
     {
       path: '/curso-de-informatica',

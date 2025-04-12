@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { headerApi } from '@/data/api';
-import { idAlunoAfterLogin } from '@/data/servicos';
+import { idAlunoAfterLogin, confirmaLogin } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 const api = import.meta.env.VITE_API_PRODUCAO
 const router = useRouter()
@@ -36,6 +36,7 @@ const submitForm = async () => {
 
     const data = await response.json();
 
+    confirmaLogin.loginConfirmado = true
     alert(`${data.message}`); //Mensagem de sucesso
     idAlunoAfterLogin.value = data.alunoId //Coleta id do aluno
     router.push('/painel') //Vai para a pagina
