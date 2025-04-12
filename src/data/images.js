@@ -13,6 +13,9 @@ import estudo from "@/assets/images/curso1d.webp";
 //imagens pagina curso de javascript
 import imgCodigoUm from "@/assets/images/curso2a.webp";
 import imgCodigoDois from "@/assets/images/curso2b.webp";
+//Videos
+import videoInformatica from "@/assets/videos/informatica.mp4";
+import videoJavascript from "@/assets/videos/javascript.mp4";
 
 export {
   astronauta,
@@ -27,4 +30,6 @@ export {
   estudo,
   imgCodigoUm,
   imgCodigoDois,
+  videoInformatica,
+  videoJavascript,
 };

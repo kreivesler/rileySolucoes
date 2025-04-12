@@ -4,14 +4,14 @@ import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import DetailsComponent from '@/components/DetailsComponent.vue'
-import { imgCodigoUm, imgCodigoDois, estudo } from '@/data/images';
+import { imgCodigoUm, imgCodigoDois, estudo, videoJavascript } from '@/data/images';
 import { conteudoJavascript } from '@/data/pagCursoJavascript';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 import VideoComponent from '@/components/VideoComponent.vue';
 const router = useRouter()
 
-const conteudoVideo = import.meta.env.VITE_VIDEO_C_JAVASCRIPT
+const conteudoVideo = videoJavascript
 
 const conteudo = conteudoJavascript
 

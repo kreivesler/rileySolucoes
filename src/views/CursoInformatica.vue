@@ -4,14 +4,14 @@ import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import DetailsComponent from '@/components/DetailsComponent.vue'
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import { escritorio, planilha, estudo } from '@/data/images';
+import { escritorio, planilha, estudo, videoInformatica } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 import VideoComponent from '@/components/VideoComponent.vue';
 const router = useRouter()
 
-const conteudoVideo = import.meta.env.VITE_VIDEO_C_INFORMATICA
+const conteudoVideo = videoInformatica
 
 const goToCheckout = () => {
   router.push('/checkout')
