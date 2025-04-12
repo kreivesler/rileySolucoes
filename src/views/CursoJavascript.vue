@@ -8,11 +8,15 @@ import { imgCodigoUm, imgCodigoDois, estudo } from '@/data/images';
 import { conteudoJavascript } from '@/data/pagCursoJavascript';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
 const router = useRouter()
 
-const conteudoVideo = import.meta.env.VITE_VIDEO_C_JAVASCRIPT
+const conteudoVideo = ref(null)
 
+onMounted(()=>{
+  conteudoVideo.value = import.meta.env.VITE_VIDEO_C_JAVASCRIPT
+})
 const conteudo = conteudoJavascript
 
 const goToCheckout = () => {

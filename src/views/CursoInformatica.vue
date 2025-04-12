@@ -8,10 +8,15 @@ import { escritorio, planilha, estudo } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
 import { idProduto } from '@/data/servicos';
 import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
 const router = useRouter()
 
-const conteudoVideo = import.meta.env.VITE_VIDEO_C_INFORMATICA
+const conteudoVideo = ref(null)
+
+onMounted(()=>{
+  conteudoVideo.value = import.meta.env.VITE_VIDEO_C_INFORMATICA
+})
 
 const goToCheckout = () => {
   router.push('/checkout')
