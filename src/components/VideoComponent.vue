@@ -15,19 +15,23 @@ const props = defineProps({
 </script>
 
 <template>
-  <video class="meu-video" :controls="props.contVideo" :autoplay="props.autoPlay" :muted="props.mutedVideo"
-  :style="{
-        boxShadow: props.boxShad,
-        borderRadius: props.borderRad,
-        width: props.widthVideo,
-        height: props.heightVideo,
-        objectFit: 'cover'
-      }"
+  <video
+    class="meu-video"
+    crossorigin="anonymous"
+    :controls="props.contVideo"
+    :autoplay="props.autoPlay"
+    :muted="props.mutedVideo"
+    :style="{
+      boxShadow: props.boxShad,
+      borderRadius: props.borderRad,
+      width: props.widthVideo,
+      height: props.heightVideo,
+      objectFit: 'cover'
+    }"
   >
-    <source :src="props.videoPath" type="video/mp4">
+    <source :src="props.videoPath" type="video/mp4" />
     Seu navegador não suporta o elemento de vídeo.
   </video>
-
 </template>
 
 <style scoped>
