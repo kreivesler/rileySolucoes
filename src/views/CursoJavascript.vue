@@ -14,7 +14,7 @@ const router = useRouter()
 
 const conteudoVideo = ref(null)
 
-onMounted(()=>{
+onMounted(() => {
   conteudoVideo.value = import.meta.env.VITE_VIDEO_C_JAVASCRIPT
 })
 const conteudo = conteudoJavascript
@@ -27,6 +27,9 @@ const goToCheckout = () => {
 
 </script>
 <template>
+  <div class="titleH1">
+    <h1>Curso de JavaScript Orientado a Objetos</h1>
+  </div>
   <ContainerComponent displayType="flex">
     <VideoComponent id="video" :cont-video="false" :auto-play="true" :muted-video="true" :video-path="conteudoVideo" />
   </ContainerComponent>
@@ -89,8 +92,8 @@ const goToCheckout = () => {
   <ContainerComponent class="imagemComp1" displayType="flex" :bgImage="estudo">
   </ContainerComponent>
 
-  <ContainerComponent paddingComp="10px" display-type="flex" flexD="column" >
-    <DetailsComponent/>
+  <ContainerComponent paddingComp="10px" display-type="flex" flexD="column">
+    <DetailsComponent />
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">
@@ -101,11 +104,27 @@ const goToCheckout = () => {
 
 </template>
 <style scoped>
+.titleH1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+.titleH1 h1 {
+  font-weight: 800;
+}
 @media only screen and (min-width: 300px) {
   .imagemComp1 {
     height: 200px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 0.8rem;
+  }
 }
 
 @media only screen and (min-width: 400px) {
@@ -113,6 +132,12 @@ const goToCheckout = () => {
     height: 200px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 0.9rem;
+  }
 
 
 }
@@ -122,6 +147,12 @@ const goToCheckout = () => {
     height: 200px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 1rem;
+  }
 
 
 }
@@ -130,7 +161,12 @@ const goToCheckout = () => {
   .imagemComp1 {
     height: 300px !important;
   }
-
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 1.2rem;
+  }
 
 
 }
@@ -139,7 +175,12 @@ const goToCheckout = () => {
   .imagemComp1 {
     height: 300px !important;
   }
-
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 1.5rem;
+  }
 
 }
 
@@ -160,6 +201,12 @@ const goToCheckout = () => {
   #video {
     width: 100%;
     height: 450px;
+  }
+    .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 2rem;
   }
 
 }

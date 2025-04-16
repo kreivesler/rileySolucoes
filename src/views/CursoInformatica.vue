@@ -26,6 +26,9 @@ const goToCheckout = () => {
 
 </script>
 <template>
+  <div class="titleH1">
+    <h1>Curso de Informatica Essencial e Pacote Office 2024</h1>
+  </div>
   <ContainerComponent displayType="flex">
     <VideoComponent id="video" :cont-video="false" :auto-play="true" :muted-video="true" :video-path="conteudoVideo" />
   </ContainerComponent>
@@ -100,11 +103,27 @@ const goToCheckout = () => {
 
 </template>
 <style scoped>
+.titleH1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+.titleH1 h1 {
+  font-weight: 800;
+}
 @media only screen and (min-width: 300px) {
   .imagemComp1 {
     height: 200px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 0.8rem;
+  }
 }
 
 @media only screen and (min-width: 400px) {
@@ -112,6 +131,12 @@ const goToCheckout = () => {
     height: 200px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 0.9rem;
+  }
 
 
 }
@@ -121,6 +146,12 @@ const goToCheckout = () => {
     height: 200px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 1rem;
+  }
 
 
 }
@@ -130,6 +161,12 @@ const goToCheckout = () => {
     height: 300px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 1.2rem;
+  }
 
 
 }
@@ -139,6 +176,12 @@ const goToCheckout = () => {
     height: 300px !important;
   }
 
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 1.5rem;
+  }
 
 }
 
@@ -159,6 +202,13 @@ const goToCheckout = () => {
   #video {
     width: 100%;
     height: 450px;
+  }
+
+  .titleH1{
+    width: 100%;
+  }
+  .titleH1 h1 {
+    font-size: 2rem;
   }
 
 }
