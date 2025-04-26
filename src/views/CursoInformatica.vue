@@ -10,7 +10,19 @@ import { idProduto, liberaCheckout } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
+import { useHead } from '@vueuse/head'
 const router = useRouter()
+
+useHead({
+  title: 'Curso de Informática Essencial + Pacote Office 2025',
+  meta: [
+    {
+      name: 'description',
+      content: 'Aprenda informática do zero com nosso curso completo de Pacote Office, Internet, Windows, Outlook e mais. Curso para iniciantes e profissionais.'
+    },
+    { name: 'keywords', content: 'curso de informática, curso pacote office, excel, word, powerpoint, outlook, informática básica, curso online de informática, aprender informática, KR Riley Soluções' }
+  ]
+})
 
 const conteudoVideo = ref(null)
 

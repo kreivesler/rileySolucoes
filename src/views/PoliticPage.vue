@@ -2,6 +2,17 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import { politicaPrivacidade } from '@/data/politica';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Política de Privacidade - KR Riley Soluções',
+  meta: [
+    {
+      name: 'description',
+      content: 'Nossa Política de Privacidade explica como protegemos seus dados e informações pessoais ao utilizar nossos sites, cursos e softwares. Saiba mais.'
+    }
+  ]
+})
 </script>
 
 <template>

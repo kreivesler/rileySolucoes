@@ -1,6 +1,18 @@
 <script setup>
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Sobre Nós - KR Riley Soluções',
+  meta: [
+    {
+      name: 'description',
+      content: 'Conheça a história da KR Riley Soluções, especializada em desenvolvimento de sites personalizados, softwares de gestão e cursos profissionais em informática e JavaScript.'
+    },
+    { name: 'keywords', content: 'quem somos, sobre a empresa, KR Riley Soluções, desenvolvimento de sites, cursos de informática, softwares personalizados, história da empresa' }
+  ]
+})
 </script>
 
 <template>

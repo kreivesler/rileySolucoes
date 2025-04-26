@@ -2,6 +2,16 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import { termoUsoCurso } from '@/data/termoUso';
+import { useHead } from '@vueuse/head'
+useHead({
+  title: 'Termos de Uso - KR Riley Soluções',
+  meta: [
+    {
+      name: 'description',
+      content: 'Leia os Termos de Uso da KR Riley Soluções. Entenda as condições para utilizar nossos sites, softwares e serviços oferecidos aos usuários.'
+    }
+  ]
+})
 </script>
 
 <template>

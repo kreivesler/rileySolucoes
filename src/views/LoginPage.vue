@@ -2,6 +2,18 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import FormLoginComponent from '@/components/FormLoginComponent.vue';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Acesso ao Portal do Aluno - KR Riley Soluções',
+  meta: [
+    {
+      name: 'description',
+      content: 'Área de login exclusiva para alunos da KR Riley Soluções. Acesse seus cursos de informática, JavaScript e conteúdos especiais com segurança.'
+    },
+    { name: 'keywords', content: 'acesso ao portal do aluno, login cursos KR Riley Soluções, área do aluno, acessar curso online, KR Riley Soluções login' }
+  ]
+})
 </script>
 <template>
   <!--<span id="msg"  >Pagina indisponível no momento!</span>-->

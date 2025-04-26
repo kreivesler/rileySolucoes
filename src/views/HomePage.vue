@@ -6,6 +6,18 @@ import ImagemUnica from '@/components/ImagemUnica.vue';
 import { astronauta,  estatSite, exSite,  astroObserva } from '@/data/images';
 import { conteudoTexto, conteudoServicos } from '@/data/texts';
 import { RouterLink } from 'vue-router';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'KR Riley Soluções - Desenvolvimento de Sites, Softwares e Cursos',
+  meta: [
+    {
+      name: 'description',
+      content: 'A KR Riley Soluções é especialista em desenvolvimento de sites personalizados, criação de softwares de gestão e cursos de informática e programação em JavaScript.'
+    },
+    { name: 'keywords', content: 'desenvolvimento de sites, criação de sites personalizados, softwares de gestão, cursos de informática, curso de javascript, desenvolvimento web, KR Riley Soluções, sites profissionais, soluções digitais' }
+  ]
+})
 </script>
 
 <template>

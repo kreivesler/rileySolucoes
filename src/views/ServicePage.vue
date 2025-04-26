@@ -6,6 +6,18 @@ import CardComponent from '@/components/CardComponent.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { astronauta, exSite, exSite2, estatSite, contato, astroObserva } from '@/data/images';
 import { RouterLink } from 'vue-router';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Nossos Serviços - KR Riley Soluções',
+  meta: [
+    {
+      name: 'description',
+      content: 'Descubra os serviços da KR Riley Soluções: desenvolvimento de sites profissionais, softwares personalizados e cursos de alta qualidade em informática e programação.'
+    },
+    { name: 'keywords', content: 'serviços de tecnologia, criação de sites, softwares de gestão, cursos online, programação web, desenvolvimento personalizado, soluções digitais, KR Riley Soluções' }
+  ]
+})
 </script>
 
 <template>

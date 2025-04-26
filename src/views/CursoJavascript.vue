@@ -10,6 +10,18 @@ import { idProduto, liberaCheckout } from '@/data/servicos';
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Curso de JavaScript Orientado a Objetos',
+  meta: [
+    {
+      name: 'description',
+      content: 'Aprenda JavaScript moderno com orientação a objetos na KR Riley Soluções. Curso completo, ideal para quem quer se destacar na programação web.'
+    },
+    { name: 'keywords', content: 'curso de javascript, javascript orientado a objetos, programação web, aprender javascript, curso de programação, desenvolvimento frontend, linguagem de programação, curso online de javascript, KR Riley Soluções' }
+  ]
+})
 const router = useRouter()
 
 const conteudoVideo = ref(null)

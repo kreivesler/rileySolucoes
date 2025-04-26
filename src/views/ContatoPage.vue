@@ -2,6 +2,18 @@
 import ContainerComponent from '@/components/ContainerComponent.vue';
 import FormComponent from '@/components/FormComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Fale Conosco - KR Riley Soluções',
+  meta: [
+    {
+      name: 'description',
+      content: 'Entre em contato com a KR Riley Soluções. Tire suas dúvidas sobre desenvolvimento de sites, softwares, cursos e serviços personalizados para sua necessidade.'
+    },
+    { name: 'keywords', content: 'contato KR Riley Soluções, fale conosco, solicitar orçamento, dúvidas sobre cursos, atendimento ao cliente, desenvolvimento de sites, suporte técnico' }
+  ]
+})
 </script>
 
 <template>
