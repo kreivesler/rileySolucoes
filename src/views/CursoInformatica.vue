@@ -39,7 +39,7 @@ const goToCheckout = () => {
 </script>
 <template>
   <div class="titleH1">
-    <h1>Curso de Informatica Essencial e Pacote Office 2024</h1>
+    <h1>Curso de Informatica Essencial e Pacote Office</h1>
   </div>
   <ContainerComponent displayType="flex">
     <VideoComponent id="video" :cont-video="false" :auto-play="true" :muted-video="true" :video-path="conteudoVideo" />
