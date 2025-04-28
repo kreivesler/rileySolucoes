@@ -1,4 +1,12 @@
-import fs from 'fs'
+import fs from 'fs';
+import path from 'path';
+
+// Função para obter o diretório atual no Vite
+const getCurrentDirectory = () => {
+  const url = import.meta.url;
+  const fileURL = new URL(url);
+  return path.dirname(fileURL.pathname);
+};
 
 const routes = [
   { path: '/' },
@@ -37,8 +45,14 @@ ${urls.map(url => `
   </url>`).join('')}
 </urlset>`;
 
-  // Cria o arquivo sitemap.xml na pasta /public
-  fs.writeFileSync('./public/sitemap.xml', sitemapContent);
+  // Usando o diretório atual obtido de import.meta.url
+  const currentDirectory = getCurrentDirectory();
+  const sitemapPath = path.resolve(currentDirectory, 'dist', 'sitemap.xml');
+
+  // Cria o arquivo sitemap.xml na pasta /dist
+  fs.writeFileSync(sitemapPath, sitemapContent);
+  console.log('✅ Sitemap gerado com sucesso em', sitemapPath);
 }
 
+//node gerarSitemap.js
 createSitemap();
