@@ -9,7 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && node gerarSitemap.js",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
