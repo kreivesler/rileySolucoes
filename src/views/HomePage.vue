@@ -3,7 +3,7 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import GridItem from '@/components/GridItem.vue';
 import ImagemUnica from '@/components/ImagemUnica.vue';
-import { astronauta,  estatSite, exSite,  astroObserva } from '@/data/images';
+import { astronauta, estatSite, exSite, astroObserva } from '@/data/images';
 import { conteudoTexto, conteudoServicos } from '@/data/texts';
 import { RouterLink } from 'vue-router';
 import { useHead } from '@vueuse/head'
@@ -15,7 +15,20 @@ useHead({
       name: 'description',
       content: 'A KR Riley Soluções é especialista em desenvolvimento de sites personalizados, criação de softwares de gestão e cursos de informática e programação em JavaScript.'
     },
-    { name: 'keywords', content: 'desenvolvimento de sites, criação de sites personalizados, softwares de gestão, cursos de informática, curso de javascript, desenvolvimento web, KR Riley Soluções, sites profissionais, soluções digitais' }
+    { name: 'keywords', content: 'desenvolvimento de sites, criação de sites personalizados, softwares de gestão, cursos de informática, curso de javascript, desenvolvimento web, KR Riley Soluções, sites profissionais, soluções digitais' },
+
+    // Open Graph
+    { property: 'og:title', content: 'KR Riley Soluções - Desenvolvimento de Sites, Softwares e Cursos' },
+    { property: 'og:description', content: 'Desenvolvemos sites personalizados, softwares de gestão e oferecemos cursos de informática e programação. Conheça a KR Riley Soluções!' },
+    { property: 'og:image', content: 'https://rileysolucoes.com.br/public/og-home.png' },
+    { property: 'og:url', content: 'https://rileysolucoes.com.br/' },
+    { property: 'og:type', content: 'website' },
+
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'KR Riley Soluções - Desenvolvimento de Sites, Softwares e Cursos' },
+    { name: 'twitter:description', content: 'Desenvolvemos sites personalizados, softwares de gestão e oferecemos cursos de informática e programação. Conheça a KR Riley Soluções!' },
+    { name: 'twitter:image', content: 'https://rileysolucoes.com.br/public/og-home.png' }
   ]
 })
 </script>
@@ -28,7 +41,7 @@ useHead({
 
   <ContainerComponent displayType="flex" height-comp="300px">
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[0].titulo" font-sizespan="2rem" font-weightspan="800"
-      :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500" >
+      :paragrafo-card="conteudoTexto[0].descricao" font-sizep="1rem" font-weightp="500">
 
       <RouterLink class="button-router" :to="{ path: '/contato', query: { titulo: 'Entrar em contato' } }">
         Entrar em contato

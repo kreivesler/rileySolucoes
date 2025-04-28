@@ -19,9 +19,23 @@ useHead({
       name: 'description',
       content: 'Aprenda JavaScript moderno com orientação a objetos na KR Riley Soluções. Curso completo, ideal para quem quer se destacar na programação web.'
     },
-    { name: 'keywords', content: 'curso de javascript, javascript orientado a objetos, programação web, aprender javascript, curso de programação, desenvolvimento frontend, linguagem de programação, curso online de javascript, KR Riley Soluções' }
+    { name: 'keywords', content: 'curso de javascript, javascript orientado a objetos, programação web, aprender javascript, curso de programação, desenvolvimento frontend, linguagem de programação, curso online de javascript, KR Riley Soluções' },
+
+    // Open Graph
+    { property: 'og:title', content: 'Curso de JavaScript Orientado a Objetos' },
+    { property: 'og:description', content: 'Aprenda JavaScript moderno com orientação a objetos na KR Riley Soluções. Curso completo, ideal para quem quer se destacar na programação web.' },
+    { property: 'og:image', content: 'https://rileysolucoes.com.br/public/curso2.png' },
+    { property: 'og:url', content: 'https://rileysolucoes.com.br/curso-javascript' },
+    { property: 'og:type', content: 'website' },
+
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Curso de JavaScript Orientado a Objetos' },
+    { name: 'twitter:description', content: 'Aprenda JavaScript moderno com orientação a objetos na KR Riley Soluções. Curso completo, ideal para quem quer se destacar na programação web.' },
+    { name: 'twitter:image', content: 'https://rileysolucoes.com.br/public/curso2.png' }
   ]
-})
+});
+
 const router = useRouter()
 
 const conteudoVideo = ref(null)
