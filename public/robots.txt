@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /signup
+Disallow: /painel
+Disallow: /learning
+Disallow: /checkout
+Sitemap: https://rileysolucoes.com.br/sitemap.xml
