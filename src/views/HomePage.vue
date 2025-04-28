@@ -20,7 +20,7 @@ useHead({
     // Open Graph
     { property: 'og:title', content: 'KR Riley Soluções - Desenvolvimento de Sites, Softwares e Cursos' },
     { property: 'og:description', content: 'Desenvolvemos sites personalizados, softwares de gestão e oferecemos cursos de informática e programação. Conheça a KR Riley Soluções!' },
-    { property: 'og:image', content: 'https://rileysolucoes.com.br/public/og-home.png' },
+    { property: 'og:image', content: 'https://rileysolucoes.com.br/og-home.png' },
     { property: 'og:url', content: 'https://rileysolucoes.com.br/' },
     { property: 'og:type', content: 'website' },
 
@@ -28,7 +28,7 @@ useHead({
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'KR Riley Soluções - Desenvolvimento de Sites, Softwares e Cursos' },
     { name: 'twitter:description', content: 'Desenvolvemos sites personalizados, softwares de gestão e oferecemos cursos de informática e programação. Conheça a KR Riley Soluções!' },
-    { name: 'twitter:image', content: 'https://rileysolucoes.com.br/public/og-home.png' }
+    { name: 'twitter:image', content: 'https://rileysolucoes.com.br/og-home.png' }
   ]
 })
 </script>

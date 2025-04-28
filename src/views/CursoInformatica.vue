@@ -25,7 +25,7 @@ useHead({
     // Open Graph
     { property: 'og:title', content: 'Curso de Informática Essencial + Pacote Office 2025' },
     { property: 'og:description', content: 'Aprenda informática do zero com nosso curso completo de Pacote Office, Internet, Windows, Outlook e mais. Curso para iniciantes e profissionais.' },
-    { property: 'og:image', content: 'https://rileysolucoes.com.br/public/curso1.png' },
+    { property: 'og:image', content: 'https://rileysolucoes.com.br/curso1.png' },
     { property: 'og:url', content: 'https://rileysolucoes.com.br/curso-de-informatica' },
     { property: 'og:type', content: 'website' },
 
@@ -33,7 +33,7 @@ useHead({
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'Curso de Informática Essencial + Pacote Office 2025' },
     { name: 'twitter:description', content: 'Aprenda informática do zero com nosso curso completo de Pacote Office, Internet, Windows, Outlook e mais. Curso para iniciantes e profissionais.' },
-    { name: 'twitter:image', content: 'https://rileysolucoes.com.br/public/curso1.png' }
+    { name: 'twitter:image', content: 'https://rileysolucoes.com.br/curso1.png' }
   ]
 });
 
