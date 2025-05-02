@@ -70,7 +70,7 @@ const goToCheckout = () => {
       <button class="button-router" @click="goToCheckout">Comprar agora</button>
     </CardComponent>
 
-    <ImagemUnica :imgPath="imgCodigoUm"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem de projeto aberto no visual studio code" :imgPath="imgCodigoUm"></ImagemUnica>
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">
@@ -80,7 +80,7 @@ const goToCheckout = () => {
 
   <ContainerComponent displayType="flex" height-comp="300px">
 
-    <ImagemUnica :imgPath="imgCodigoDois"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem de código escrito na linguagem de programação JavaScript" :imgPath="imgCodigoDois"></ImagemUnica>
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudo[2].titulo" font-sizespan="2rem" font-weightspan="800"

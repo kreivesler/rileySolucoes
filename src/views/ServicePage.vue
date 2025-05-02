@@ -50,13 +50,13 @@ useHead({
 
     </CardComponent>
 
-    <ImagemUnica :imgPath="exSite"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem de site personalizado para empresa de turismo" :imgPath="exSite"></ImagemUnica>
 
   </ContainerComponent>
 
   <ContainerComponent display-type="flex" flex-d="column">
 
-    <ImagemUnica :imgPath="exSite2"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem de site personalizado para empresa de imóveis" :imgPath="exSite2"></ImagemUnica>
 
     <CardComponent class="cardServices" :titulo-card="conteudoServicos[1].titulo" text-align="left">
       <p>{{ conteudoServicos[1].descricao }}</p>
@@ -86,13 +86,13 @@ useHead({
 
     </CardComponent>
 
-    <ImagemUnica :imgPath="estatSite"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem de ótima pontuação e performance de site feito pela kr riley soluções" :imgPath="estatSite"></ImagemUnica>
 
   </ContainerComponent>
 
   <ContainerComponent display-type="flex" flex-d="column">
 
-    <ImagemUnica :imgPath="contato"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem demostrando suporte aos clientes da kr riley soluções" :imgPath="contato"></ImagemUnica>
 
     <CardComponent class="cardServices" :titulo-card="conteudoServicos[3].titulo" text-align="left">
       <p>{{ conteudoServicos[3].descricao }}</p>

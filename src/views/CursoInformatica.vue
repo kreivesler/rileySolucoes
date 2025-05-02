@@ -69,7 +69,7 @@ const goToCheckout = () => {
       <button class="button-router" @click="goToCheckout">Comprar agora</button>
     </CardComponent>
 
-    <ImagemUnica :imgPath="estudante"></ImagemUnica>
+    <ImagemUnica imgAlt="Uma estudante de informática segura seu laptop" :imgPath="estudante"></ImagemUnica>
   </ContainerComponent>
 
   <ContainerComponent id="container2" display-type="flex">
@@ -79,7 +79,7 @@ const goToCheckout = () => {
 
   <ContainerComponent displayType="flex" height-comp="300px">
 
-    <ImagemUnica :imgPath="planilha"></ImagemUnica>
+    <ImagemUnica imgAlt="Profissional visualizando planilha de excel em seu computador" :imgPath="planilha"></ImagemUnica>
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudo[2].titulo" font-sizespan="2rem" font-weightspan="800"
