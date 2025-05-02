@@ -27,11 +27,11 @@ const toggleMenu = () => {
 
 <template>
   <div class="menu-h" :style="{backgroundColor: bgColor}">
-    <span :style="{
+    <h1 :style="{
       fontSize: fontSizeSpan,
       fontWeight: fontWeightSpan,
       color: colorSpan
-    }">{{ Titulo }}</span>
+    }">{{ Titulo }}</h1>
 
     <nav>
       <RouterLink

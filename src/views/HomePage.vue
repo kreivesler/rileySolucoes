@@ -61,7 +61,8 @@ useHead({
 
   <ContainerComponent displayType="flex" height-comp="300px">
 
-    <ImagemUnica imgAlt="Imagem de ótima pontuação e performance de site feito pela kr riley soluções" :imgPath="estatSite"></ImagemUnica>
+    <ImagemUnica imgAlt="Imagem de ótima pontuação e performance de site feito pela kr riley soluções"
+      :imgPath="estatSite"></ImagemUnica>
 
 
     <CardComponent borderRad="10px" :titulo-card="conteudoTexto[2].titulo" font-sizespan="2rem" font-weightspan="800"
