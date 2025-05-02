@@ -54,7 +54,7 @@ const goToCheckout = () => {
 </script>
 <template>
   <div class="titleH1">
-    <h1>Curso de JavaScript Orientado a Objetos</h1>
+    <span>Curso de JavaScript Orientado a Objetos</span>
   </div>
   <ContainerComponent displayType="flex">
     <VideoComponent id="video" :cont-video="false" :auto-play="true" :muted-video="true" :video-path="conteudoVideo" />
@@ -137,7 +137,7 @@ const goToCheckout = () => {
   text-align: center;
   padding: 10px;
 }
-.titleH1 h1 {
+.titleH1 span {
   font-weight: 800;
 }
 @media only screen and (min-width: 300px) {
@@ -148,7 +148,7 @@ const goToCheckout = () => {
   .titleH1{
     width: 100%;
   }
-  .titleH1 h1 {
+  .titleH1 span {
     font-size: 0.8rem;
   }
 }
@@ -161,7 +161,7 @@ const goToCheckout = () => {
   .titleH1{
     width: 100%;
   }
-  .titleH1 h1 {
+  .titleH1 span {
     font-size: 0.9rem;
   }
 
@@ -176,7 +176,7 @@ const goToCheckout = () => {
   .titleH1{
     width: 100%;
   }
-  .titleH1 h1 {
+  .titleH1 span {
     font-size: 1rem;
   }
 
@@ -190,7 +190,7 @@ const goToCheckout = () => {
   .titleH1{
     width: 100%;
   }
-  .titleH1 h1 {
+  .titleH1 span {
     font-size: 1.2rem;
   }
 
@@ -204,7 +204,7 @@ const goToCheckout = () => {
   .titleH1{
     width: 100%;
   }
-  .titleH1 h1 {
+  .titleH1 span {
     font-size: 1.5rem;
   }
 
@@ -231,7 +231,7 @@ const goToCheckout = () => {
     .titleH1{
     width: 100%;
   }
-  .titleH1 h1 {
+  .titleH1 span {
     font-size: 2rem;
   }
 
