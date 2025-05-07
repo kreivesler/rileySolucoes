@@ -6,12 +6,12 @@ import DetailsComponent from '@/components/DetailsComponent.vue'
 import ImagemUnica from '@/components/ImagemUnica.vue';
 import { planilha, estudo, estudante } from '@/data/images';
 import { conteudo } from '@/data/pagCursoInformatica';
-import { idProduto, liberaCheckout } from '@/data/servicos';
-import { useRouter } from 'vue-router';
+//import { idProduto, liberaCheckout } from '@/data/servicos';
+//import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
 import { useHead } from '@vueuse/head'
-const router = useRouter()
+//const router = useRouter()
 
 useHead({
   title: 'Curso de Informática Essencial + Pacote Office 2025',
@@ -45,9 +45,10 @@ onMounted(()=>{
 })
 
 const goToCheckout = () => {
-  liberaCheckout.checkoutLiberado = true
-  router.push('/checkout')
-  idProduto.value = import.meta.env.VITE_PROD_C_INFORMATICA
+  //liberaCheckout.checkoutLiberado = true
+  //router.push('/checkout')
+  //idProduto.value = import.meta.env.VITE_PROD_C_INFORMATICA
+  window.location.href = import.meta.env.VITE_LINK_INF
 }
 
 </script>

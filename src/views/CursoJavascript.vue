@@ -6,8 +6,8 @@ import ImagemUnica from '@/components/ImagemUnica.vue';
 import DetailsComponent from '@/components/DetailsComponent.vue'
 import { imgCodigoUm, imgCodigoDois, estudo } from '@/data/images';
 import { conteudoJavascript } from '@/data/pagCursoJavascript';
-import { idProduto, liberaCheckout } from '@/data/servicos';
-import { useRouter } from 'vue-router';
+//import { idProduto, liberaCheckout } from '@/data/servicos';
+//import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue'
 import VideoComponent from '@/components/VideoComponent.vue';
 import { useHead } from '@vueuse/head'
@@ -36,7 +36,7 @@ useHead({
   ]
 });
 
-const router = useRouter()
+//const router = useRouter()
 
 const conteudoVideo = ref(null)
 
@@ -46,9 +46,10 @@ onMounted(() => {
 const conteudo = conteudoJavascript
 
 const goToCheckout = () => {
-  liberaCheckout.checkoutLiberado = true
-  router.push('/checkout')
-  idProduto.value = import.meta.env.VITE_PROD_C_JAVASCRIPT
+  //liberaCheckout.checkoutLiberado = true
+  //router.push('/checkout')
+  //idProduto.value = import.meta.env.VITE_PROD_C_JAVASCRIPT
+  window.location.href = import.meta.env.VITE_LINK_JSC
 }
 
 </script>
